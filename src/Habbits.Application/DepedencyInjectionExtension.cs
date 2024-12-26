@@ -1,4 +1,6 @@
 ﻿using Habbits.Application.AutoMapper;
+using Habbits.Application.UseCases.Login;
+using Habbits.Application.UseCases.Users.Profile;
 using Habbits.Application.UseCases.Users.Register;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -20,5 +22,7 @@ public static class DepedencyInjectionExtension
     private static void AddUseCases(IServiceCollection services)
     {
         services.AddScoped<IRegisterUserUseCase, RegisterUserUseCase>();
+        services.AddScoped<IDoLoginUseCase, DoLoginUseCase>();
+        services.AddScoped<IGetUserProfileUseCase, GetUserProfileUseCase>();
     }
 }

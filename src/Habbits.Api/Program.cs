@@ -19,6 +19,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 
+//CONFIGURAÇÃO PARA ADICIONAR O BOTÃO PARA COLOCAR O TOKEN NO SWAGGERR
 builder.Services.AddSwaggerGen(config =>
 {
     config.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
@@ -51,6 +52,7 @@ builder.Services.AddSwaggerGen(config =>
     });
 });
 
+//CONFIGURAÇÃO FILTRO DE EXCEÇÃO
 builder.Services.AddMvc(options => options.Filters.Add(typeof(ExceptionFilter)));
 
 builder.Services.AddInfrastructure(builder.Configuration);
@@ -101,6 +103,7 @@ app.UseMiddleware<LanguageMiddleware>();
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

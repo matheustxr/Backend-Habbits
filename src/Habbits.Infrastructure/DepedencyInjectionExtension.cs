@@ -2,10 +2,12 @@
 using Habbits.Domain.Repositories.User;
 using Habbits.Domain.Security.Cryptography;
 using Habbits.Domain.Security.Tokens;
+using Habbits.Domain.Services.LoggedUser;
 using Habbits.Infrastructure.DataAccess;
 using Habbits.Infrastructure.DataAccess.Repositories;
 using Habbits.Infrastructure.Extensions;
 using Habbits.Infrastructure.Security.Tokens;
+using Habbits.Infrastructure.Services.LoggedUser;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -17,7 +19,7 @@ public static class DepedencyInjectionExtension
     public static void AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddScoped<IPasswordEncripter, Security.Cryptography.BCrypt>();
-        //services.AddScoped<ILoggedUser, LoggedUser>();
+        services.AddScoped<ILoggedUser, LoggedUser>();
 
         AddToken(services, configuration);
         AddRepositories(services);

@@ -1,7 +1,9 @@
-﻿using Habbits.Application.UseCases.Users.Register;
+﻿using Habbits.Application.UseCases.Users.Profile;
+using Habbits.Application.UseCases.Users.Register;
 using Habbits.Communication.Requests;
 using Habbits.Communication.Responses;
 using Habbits.Communication.Responses.Users;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Habbits.Api.Controllers;
@@ -19,5 +21,15 @@ public class UserController : ControllerBase
         var response = await useCase.Execute(request);
 
         return Created(string.Empty, response);
+    }
+
+    [HttpGet]
+    [ProducesResponseType(typeof(ResponseUserProfileJson), StatusCodes.Status200OK)]
+    [Authorize]
+    public async Task<IActionResult> GetProfile([FromServices] IGetUserProfileUseCase useCase)
+    {
+        var response = await useCase.Execute();
+
+        return Ok(response);
     }
 }
