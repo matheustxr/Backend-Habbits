@@ -24,12 +24,21 @@ public class UserController : ControllerBase
     }
 
     [HttpGet]
-    [ProducesResponseType(typeof(ResponseUserProfileJson), StatusCodes.Status200OK)]
     [Authorize]
+    [ProducesResponseType(typeof(ResponseUserProfileJson), StatusCodes.Status200OK)]
     public async Task<IActionResult> GetProfile([FromServices] IGetUserProfileUseCase useCase)
     {
         var response = await useCase.Execute();
 
         return Ok(response);
+    }
+
+    [HttpPut]
+    [Authorize]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
+    public async Task<IActionResult> UpdateProfile()
+    {
+        return NoContent();
     }
 }
