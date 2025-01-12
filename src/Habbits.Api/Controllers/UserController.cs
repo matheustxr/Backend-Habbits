@@ -1,4 +1,5 @@
-﻿using Habbits.Application.UseCases.Users.Profile;
+﻿using Habbits.Application.UseCases.Users.ChangePassword;
+using Habbits.Application.UseCases.Users.Profile;
 using Habbits.Application.UseCases.Users.Register;
 using Habbits.Communication.Requests;
 using Habbits.Communication.Responses;
@@ -39,6 +40,19 @@ public class UserController : ControllerBase
     [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> UpdateProfile()
     {
+        return NoContent();
+    }
+
+    [HttpPut("change-password")]
+    [Authorize]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
+    public async Task<IActionResult> ChangePassword(
+        [FromServices] IChangePasswordUseCase useCase,
+        [FromBody] RequestChangePasswordJson request)
+    {
+        await useCase.Execute(request);
+
         return NoContent();
     }
 }
