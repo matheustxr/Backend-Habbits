@@ -135,6 +135,9 @@
   <data name="NAME_EMPTY" xml:space="preserve">
     <value>O nome não pode estar vazio.</value>
   </data>
+  <data name="PASSWORD_DIFFERENT_CURRENT_PASSWORD" xml:space="preserve">
+    <value>A senha inserida é diferente da senha atual.</value>
+  </data>
   <data name="UNKNOW_ERRO" xml:space="preserve">
     <value>Error desconhecido</value>
   </data>
