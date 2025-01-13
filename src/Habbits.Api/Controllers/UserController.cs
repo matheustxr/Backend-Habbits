@@ -1,6 +1,8 @@
 ﻿using Habbits.Application.UseCases.Users.ChangePassword;
+using Habbits.Application.UseCases.Users.Delete;
 using Habbits.Application.UseCases.Users.Profile;
 using Habbits.Application.UseCases.Users.Register;
+using Habbits.Application.UseCases.Users.Update;
 using Habbits.Communication.Requests;
 using Habbits.Communication.Responses;
 using Habbits.Communication.Responses.Users;
@@ -38,8 +40,12 @@ public class UserController : ControllerBase
     [Authorize]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
-    public async Task<IActionResult> UpdateProfile()
+    public async Task<IActionResult> UpdateProfile(
+        [FromServices] IUpdateUserUseCase useCase,
+        [FromBody] RequestUpdateUserJson request)
     {
+        await useCase.Execute(request);
+
         return NoContent();
     }
 
@@ -55,4 +61,15 @@ public class UserController : ControllerBase
 
         return NoContent();
     }
+
+    [HttpDelete]
+    [Authorize]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    public async Task<IActionResult> DeleteProfile([FromServices] IDeleteUserAccountUseCase useCase)
+    {
+        await useCase.Execute();
+
+        return NoContent();
+    }
+
 }
