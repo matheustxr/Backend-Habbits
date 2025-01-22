@@ -11,6 +11,6 @@ public class User
     public DateTime? UpdatedAt { get; set; }
 
     public List<int> WeekDays { get; set; } = new();
-
+        
     public bool IsActive { get; set; } = true;
 }
