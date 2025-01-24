@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Habbits.Infrastructure.Migrations
 {
     [DbContext(typeof(HabbitsDbContext))]
-    [Migration("20241217215732_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20250124124605_InitialMigration")]
+    partial class InitialMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -27,11 +27,9 @@ namespace Habbits.Infrastructure.Migrations
 
             modelBuilder.Entity("Habbits.Domain.Entities.User", b =>
                 {
-                    b.Property<long>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
+                        .HasColumnType("uuid");
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -44,9 +42,6 @@ namespace Habbits.Infrastructure.Migrations
                     b.Property<string>("Password")
                         .IsRequired()
                         .HasColumnType("text");
-
-                    b.Property<Guid>("UserIdentifier")
-                        .HasColumnType("uuid");
 
                     b.HasKey("Id");
 

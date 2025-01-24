@@ -31,6 +31,6 @@ public class LoggedUser : ILoggedUser
         return await _dbContext
             .Users
             .AsNoTracking()
-            .FirstAsync(user => user.UserIdentifier == Guid.Parse(identifier));
+            .FirstAsync(user => user.Id == Guid.Parse(identifier));
     }
 }

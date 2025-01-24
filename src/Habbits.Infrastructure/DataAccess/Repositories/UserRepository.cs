@@ -26,7 +26,7 @@ public class UserRepository : IUserReadOnlyRepository, IUserWriteOnlyRepository,
         return await _dbContext.Users.AnyAsync(user => user.Email.Equals(email));
     }
 
-    public async Task<User> GetById(long id)
+    public async Task<User> GetById(Guid id)
     {
         return await _dbContext.Users.FirstAsync(user => user.Id == id);
     }

@@ -24,11 +24,9 @@ namespace Habbits.Infrastructure.Migrations
 
             modelBuilder.Entity("Habbits.Domain.Entities.User", b =>
                 {
-                    b.Property<long>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
+                        .HasColumnType("uuid");
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -41,9 +39,6 @@ namespace Habbits.Infrastructure.Migrations
                     b.Property<string>("Password")
                         .IsRequired()
                         .HasColumnType("text");
-
-                    b.Property<Guid>("UserIdentifier")
-                        .HasColumnType("uuid");
 
                     b.HasKey("Id");
 
