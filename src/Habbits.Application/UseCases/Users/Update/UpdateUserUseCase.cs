@@ -1,13 +1,12 @@
-﻿using Habbits.Communication.Requests;
-using Habbits.Domain.Repositories.User;
+﻿using FluentValidation.Results;
+using Habbits.Communication.Requests;
 using Habbits.Domain.Repositories;
+using Habbits.Domain.Repositories.User;
 using Habbits.Domain.Services.LoggedUser;
-using FluentValidation.Results;
-using Habbits.Exception.ExceptionBase;
 using Habbits.Exception;
+using Habbits.Exception.ExceptionBase;
 
 namespace Habbits.Application.UseCases.Users.Update;
-
 public class UpdateUserUseCase : IUpdateUserUseCase
 {
     private readonly ILoggedUser _loggedUser;
