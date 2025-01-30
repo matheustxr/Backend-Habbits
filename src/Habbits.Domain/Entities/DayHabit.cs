@@ -2,8 +2,9 @@
 
 public class DayHabit
 {
-    public Guid Id { get; set; } = Guid.NewGuid();
-    public Guid HabitId { get; set; }
-    public Habit Habit { get; set; }
+    public long Id { get; set; }
+    public long HabitId { get; set; }
+    public Habit? Habits { get; set; }
     public DateTime Date { get; set; }
+    public bool IsCompleted { get; set; } = false;   
 }

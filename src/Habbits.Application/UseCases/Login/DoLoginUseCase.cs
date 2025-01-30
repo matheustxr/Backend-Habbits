@@ -1,4 +1,4 @@
-﻿using Habbits.Communication.Requests;
+﻿using Habbits.Communication.Requests.User;
 using Habbits.Communication.Responses.Users;
 using Habbits.Domain.Repositories.User;
 using Habbits.Domain.Security.Cryptography;

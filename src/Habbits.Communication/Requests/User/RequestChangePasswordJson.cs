@@ -1,4 +1,4 @@
-﻿namespace Habbits.Communication.Requests;
+﻿namespace Habbits.Communication.Requests.User;
 
 public class RequestChangePasswordJson
 {

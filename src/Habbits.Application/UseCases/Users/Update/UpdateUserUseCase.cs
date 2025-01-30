@@ -1,5 +1,5 @@
 ﻿using FluentValidation.Results;
-using Habbits.Communication.Requests;
+using Habbits.Communication.Requests.User;
 using Habbits.Domain.Repositories;
 using Habbits.Domain.Repositories.User;
 using Habbits.Domain.Services.LoggedUser;

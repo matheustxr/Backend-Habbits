@@ -3,7 +3,7 @@ using Habbits.Application.UseCases.Users.Delete;
 using Habbits.Application.UseCases.Users.Profile;
 using Habbits.Application.UseCases.Users.Register;
 using Habbits.Application.UseCases.Users.Update;
-using Habbits.Communication.Requests;
+using Habbits.Communication.Requests.User;
 using Habbits.Communication.Responses;
 using Habbits.Communication.Responses.Users;
 using Microsoft.AspNetCore.Authorization;

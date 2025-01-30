@@ -1,5 +1,5 @@
 ﻿using Habbits.Application.UseCases.Login;
-using Habbits.Communication.Requests;
+using Habbits.Communication.Requests.User;
 using Habbits.Communication.Responses;
 using Habbits.Communication.Responses.Users;
 using Microsoft.AspNetCore.Mvc;

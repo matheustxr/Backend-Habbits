@@ -1,4 +1,4 @@
-﻿using Habbits.Communication.Requests;
+﻿using Habbits.Communication.Requests.User;
 
 namespace Habbits.Application.UseCases.Users.ChangePassword;
 public interface IChangePasswordUseCase

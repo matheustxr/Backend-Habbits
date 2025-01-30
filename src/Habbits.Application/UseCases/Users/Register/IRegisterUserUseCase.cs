@@ -1,4 +1,4 @@
-﻿using Habbits.Communication.Requests;
+﻿using Habbits.Communication.Requests.User;
 using Habbits.Communication.Responses.Users;
 
 namespace Habbits.Application.UseCases.Users.Register;
