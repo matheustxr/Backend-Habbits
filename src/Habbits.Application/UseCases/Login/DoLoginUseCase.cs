@@ -9,12 +9,12 @@ namespace Habbits.Application.UseCases.Login;
 
 public class DoLoginUseCase : IDoLoginUseCase
 {
-    private readonly IUserReadOnlyRepository _repository;
+    private readonly IHabitReadOnlyRepository _repository;
     private readonly IPasswordEncripter _passwordEncripter;
     private readonly IAccessTokenGenerator _accessTokenGenerator;
 
     public DoLoginUseCase(
-        IUserReadOnlyRepository repository,
+        IHabitReadOnlyRepository repository,
         IPasswordEncripter passwordEncripter,
         IAccessTokenGenerator accessTokenGenerator)
     {

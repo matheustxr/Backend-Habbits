@@ -42,9 +42,9 @@ public static class DepedencyInjectionExtension
     {
         services.AddScoped<IUnityOfWork, UnityOfWork>();
 
-        services.AddScoped<IUserReadOnlyRepository, UserRepository>();
-        services.AddScoped<IUserWriteOnlyRepository, UserRepository>();
-        services.AddScoped<IUserUpdateOnlyRepository, UserRepository>();
+        services.AddScoped<IHabitReadOnlyRepository, UserRepository>();
+        services.AddScoped<IHabitWriteOnlyRepository, UserRepository>();
+        services.AddScoped<IHabitUpdateOnlyRepository, UserRepository>();
     }
 
     private static void AddDbContext(IServiceCollection services, IConfiguration configuration)

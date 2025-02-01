@@ -7,4 +7,5 @@ public class HabbitsDbContext : DbContext
 {
     public HabbitsDbContext(DbContextOptions options) : base(options) { }
     public DbSet<User> Users { get; set; }
+    public DbSet<Habit> Habits { get; set; }
 }

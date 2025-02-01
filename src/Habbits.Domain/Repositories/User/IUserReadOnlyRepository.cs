@@ -1,5 +1,5 @@
 ﻿namespace Habbits.Domain.Repositories.User;
-public interface IUserReadOnlyRepository
+public interface IHabitReadOnlyRepository
 {
     Task<bool> ExistActiveUserWithEmail(string email);
 

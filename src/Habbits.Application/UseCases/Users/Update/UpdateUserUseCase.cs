@@ -10,14 +10,14 @@ namespace Habbits.Application.UseCases.Users.Update;
 public class UpdateUserUseCase : IUpdateUserUseCase
 {
     private readonly ILoggedUser _loggedUser;
-    private readonly IUserUpdateOnlyRepository _repository;
-    private readonly IUserReadOnlyRepository _userReadOnlyRepository;
+    private readonly IHabitUpdateOnlyRepository _repository;
+    private readonly IHabitReadOnlyRepository _userReadOnlyRepository;
     private readonly IUnityOfWork _unitOfWork;
 
     public UpdateUserUseCase(
         ILoggedUser loggedUser,
-        IUserUpdateOnlyRepository repository,
-        IUserReadOnlyRepository userReadOnlyRepository,
+        IHabitUpdateOnlyRepository repository,
+        IHabitReadOnlyRepository userReadOnlyRepository,
         IUnityOfWork unityOfWork)
     {
         _loggedUser = loggedUser;

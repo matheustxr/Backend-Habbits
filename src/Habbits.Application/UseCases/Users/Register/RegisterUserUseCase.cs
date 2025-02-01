@@ -16,16 +16,16 @@ public class RegisterUserUseCase : IRegisterUserUseCase
 {
     private readonly IMapper _mapper;
     private readonly IPasswordEncripter _passwordEncripter;
-    private readonly IUserReadOnlyRepository _userReadOnlyRepository;
-    private readonly IUserWriteOnlyRepository _userWriteOnlyRepository;
+    private readonly IHabitReadOnlyRepository _userReadOnlyRepository;
+    private readonly IHabitWriteOnlyRepository _userWriteOnlyRepository;
     private readonly IUnityOfWork _unitOfWork;
     private readonly IAccessTokenGenerator _tokenGenerator;
 
     public RegisterUserUseCase(
         IMapper mapper,
         IPasswordEncripter passwordEncripter,
-        IUserReadOnlyRepository userReadOnlyRepository,
-        IUserWriteOnlyRepository userWriteOnlyRepository,
+        IHabitReadOnlyRepository userReadOnlyRepository,
+        IHabitWriteOnlyRepository userWriteOnlyRepository,
         IAccessTokenGenerator tokenGenerator,
         IUnityOfWork unitOfWork)
     {

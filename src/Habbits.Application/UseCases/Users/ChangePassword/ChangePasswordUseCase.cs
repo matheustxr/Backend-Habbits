@@ -12,13 +12,13 @@ namespace Habbits.Application.UseCases.Users.ChangePassword;
 public class ChangePasswordUseCase : IChangePasswordUseCase
 {
     private readonly ILoggedUser _loggedUser;
-    private readonly IUserUpdateOnlyRepository _repository;
+    private readonly IHabitUpdateOnlyRepository _repository;
     private readonly IUnityOfWork _unityOfWork;
     private readonly IPasswordEncripter _passwordEncripter;
 
     public ChangePasswordUseCase(
         ILoggedUser loggedUser,
-        IUserUpdateOnlyRepository repository,
+        IHabitUpdateOnlyRepository repository,
         IUnityOfWork unityOfWork,
         IPasswordEncripter passwordEncripter)
     {
