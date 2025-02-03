@@ -1,5 +1,6 @@
 ﻿using Habbits.Domain.Entities;
 using Habbits.Domain.Repositories.Habit;
+using Microsoft.EntityFrameworkCore;
 
 namespace Habbits.Infrastructure.DataAccess.Repositories;
 
@@ -18,6 +19,16 @@ public class HabitRepository : IHabitReadOnlyRepository, IHabitWriteOnlyReposito
     {
         var habitToRemove = await _dbContext.Habits.FindAsync(habit.Id);
         _dbContext.Habits.Remove(habitToRemove!);
+    }
+
+    public async Task<bool> ExistActiveHabitWithTitle(string habit)
+    {
+        return await _dbContext.Habits.AnyAsync(habit => habit.Title.Equals(habit));
+    }
+
+    public async Task<Habit?> GetHabitByTitle(string habit)
+    {
+        return await _dbContext.Habits.AsNoTracking().FirstOrDefaultAsync(habit => habit.Title.Equals(habit));
     }
 
     public void Update(Habit habit)
