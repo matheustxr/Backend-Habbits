@@ -9,12 +9,12 @@ public class DeleteUserAccountUseCase : IDeleteUserAccountUseCase
 {
     private readonly ILoggedUser _loggedUser;
     private readonly IUnityOfWork _unityOfWork;
-    private readonly IHabitWriteOnlyRepository _repository;
+    private readonly IUsertWriteOnlyRepository _repository;
 
     public DeleteUserAccountUseCase(
         ILoggedUser loggedUser,
         IUnityOfWork unityOfWork,
-        IHabitWriteOnlyRepository repository)
+        IUsertWriteOnlyRepository repository)
     {
         _loggedUser = loggedUser;
         _unityOfWork = unityOfWork;

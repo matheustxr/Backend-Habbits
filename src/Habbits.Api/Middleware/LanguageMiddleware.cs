@@ -1,6 +1,6 @@
 ﻿using System.Globalization;
 
-namespace Habbits.API.Middlewares;
+namespace Habbits.Api.Middleware;
 public class LanguageMiddleware
 {
     private readonly RequestDelegate _next;

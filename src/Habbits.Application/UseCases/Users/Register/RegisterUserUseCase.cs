@@ -11,21 +11,20 @@ using Habbits.Exception.ExceptionBase;
 
 namespace Habbits.Application.UseCases.Users.Register;
 
-//FALTA CRIAR ESSAS INTERFACES DANDO ERROR E CRIAR O BANCO DE DADOS E SUA CONEXÃO
 public class RegisterUserUseCase : IRegisterUserUseCase
 {
     private readonly IMapper _mapper;
     private readonly IPasswordEncripter _passwordEncripter;
-    private readonly IHabitReadOnlyRepository _userReadOnlyRepository;
-    private readonly IHabitWriteOnlyRepository _userWriteOnlyRepository;
+    private readonly IUserReadOnlyRepository _userReadOnlyRepository;
+    private readonly IUsertWriteOnlyRepository _userWriteOnlyRepository;
     private readonly IUnityOfWork _unitOfWork;
     private readonly IAccessTokenGenerator _tokenGenerator;
 
     public RegisterUserUseCase(
         IMapper mapper,
         IPasswordEncripter passwordEncripter,
-        IHabitReadOnlyRepository userReadOnlyRepository,
-        IHabitWriteOnlyRepository userWriteOnlyRepository,
+        IUserReadOnlyRepository userReadOnlyRepository,
+        IUsertWriteOnlyRepository userWriteOnlyRepository,
         IAccessTokenGenerator tokenGenerator,
         IUnityOfWork unitOfWork)
     {

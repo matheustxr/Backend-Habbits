@@ -1,6 +1,6 @@
 using Habbits.Api.Filters;
+using Habbits.Api.Middleware;
 using Habbits.Api.Token;
-using Habbits.API.Middlewares;
 using Habbits.Application;
 using Habbits.Domain.Security.Tokens;
 using Habbits.Infrastructure;

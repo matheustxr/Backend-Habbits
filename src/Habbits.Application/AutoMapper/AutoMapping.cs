@@ -29,6 +29,6 @@ public class AutoMapping : Profile
     private void EntityResponse()
     {
         CreateMap<User, ResponseUserProfileJson>();
-        CreateMap<Habit, ResponseHabitJson>();
+        CreateMap<Habit, ResponseCreateHabitJson>();
     }
 }

@@ -1,4 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Habbits.Application.UseCases.Habit.Create;
+using Habbits.Communication.Requests.Habits;
+using Habbits.Communication.Responses;
+using Habbits.Communication.Responses.Habbits;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Habbits.Api.Controllers;
 [Route("api/[controller]")]
@@ -6,8 +11,15 @@ namespace Habbits.Api.Controllers;
 public class HabitsController : ControllerBase
 {
     [HttpPost]
-    public IActionResult CreateHabit()
+    [Authorize]
+    [ProducesResponseType(typeof(ResponseCreateHabitJson), StatusCodes.Status201Created)]
+    [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
+    public async Task<IActionResult> CreateHabit(
+        [FromBody] RequestCreateHabitJson request,
+        [FromServices] ICreateHabitUseCase useCase)
     {
-        return Ok();
+        var response = await useCase.Execute(request);
+
+        return Created(string.Empty, response);
     }
 }
