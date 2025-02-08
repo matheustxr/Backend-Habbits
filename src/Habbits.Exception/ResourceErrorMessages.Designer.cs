@@ -61,6 +61,15 @@ namespace Habbits.Exception {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Description is too long, the value max is 500 character.
+        /// </summary>
+        public static string DESCRIPTION_TOO_LONG {
+            get {
+                return ResourceManager.GetString("DESCRIPTION_TOO_LONG", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a E-mail already exists.
         /// </summary>
         public static string EMAIL_ALREADY_REGISTERED {
@@ -124,11 +133,29 @@ namespace Habbits.Exception {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a The title cannot be empty.
+        /// </summary>
+        public static string TITLE_EMPTY {
+            get {
+                return ResourceManager.GetString("TITLE_EMPTY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Unknown error.
         /// </summary>
         public static string UNKNOW_ERRO {
             get {
                 return ResourceManager.GetString("UNKNOW_ERRO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a The days of the week cannot be empty.
+        /// </summary>
+        public static string WEEKDAYS_EMPTY {
+            get {
+                return ResourceManager.GetString("WEEKDAYS_EMPTY", resourceCulture);
             }
         }
     }

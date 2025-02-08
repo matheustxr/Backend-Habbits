@@ -10,6 +10,6 @@ public static class DataBaseMigration
     {
         var dbContext = serviceProvider.GetRequiredService<HabbitsDbContext>();
 
-        await dbContext.Database.MigrateAsync();
+                await dbContext.Database.MigrateAsync();
     }
 }

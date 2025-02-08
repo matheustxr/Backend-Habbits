@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="DESCRIPTION_TOO_LONG" xml:space="preserve">
+    <value>Description is too long, the value max is 500 character</value>
+  </data>
   <data name="EMAIL_ALREADY_REGISTERED" xml:space="preserve">
     <value>E-mail already exists</value>
   </data>
@@ -138,7 +141,13 @@
   <data name="PASSWORD_DIFFERENT_CURRENT_PASSWORD" xml:space="preserve">
     <value>The password entered is different from the current password.</value>
   </data>
+  <data name="TITLE_EMPTY" xml:space="preserve">
+    <value>The title cannot be empty</value>
+  </data>
   <data name="UNKNOW_ERRO" xml:space="preserve">
     <value>Unknown error</value>
+  </data>
+  <data name="WEEKDAYS_EMPTY" xml:space="preserve">
+    <value>The days of the week cannot be empty</value>
   </data>
 </root>

@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Habbits.Infrastructure.DataAccess.Repositories;
 
-public class UserRepository : IHabitReadOnlyRepository, IHabitWriteOnlyRepository, IHabitUpdateOnlyRepository
+public class UserRepository : IUserReadOnlyRepository, IUsertWriteOnlyRepository, IUserUpdateOnlyRepository
 {
     private readonly HabbitsDbContext _dbContext;
 

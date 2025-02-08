@@ -1,18 +1,12 @@
 ﻿using AutoMapper;
 using FluentValidation.Results;
-using Habbits.Application.UseCases.Users.Register;
 using Habbits.Communication.Requests.Habits;
 using Habbits.Communication.Responses.Habbits;
 using Habbits.Domain.Repositories;
 using Habbits.Domain.Repositories.Habit;
-using Habbits.Domain.Repositories.User;
-using Habbits.Domain.Security.Cryptography;
-using Habbits.Domain.Security.Tokens;
-using Habbits.Exception.ExceptionBase;
 using Habbits.Exception;
-using Habbits.Domain.Entities;
-using Habbits.Communication.Responses.Users;
-
+using Habbits.Exception.ExceptionBase;
+    
 namespace Habbits.Application.UseCases.Habit.Create
 {
     public class CreateHabitUseCase : ICreateHabitUseCase

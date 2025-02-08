@@ -1,10 +1,9 @@
 ﻿using Habbits.Communication.Requests.Habits;
 using Habbits.Communication.Responses.Habbits;
 
-namespace Habbits.Application.UseCases.Habit.Create
+namespace Habbits.Application.UseCases.Habit.Create;
+public interface ICreateHabitUseCase
 {
-    public interface ICreateHabitUseCase
-    {
-        Task<ResponseCreateHabitJson> Execute(RequestCreateHabitJson request);
-    }
-}
+    Task<ResponseCreateHabitJson> Execute(RequestCreateHabitJson request);
+};
+

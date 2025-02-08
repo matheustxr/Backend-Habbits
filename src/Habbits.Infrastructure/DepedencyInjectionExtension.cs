@@ -1,4 +1,5 @@
 ﻿using Habbits.Domain.Repositories;
+using Habbits.Domain.Repositories.Habit;
 using Habbits.Domain.Repositories.User;
 using Habbits.Domain.Security.Cryptography;
 using Habbits.Domain.Security.Tokens;
@@ -42,9 +43,13 @@ public static class DepedencyInjectionExtension
     {
         services.AddScoped<IUnityOfWork, UnityOfWork>();
 
-        services.AddScoped<IHabitReadOnlyRepository, UserRepository>();
-        services.AddScoped<IHabitWriteOnlyRepository, UserRepository>();
-        services.AddScoped<IHabitUpdateOnlyRepository, UserRepository>();
+        services.AddScoped<IUserReadOnlyRepository, UserRepository>();
+        services.AddScoped<IUsertWriteOnlyRepository, UserRepository>();
+        services.AddScoped<IUserUpdateOnlyRepository, UserRepository>();
+
+        services.AddScoped<IHabitReadOnlyRepository, HabitRepository>();
+        services.AddScoped<IHabitWriteOnlyRepository, HabitRepository>();
+        services.AddScoped<IHabitUpdateOnlyRepository, HabitRepository>();
     }
 
     private static void AddDbContext(IServiceCollection services, IConfiguration configuration)
