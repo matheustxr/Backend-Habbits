@@ -6,7 +6,7 @@ using Habbits.Domain.Repositories;
 using Habbits.Domain.Repositories.Habit;
 using Habbits.Exception;
 using Habbits.Exception.ExceptionBase;
-    
+
 namespace Habbits.Application.UseCases.Habit.Create
 {
     public class CreateHabitUseCase : ICreateHabitUseCase
@@ -46,10 +46,11 @@ namespace Habbits.Application.UseCases.Habit.Create
 
         private async Task Validate(RequestCreateHabitJson request)
         {
-            var result = new CreateHabitValidator().Validate(request);
+            var result = new CreateHabitValidator().Validate(request);  
 
-            var emailExist = await _habitReadOnlyRepository.ExistActiveHabitWithTitle(request.Title);
-            if (emailExist)
+            var titleExist = await _habitReadOnlyRepository.ExistActiveHabitWithTitle(request.Title);
+
+            if (titleExist)
             {
                 result.Errors.Add(new ValidationFailure(string.Empty, ResourceErrorMessages.EMAIL_ALREADY_REGISTERED));
             }

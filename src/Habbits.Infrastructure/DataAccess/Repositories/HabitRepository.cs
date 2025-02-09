@@ -21,9 +21,9 @@ public class HabitRepository : IHabitReadOnlyRepository, IHabitWriteOnlyReposito
         _dbContext.Habits.Remove(habitToRemove!);
     }
 
-    public async Task<bool> ExistActiveHabitWithTitle(string habit)
+    public async Task<bool> ExistActiveHabitWithTitle(string title)     
     {
-        return await _dbContext.Habits.AnyAsync(habit => habit.Title.Equals(habit));
+        return await _dbContext.Habits.AnyAsync(h => h.Title == title);
     }
 
     public async Task<Habit> GetById(long id)
@@ -31,9 +31,9 @@ public class HabitRepository : IHabitReadOnlyRepository, IHabitWriteOnlyReposito
         return await _dbContext.Habits.FirstAsync(habit => habit.Id == id);
     }
 
-    public async Task<Habit?> GetHabitByTitle(string habit)
+    public async Task<Habit?> GetHabitByTitle(string title)
     {
-        return await _dbContext.Habits.AsNoTracking().FirstOrDefaultAsync(habit => habit.Title.Equals(habit));
+        return await _dbContext.Habits.AsNoTracking().FirstOrDefaultAsync(h => h.Title == title);
     }
 
     public void Update(Habit habit)

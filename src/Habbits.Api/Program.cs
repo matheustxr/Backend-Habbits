@@ -1,6 +1,7 @@
 using Habbits.Api.Filters;
 using Habbits.Api.Middleware;
 using Habbits.Api.Token;
+using Habbits.Api.UserContext;
 using Habbits.Application;
 using Habbits.Domain.Security.Tokens;
 using Habbits.Infrastructure;
@@ -8,7 +9,7 @@ using Habbits.Infrastructure.DataAccess;
 using Habbits.Infrastructure.Extensions;
 using Habbits.Infrastructure.Migrations;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Diagnostics.HealthChecks;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;    
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
@@ -67,7 +68,7 @@ var signingKey = builder.Configuration.GetValue<string>("Settings:Jwt:SigningKey
 builder.Services.AddAuthentication(config =>
 {
     config.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-    config.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+config.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
 }).AddJwtBearer(config =>
 {
     config.TokenValidationParameters = new TokenValidationParameters
@@ -78,6 +79,9 @@ builder.Services.AddAuthentication(config =>
         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(signingKey!))
     };
 });
+
+builder.Services.AddHttpContextAccessor();
+builder.Services.AddScoped<IUserContext, UserContext>();
 
 builder.Services.AddHealthChecks().AddDbContextCheck<HabbitsDbContext>();
 

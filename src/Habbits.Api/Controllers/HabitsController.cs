@@ -1,4 +1,5 @@
-﻿using Habbits.Application.UseCases.Habit.Create;
+﻿using Habbits.Api.UserContext;
+using Habbits.Application.UseCases.Habit.Create;
 using Habbits.Communication.Requests.Habits;
 using Habbits.Communication.Responses;
 using Habbits.Communication.Responses.Habbits;
@@ -10,6 +11,13 @@ namespace Habbits.Api.Controllers;
 [ApiController]
 public class HabitsController : ControllerBase
 {
+    private readonly IUserContext _userContext;
+
+    public HabitsController(IUserContext userContext)
+    {
+        _userContext = userContext; 
+    }
+
     [HttpPost]
     [Authorize]
     [ProducesResponseType(typeof(ResponseCreateHabitJson), StatusCodes.Status201Created)]
@@ -18,6 +26,8 @@ public class HabitsController : ControllerBase
         [FromBody] RequestCreateHabitJson request,
         [FromServices] ICreateHabitUseCase useCase)
     {
+        request.UserId = _userContext.GetUserId();
+
         var response = await useCase.Execute(request);
 
         return Created(string.Empty, response);

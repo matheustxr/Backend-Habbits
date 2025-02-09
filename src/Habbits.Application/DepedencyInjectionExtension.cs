@@ -32,7 +32,7 @@ public static class DepedencyInjectionExtension
         services.AddScoped<IUpdateUserUseCase, UpdateUserUseCase> ();
         services.AddScoped<IDeleteUserAccountUseCase, DeleteUserAccountUseCase>();
         services.AddScoped<IChangePasswordUseCase, ChangePasswordUseCase>();
-
+            
         services.AddScoped<ICreateHabitUseCase, CreateHabitUseCase>();
     }
 }
