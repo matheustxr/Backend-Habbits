@@ -1,18 +1,25 @@
-﻿using Habbits.Domain.Entities;
+﻿using Bogus;
+using CommonTestUtilities.Cryptography;
+using Habbits.Domain.Entities;
 using Habbits.Domain.Services.LoggedUser;
 using Moq;
 
 namespace CommonTestUtilities.Entities
 {
-    public class LoggedUserBuilder
+    public class UserBuilder
     {
-        public static ILoggedUser Build(User user)
+        public static User Build()
         {
-            var mock = new Mock<ILoggedUser>();
+            var passwordEncripter = new PasswordEncripterBuilder().Build();
 
-            mock.Setup(loggedUser => loggedUser.Get()).ReturnsAsync(user);
+            var user = new Faker<User>()
+                .RuleFor(u => u.Id, _ => Guid.NewGuid()) // ID único
+                .RuleFor(u => u.Name, faker => faker.Name.FullName())
+                .RuleFor(u => u.Email, faker => faker.Internet.Email())
+                .RuleFor(u => u.Password, (_, user) => passwordEncripter.Encrypt(user.Password))
+                .RuleFor(u => u.Habits, _ => new List<Habit>());
 
-            return mock.Object;
+            return user;
         }
     }
 }
