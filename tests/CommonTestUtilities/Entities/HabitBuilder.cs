@@ -34,8 +34,8 @@ namespace CommonTestUtilities.Entities
                 .RuleFor(h => h.UpdatedAt, faker => faker.Date.Recent(10))
                 .RuleFor(h => h.IsActive, faker => faker.Random.Bool())
                 .RuleFor(h => h.UserId, _ => user.Id)
-                .RuleFor(h => h.DayHabits, faker => faker.Make(3, () => DayHabitBuilder.Build(1))) // 3 hábitos diários aleatórios
-                .RuleFor(h => h.HabitCategory, () => HabitCategoryBuilder.Build()); // Adiciona uma categoria aleatória
+                .RuleFor(h => h.DayHabits, faker => faker.Make(3, () => DayHabitBuilder.Build(1)))
+                .RuleFor(h => h.HabitCategory, () => HabitCategoryBuilder.Build());
         }
     }
 }
