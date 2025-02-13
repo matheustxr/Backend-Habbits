@@ -1,10 +1,11 @@
 ﻿
 
+
 using Habbits.Domain.Entities;
 using Habbits.Domain.Repositories.User;
 using Moq;
 
-namespace CommonTestUtilities.Repositories.User
+namespace CommonTestUtilities.Repositories.Users
 {
     public class UserReadOnlyRepositoryBuilder
     {

@@ -1,8 +1,6 @@
 ﻿using Bogus;
 using CommonTestUtilities.Cryptography;
 using Habbits.Domain.Entities;
-using Habbits.Domain.Services.LoggedUser;
-using Moq;
 
 namespace CommonTestUtilities.Entities
 {
