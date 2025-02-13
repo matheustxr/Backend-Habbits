@@ -16,8 +16,4 @@
     <ProjectReference Include="..\..\src\Habbits.Communication\Habbits.Communication.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Repositories\User\" />
-  </ItemGroup>
-
 </Project>
