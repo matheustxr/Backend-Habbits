@@ -1,7 +1,4 @@
-﻿
-
-
-using Habbits.Domain.Entities;
+﻿using Habbits.Domain.Entities;
 using Habbits.Domain.Repositories.User;
 using Moq;
 
