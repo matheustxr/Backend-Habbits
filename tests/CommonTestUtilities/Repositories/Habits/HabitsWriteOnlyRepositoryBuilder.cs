@@ -3,11 +3,11 @@ using Moq;
 
 namespace CommonTestUtilities.Repositories.Habits
 {
-    public class HabitsReadOnlyRepository
+    public class HabitsWriteOnlyRepositoryBuilder
     {
-        public static IHabitReadOnlyRepository Build()
+        public static IHabitWriteOnlyRepository Build()
         {
-            var mock = new Mock<IHabitReadOnlyRepository>();
+            var mock = new Mock<IHabitWriteOnlyRepository>();
 
             return mock.Object;
         }
