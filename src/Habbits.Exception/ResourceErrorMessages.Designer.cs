@@ -142,6 +142,15 @@ namespace Habbits.Exception {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a The title is required.
+        /// </summary>
+        public static string TITLE_REQUIRED {
+            get {
+                return ResourceManager.GetString("TITLE_REQUIRED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Unknown error.
         /// </summary>
         public static string UNKNOW_ERRO {

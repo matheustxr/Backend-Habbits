@@ -4,7 +4,7 @@ using Moq;
 
 namespace CommonTestUtilities.LoggedUser
 {
-    public class UserBuilder
+    public class LoggedUserBuilder
     {
         public static ILoggedUser Build(User user)
         {

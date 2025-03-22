@@ -144,6 +144,9 @@
   <data name="TITLE_EMPTY" xml:space="preserve">
     <value>The title cannot be empty</value>
   </data>
+  <data name="TITLE_REQUIRED" xml:space="preserve">
+    <value>The title is required</value>
+  </data>
   <data name="UNKNOW_ERRO" xml:space="preserve">
     <value>Unknown error</value>
   </data>
