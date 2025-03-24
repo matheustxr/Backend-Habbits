@@ -61,7 +61,22 @@ namespace UseCases.Habits.Create
             result.Which.GetErrors().Should().Contain(ResourceErrorMessages.WEEKDAYS_EMPTY);
         }
 
-        
+        [Fact]
+        public async Task Error_Description_TooLong()
+        {
+            var loggedUser = UserBuilder.Build();
+
+            var request = RequestCreateHabitJsonHabitBuilder.Build();
+            request.Description = new string('A', 501); // Descrição com 501 caracteres
+
+            var useCase = CreateUseCase(loggedUser);
+            var act = async () => await useCase.Execute(request);
+
+            var result = await act.Should().ThrowAsync<ErrorOnValidationException>();
+
+            result.Which.GetErrors().Should().Contain(ResourceErrorMessages.DESCRIPTION_TOO_LONG);
+        }
+
         private CreateHabitUseCase CreateUseCase(Habbits.Domain.Entities.User user)
         {
             var habitWriteOnlyRepository = HabitsWriteOnlyRepositoryBuilder.Build();
