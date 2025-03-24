@@ -45,6 +45,23 @@ namespace UseCases.Habits.Create
             result.Which.GetErrors().Should().Contain(ResourceErrorMessages.TITLE_EMPTY);
         }
 
+        [Fact]
+        public async Task Error_WeekDays_Empty()
+        {
+            var loggedUser = UserBuilder.Build();
+
+            var request = RequestCreateHabitJsonHabitBuilder.Build();
+            request.WeekDays.Clear(); // Simulando lista vazia
+
+            var useCase = CreateUseCase(loggedUser);
+            var act = async () => await useCase.Execute(request);
+
+            var result = await act.Should().ThrowAsync<ErrorOnValidationException>();
+
+            result.Which.GetErrors().Should().Contain(ResourceErrorMessages.WEEKDAYS_EMPTY);
+        }
+
+        
         private CreateHabitUseCase CreateUseCase(Habbits.Domain.Entities.User user)
         {
             var habitWriteOnlyRepository = HabitsWriteOnlyRepositoryBuilder.Build();
