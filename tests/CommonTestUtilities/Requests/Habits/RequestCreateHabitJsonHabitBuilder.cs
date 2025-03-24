@@ -1,8 +1,6 @@
 ﻿using Bogus;
+using Habbits.Communication.Enums; 
 using Habbits.Communication.Requests.Habits;
-using Habbits.Communication.Enums;  // Usando o namespace correto para WeekDays
-using System;
-using System.Collections.Generic;
 
 namespace CommonTestUtilities.Requests.Habits
 {

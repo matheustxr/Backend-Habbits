@@ -34,17 +34,15 @@ namespace UseCases.Habits.Create
             var loggedUser = UserBuilder.Build();
 
             var request = RequestCreateHabitJsonHabitBuilder.Build();
-
             request.Title = string.Empty;
 
             var useCase = CreateUseCase(loggedUser);
-
             var act = async () => await useCase.Execute(request);
 
             var result = await act.Should().ThrowAsync<ErrorOnValidationException>();
 
             result.Which.GetErrors().Should().HaveCount(1);
-            result.Which.GetErrors().Should().Contain(ResourceErrorMessages.TITLE_REQUIRED);
+            result.Which.GetErrors().Should().Contain(ResourceErrorMessages.TITLE_EMPTY);
         }
 
         private CreateHabitUseCase CreateUseCase(Habbits.Domain.Entities.User user)
