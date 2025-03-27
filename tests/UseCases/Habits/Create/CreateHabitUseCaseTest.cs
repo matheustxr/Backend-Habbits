@@ -1,18 +1,85 @@
-﻿using CommonTestUtilities.Entities;
-using CommonTestUtilities.LoggedUser;
-using CommonTestUtilities.Mapper;
-using CommonTestUtilities.Repositories;
-using CommonTestUtilities.Repositories.Habits;
-using CommonTestUtilities.Requests.Habits;
+﻿using AutoMapper;
 using FluentAssertions;
 using Habbits.Application.UseCases.Habit.Create;
+using Habbits.Communication.Enums;
+using Habbits.Communication.Requests.Habits;
+using Habbits.Domain.Entities;
+using Habbits.Domain.Repositories;
+using Habbits.Domain.Repositories.Habit;
 using Habbits.Exception;
 using Habbits.Exception.ExceptionBase;
+using Moq;
 
 namespace UseCases.Habits.Create
 {
     public class CreateHabitUseCaseTest
     {
+        private readonly Mock<IMapper> _mapperMock;
+        private readonly Mock<IHabitReadOnlyRepository> _habitReadOnlyRepositoryMock;
+        private readonly Mock<IHabitWriteOnlyRepository> _habitWriteOnlyRepositoryMock;
+        private readonly Mock<IUnityOfWork> _unitOfWorkMock;
+        private readonly CreateHabitUseCase _useCase;
+
+        public CreateHabitUseCaseTest()
+        {
+            _mapperMock = new Mock<IMapper>();
+            _habitReadOnlyRepositoryMock = new Mock<IHabitReadOnlyRepository>();
+            _habitWriteOnlyRepositoryMock = new Mock<IHabitWriteOnlyRepository>();
+            _unitOfWorkMock = new Mock<IUnityOfWork>();
+
+            _useCase = new CreateHabitUseCase(
+                _mapperMock.Object,
+                _habitReadOnlyRepositoryMock.Object,
+                _habitWriteOnlyRepositoryMock.Object,
+                _unitOfWorkMock.Object
+            );
+        }
+
+        [Fact]
+        public async Task Should_CreateHabit_When_DataIsValid()
+        {
+            var request = new RequestCreateHabitJson
+            {
+                Title = "Exercise",
+                Description = "Go to the gym",
+                WeekDays = new List<WeekDays> { WeekDays.Monday, WeekDays.Wednesday },
+                IsActive = true,
+                UserId = Guid.NewGuid()
+            };
+
+            var habit = new Habit { Title = request.Title };
+
+            _habitReadOnlyRepositoryMock
+                .Setup(repo => repo.ExistActiveHabitWithTitle(request.Title))
+                .ReturnsAsync(false);
+
+            _mapperMock
+                .Setup(mapper => mapper.Map<Habit>(request))
+                .Returns(habit);
+
+            var response = await _useCase.Execute(request);
+
+            _habitWriteOnlyRepositoryMock.Verify(r => r.Add(It.IsAny<Habit>()), Times.Once);
+            _unitOfWorkMock.Verify(u => u.Commit(), Times.Once);
+
+            response.Title.Should().Be(request.Title);
+        }
+
+        [Fact]
+        public async Task Should_ThrowError_When_TitleAlreadyExists()
+        {
+            var request = new RequestCreateHabitJson { Title = "Exercise" };
+
+            _habitReadOnlyRepositoryMock
+                .Setup(repo => repo.ExistActiveHabitWithTitle(request.Title))
+                .ReturnsAsync(true);
+
+            var exception = await Assert.ThrowsAsync<ErrorOnValidationException>(() => _useCase.Execute(request));
+
+            exception.GetErrors().Should().Contain(ResourceErrorMessages.EMAIL_ALREADY_REGISTERED);
+        }
+
+        /*
         [Fact]
         public async Task Sucess()
         {
@@ -91,5 +158,6 @@ namespace UseCases.Habits.Create
 
             return new CreateHabitUseCase(mapper, habitReadOnlyRepository, habitWriteOnlyRepository, unityOfWork);
         }
+        */
     }
 }
