@@ -8,11 +8,11 @@ namespace WebApi.Test.Habits.Create
 {
     public class CreateHabitWebApiTests : IClassFixture<CustomWebApplicationFactory<Program>>
     {
-        private readonly HttpClient _client;
+        private readonly HabitsClassFixture _fixture;
 
         public CreateHabitWebApiTests(CustomWebApplicationFactory<Program> factory)
         {
-            _client = factory.CreateClient();
+            _fixture = new HabitsClassFixture(factory);
         }
 
         [Fact]
@@ -27,7 +27,7 @@ namespace WebApi.Test.Habits.Create
                 UserId = Guid.NewGuid()
             };
 
-            var response = await _client.PostAsJsonAsync("/api/habits", request);
+            var response = await _fixture.DoPostAsync("/api/habits", request);
 
             response.StatusCode.Should().Be(HttpStatusCode.Created);
         }
@@ -43,7 +43,7 @@ namespace WebApi.Test.Habits.Create
                 UserId = Guid.NewGuid()
             };
 
-            var response = await _client.PostAsJsonAsync("/api/habits", request);
+            var response = await _fixture.DoPostAsync("/api/habits", request);
 
             response.StatusCode.Should().Be(HttpStatusCode.BadRequest);
         }
