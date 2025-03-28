@@ -18,6 +18,7 @@ namespace CommonTestUtilities.Entities
             {
                 var habit = Build(user);
                 habit.Id = habitId++;
+                habit.DayHabits = habit.DayHabits.Select(d => DayHabitBuilder.Build(habit.Id)).ToList();
                 list.Add(habit);
             }
 
@@ -27,7 +28,7 @@ namespace CommonTestUtilities.Entities
         public static Habit Build(User user)
         {
             return new Faker<Habit>()
-                .RuleFor(h => h.Id, _ => 1)
+                .RuleFor(h => h.Id, faker => faker.UniqueIndex)
                 .RuleFor(h => h.Title, faker => faker.Lorem.Word())
                 .RuleFor(h => h.Description, faker => faker.Lorem.Sentence())
                 .RuleFor(h => h.CreatedAt, faker => faker.Date.Past())

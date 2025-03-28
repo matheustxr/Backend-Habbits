@@ -1,51 +1,56 @@
-﻿using System.Net;
-using System.Net.Http.Json;
+﻿using CommonTestUtilities.Requests.Habits;
 using FluentAssertions;
-using Habbits.Communication.Enums;
-using Habbits.Communication.Requests.Habits;
+using Habbits.Exception;
+using System.Globalization;
+using System.Net;
+using System.Text.Json;
+using WebApi.Test.InlineData;
 
-namespace WebApi.Test.Habits.Create
+namespace WebApi.Test.Habits.Create;
+
+public class CreateHabitWebApiTests : HabitsClassFixture, IClassFixture<CustomWebApplicationFactory>
 {
-    public class CreateHabitWebApiTests : IClassFixture<CustomWebApplicationFactory<Program>>
+    private const string METHOD = "api/habits";
+    private readonly string _token;
+
+    public CreateHabitWebApiTests(CustomWebApplicationFactory webApplicationFactory) : base(webApplicationFactory)
     {
-        private readonly HabitsClassFixture _fixture;
+        _token = webApplicationFactory.TestUserToken ?? throw new InvalidOperationException("Token não gerado");
+    }
 
-        public CreateHabitWebApiTests(CustomWebApplicationFactory<Program> factory)
-        {
-            _fixture = new HabitsClassFixture(factory);
-        }
+    [Fact]
+    public async Task Success()
+    {
+        var request = RequestCreateHabitJsonBuilder.Build();
 
-        [Fact]
-        public async Task Should_ReturnSuccess_When_HabitIsValid()
-        {
-            var request = new RequestCreateHabitJson
-            {
-                Title = "Read a book",
-                Description = "Read for 30 minutes",
-                WeekDays = new List<WeekDays> { WeekDays.Tuesday },
-                IsActive = true,
-                UserId = Guid.NewGuid()
-            };
+        var result = await DoPost(requestUri: METHOD, request: request, token: _token);
 
-            var response = await _fixture.DoPostAsync("/api/habits", request);
+        result.StatusCode.Should().Be(HttpStatusCode.Created);
 
-            response.StatusCode.Should().Be(HttpStatusCode.Created);
-        }
+        var body = await result.Content.ReadAsStreamAsync();
+        var response = await JsonDocument.ParseAsync(body);
 
-        [Fact]
-        public async Task Should_ReturnBadRequest_When_TitleIsEmpty()
-        {
-            var request = new RequestCreateHabitJson
-            {
-                Title = "",
-                WeekDays = new List<WeekDays> { WeekDays.Friday },
-                IsActive = false,
-                UserId = Guid.NewGuid()
-            };
+        response.RootElement.GetProperty("title").GetString().Should().Be(request.Title);
+    }
 
-            var response = await _fixture.DoPostAsync("/api/habits", request);
+    [Theory]
+    [ClassData(typeof(CultureInlineDataTest))]
+    public async Task Error_Title_Empty(string culture)
+    {
+        var request = RequestCreateHabitJsonBuilder.Build();
+        request.Title = string.Empty;
 
-            response.StatusCode.Should().Be(HttpStatusCode.BadRequest);
-        }
+        var result = await DoPost(requestUri: METHOD, request: request, token: _token, culture: culture);
+
+        result.StatusCode.Should().Be(HttpStatusCode.BadRequest);
+
+        var body = await result.Content.ReadAsStreamAsync();
+        var response = await JsonDocument.ParseAsync(body);
+
+        var errors = response.RootElement.GetProperty("errorMessages").EnumerateArray();
+
+        var expectedMessage = ResourceErrorMessages.ResourceManager.GetString("TITLE_EMPTY", new CultureInfo(culture));
+
+        errors.Should().HaveCount(1).And.Contain(error => error.GetString()!.Equals(expectedMessage));
     }
 }

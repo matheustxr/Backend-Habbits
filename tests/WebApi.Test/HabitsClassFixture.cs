@@ -1,17 +1,32 @@
-﻿using System.Net;
-using System.Net.Http.Headers;
+﻿using System.Net.Http.Headers;
 using System.Net.Http.Json;
-using Microsoft.AspNetCore.Mvc.Testing;
+using Microsoft.EntityFrameworkCore;
+using Habbits.Infrastructure.DataAccess;
 
 namespace WebApi.Test;
 
-public class HabitsClassFixture
+public class HabitsClassFixture : IDisposable
 {
     private readonly HttpClient _httpClient;
+    public readonly HabbitsDbContext DbContext;
 
     public HabitsClassFixture(CustomWebApplicationFactory webApplicationFactory)
     {
         _httpClient = webApplicationFactory.CreateClient();
+
+        // Configurando o DbContext para usar um banco de dados em memória isolado
+        var options = new DbContextOptionsBuilder<HabbitsDbContext>()
+            .UseInMemoryDatabase(Guid.NewGuid().ToString()) // Nome aleatório para cada execução
+            .EnableSensitiveDataLogging() // Ajuda a debugar problemas de rastreamento de entidade
+            .Options;
+
+        DbContext = new HabbitsDbContext(options);
+    }
+
+    public void Dispose()
+    {
+        DbContext.Database.EnsureDeleted();
+        DbContext.Dispose();
     }
 
     protected async Task<HttpResponseMessage> DoPost(
@@ -20,11 +35,20 @@ public class HabitsClassFixture
         string token = "",
         string culture = "en")
     {
-        AuthorizeRequest(token);
+        var httpRequest = new HttpRequestMessage(HttpMethod.Post, requestUri)
+        {
+            Content = JsonContent.Create(request)
+        };
 
-        ChangeRequestCulture(culture);
+        if (!string.IsNullOrWhiteSpace(token))
+        {
+            httpRequest.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
+        }
 
-        return await _httpClient.PostAsJsonAsync(requestUri, request);
+        httpRequest.Headers.AcceptLanguage.Clear();
+        httpRequest.Headers.AcceptLanguage.Add(new StringWithQualityHeaderValue(culture));
+
+        return await _httpClient.SendAsync(httpRequest);
     }
 
     protected async Task<HttpResponseMessage> DoPut(
@@ -72,7 +96,6 @@ public class HabitsClassFixture
     private void ChangeRequestCulture(string culture)
     {
         _httpClient.DefaultRequestHeaders.AcceptLanguage.Clear();
-
         _httpClient.DefaultRequestHeaders.AcceptLanguage.Add(new StringWithQualityHeaderValue(culture));
     }
 }

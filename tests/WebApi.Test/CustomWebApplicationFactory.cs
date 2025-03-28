@@ -1,70 +1,18 @@
-﻿using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc.Testing;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.DependencyInjection.Extensions;
-using Microsoft.EntityFrameworkCore;
-using Habbits.Domain.Repositories;
-using Moq;
-using Habbits.Infrastructure.DataAccess;
-using Habbits.Domain.Repositories.Habit;
-using Microsoft.EntityFrameworkCore.Diagnostics;
-using Microsoft.Extensions.Configuration;
+﻿using CommonTestUtilities.Entities;
+using Habbits.Domain.Entities;
 using Habbits.Domain.Security.Cryptography;
 using Habbits.Domain.Security.Tokens;
-using CommonTestUtilities.Entities;
-using Habbits.Domain.Entities;
+using Habbits.Infrastructure.DataAccess;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc.Testing;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace WebApi.Test
 {
-    public class CustomWebApplicationFactory<TStartup> : WebApplicationFactory<TStartup> where TStartup : class
+    public class CustomWebApplicationFactory : WebApplicationFactory<Program>
     {
-        /*
-        protected override void ConfigureWebHost(IWebHostBuilder builder)
-        {
-            builder.ConfigureAppConfiguration((context, config) =>
-            {
-                config.AddJsonFile("appsettings.Test.json");
-            });
-
-            builder.ConfigureServices(services =>
-            {
-                // Remove o contexto de banco de dados real
-                var descriptor = services.SingleOrDefault(d => d.ServiceType == typeof(DbContextOptions<HabbitsDbContext>));
-                if (descriptor != null)
-                {
-                    services.Remove(descriptor);
-                }
-
-                // Adiciona um banco de dados em memória para testes
-                services.AddDbContext<HabbitsDbContext>(options =>
-                {
-                    options.UseInMemoryDatabase("HabbitsTestDb")
-                        .ConfigureWarnings(w => w.Ignore(InMemoryEventId.TransactionIgnoredWarning)); // Evita erro de transações
-                });
-
-                // Configuração de mocks para repositórios se necessário
-                var habitReadOnlyRepoMock = new Mock<IHabitReadOnlyRepository>();
-                var habitWriteOnlyRepoMock = new Mock<IHabitWriteOnlyRepository>();
-                var habitUpdateOnlyRepoMock = new Mock<IHabitUpdateOnlyRepository>();
-                var unitOfWorkMock = new Mock<IUnityOfWork>();
-
-                services.RemoveAll<IHabitReadOnlyRepository>();
-                services.RemoveAll<IHabitWriteOnlyRepository>();
-                services.RemoveAll<IHabitUpdateOnlyRepository>();
-                services.RemoveAll<IUnityOfWork>();
-
-                services.AddSingleton(habitReadOnlyRepoMock.Object);
-                services.AddSingleton(habitWriteOnlyRepoMock.Object);
-                services.AddSingleton(habitUpdateOnlyRepoMock.Object);
-                services.AddSingleton(unitOfWorkMock.Object);
-
-                // Criar o escopo de serviços para inicializar o banco de dados de testes
-                using var scope = services.BuildServiceProvider().CreateScope();
-                var dbContext = scope.ServiceProvider.GetRequiredService<HabbitsDbContext>();
-                dbContext.Database.EnsureCreated();
-            });
-        }
-        */
+        public string? TestUserToken { get; private set; }
 
         protected override void ConfigureWebHost(IWebHostBuilder builder)
         {
@@ -95,7 +43,15 @@ namespace WebApi.Test
             IPasswordEncripter passwordEncripter,
             IAccessTokenGenerator accessTokenGenerator)
         {
+            dbContext.Database.EnsureDeleted();
+            dbContext.Database.EnsureCreated();
+
             var user = AddUser(dbContext, passwordEncripter, accessTokenGenerator);
+
+            if (user == null || string.IsNullOrEmpty(TestUserToken))
+            {
+                throw new InvalidOperationException("Erro ao criar usuário de teste e gerar token.");
+            }
 
             var habit = AddHabit(dbContext, user, habitId: 1);
 
@@ -111,7 +67,7 @@ namespace WebApi.Test
 
             dbContext.Users.Add(user);
 
-            var token = accessTokenGenerator.Generate(user);
+            TestUserToken = accessTokenGenerator.Generate(user);
 
             return user;
         }

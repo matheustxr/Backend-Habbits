@@ -4,19 +4,21 @@ using Habbits.Communication.Requests.Habits;
 
 namespace CommonTestUtilities.Requests.Habits
 {
-    public class RequestCreateHabitJsonHabitBuilder
+    public class RequestCreateHabitJsonBuilder
     {
+        private static readonly Guid FixedUserId = Guid.NewGuid();
+
         public static RequestCreateHabitJson Build()
         {
             var faker = new Faker();
 
             var habit = new RequestCreateHabitJson
             {
-                Title = faker.Lorem.Sentence(),  
-                Description = faker.Lorem.Paragraph(),  
-                WeekDays = GenerateRandomWeekDays(), 
-                IsActive = faker.Random.Bool(),  
-                UserId = Guid.NewGuid()  
+                Title = faker.Lorem.Sentence(),
+                Description = faker.Lorem.Paragraph(),
+                WeekDays = GenerateRandomWeekDays(),
+                IsActive = faker.Random.Bool(),
+                UserId = FixedUserId
             };
 
             return habit;
