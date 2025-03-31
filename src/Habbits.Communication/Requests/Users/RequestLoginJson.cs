@@ -1,4 +1,4 @@
-﻿namespace Habbits.Communication.Requests.User;
+﻿namespace Habbits.Communication.Requests.Users;
 
 public class RequestLoginJson
 {

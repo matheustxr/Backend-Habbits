@@ -1,5 +1,5 @@
 ﻿using Bogus;
-using Habbits.Communication.Requests.User;
+using Habbits.Communication.Requests.Users;
 
 namespace CommonTestUtilities.Requests.User
 {

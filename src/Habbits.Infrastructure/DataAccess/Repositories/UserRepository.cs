@@ -1,5 +1,5 @@
 ﻿using Habbits.Domain.Entities;
-using Habbits.Domain.Repositories.User;
+using Habbits.Domain.Repositories.Users;
 using Microsoft.EntityFrameworkCore;
 
 namespace Habbits.Infrastructure.DataAccess.Repositories;

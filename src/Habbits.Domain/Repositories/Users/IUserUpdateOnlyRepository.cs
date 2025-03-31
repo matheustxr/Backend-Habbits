@@ -1,4 +1,4 @@
-﻿namespace Habbits.Domain.Repositories.User;
+﻿namespace Habbits.Domain.Repositories.Users;
 public interface IUserUpdateOnlyRepository
 {
     Task<Entities.User> GetById(Guid id);

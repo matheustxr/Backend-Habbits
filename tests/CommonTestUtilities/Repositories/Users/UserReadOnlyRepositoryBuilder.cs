@@ -1,5 +1,5 @@
 ﻿using Habbits.Domain.Entities;
-using Habbits.Domain.Repositories.User;
+using Habbits.Domain.Repositories.Users;
 using Moq;
 
 namespace CommonTestUtilities.Repositories.Users
@@ -24,5 +24,7 @@ namespace CommonTestUtilities.Repositories.Users
 
             return this;
         }
+
+        public IUserReadOnlyRepository Build() => _repository.Object;
     }
 }

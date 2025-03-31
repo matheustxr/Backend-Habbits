@@ -3,7 +3,7 @@ using FluentValidation.Results;
 using Habbits.Communication.Requests.Habits;
 using Habbits.Communication.Responses.Habbits;
 using Habbits.Domain.Repositories;
-using Habbits.Domain.Repositories.Habit;
+using Habbits.Domain.Repositories.Habits;
 using Habbits.Exception;
 using Habbits.Exception.ExceptionBase;
 

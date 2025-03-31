@@ -1,4 +1,4 @@
-﻿namespace Habbits.Domain.Repositories.Habit;
+﻿namespace Habbits.Domain.Repositories.Habits;
 public interface IHabitWriteOnlyRepository
 {
     Task Add(Entities.Habit habit);

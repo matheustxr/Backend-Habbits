@@ -5,12 +5,12 @@ using Habbits.Communication.Enums;
 using Habbits.Communication.Requests.Habits;
 using Habbits.Domain.Entities;
 using Habbits.Domain.Repositories;
-using Habbits.Domain.Repositories.Habit;
+using Habbits.Domain.Repositories.Habits;
 using Habbits.Exception;
 using Habbits.Exception.ExceptionBase;
 using Moq;
 
-namespace UseCases.Habits.Create
+namespace UseCases.Test.Habits.Create
 {
     public class CreateHabitUseCaseTest
     {

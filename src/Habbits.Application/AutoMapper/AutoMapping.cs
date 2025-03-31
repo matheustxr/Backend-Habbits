@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Habbits.Communication.Requests.Habits;
-using Habbits.Communication.Requests.User;
+using Habbits.Communication.Requests.Users;
 using Habbits.Communication.Responses.Habbits;
 using Habbits.Communication.Responses.Users;
 using Habbits.Domain.Entities;

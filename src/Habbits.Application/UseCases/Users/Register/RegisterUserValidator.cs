@@ -1,5 +1,5 @@
 ﻿using FluentValidation;
-using Habbits.Communication.Requests.User;
+using Habbits.Communication.Requests.Users;
 using Habbits.Exception;
 
 namespace Habbits.Application.UseCases.Users.Register;

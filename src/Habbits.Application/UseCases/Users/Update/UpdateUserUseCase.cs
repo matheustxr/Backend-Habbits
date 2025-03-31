@@ -1,7 +1,7 @@
 ﻿using FluentValidation.Results;
-using Habbits.Communication.Requests.User;
+using Habbits.Communication.Requests.Users;
 using Habbits.Domain.Repositories;
-using Habbits.Domain.Repositories.User;
+using Habbits.Domain.Repositories.Users;
 using Habbits.Domain.Services.LoggedUser;
 using Habbits.Exception;
 using Habbits.Exception.ExceptionBase;

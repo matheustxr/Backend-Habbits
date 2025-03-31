@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 using Habbits.Communication.Requests.Habits;
-using Habbits.Communication.Requests.User;
+using Habbits.Communication.Requests.Users;
 using Habbits.Exception;
 
 namespace Habbits.Application.UseCases.Habit.Create

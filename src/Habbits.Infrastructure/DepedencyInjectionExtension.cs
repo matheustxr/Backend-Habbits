@@ -1,6 +1,6 @@
 ﻿using Habbits.Domain.Repositories;
-using Habbits.Domain.Repositories.Habit;
-using Habbits.Domain.Repositories.User;
+using Habbits.Domain.Repositories.Habits;
+using Habbits.Domain.Repositories.Users;
 using Habbits.Domain.Security.Cryptography;
 using Habbits.Domain.Security.Tokens;
 using Habbits.Domain.Services.LoggedUser;

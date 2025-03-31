@@ -1,8 +1,9 @@
-﻿using Moq;
+﻿using Habbits.Domain.Repositories.Users;
+using Moq;
 
 namespace CommonTestUtilities.Repositories.Users
 {
-    public class IUsertWriteOnlyRepository
+    public class UsertWriteOnlyRepository
     {
         public static IUsertWriteOnlyRepository Build()
         {

@@ -1,11 +1,11 @@
-﻿using Habbits.Domain.Repositories.User;
-using Habbits.Domain.Repositories;
+﻿using Habbits.Domain.Repositories;
 using Habbits.Domain.Security.Cryptography;
 using Habbits.Domain.Services.LoggedUser;
 using FluentValidation.Results;
 using Habbits.Exception;
 using Habbits.Exception.ExceptionBase;
-using Habbits.Communication.Requests.User;
+using Habbits.Communication.Requests.Users;
+using Habbits.Domain.Repositories.Users;
 
 namespace Habbits.Application.UseCases.Users.ChangePassword;
 

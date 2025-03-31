@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
 using FluentValidation.Results;
-using Habbits.Communication.Requests.User;
+using Habbits.Communication.Requests.Users;
 using Habbits.Communication.Responses.Users;
 using Habbits.Domain.Repositories;
-using Habbits.Domain.Repositories.User;
+using Habbits.Domain.Repositories.Users;
 using Habbits.Domain.Security.Cryptography;
 using Habbits.Domain.Security.Tokens;
 using Habbits.Exception;

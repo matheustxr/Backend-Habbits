@@ -1,6 +1,6 @@
 ﻿
 using Habbits.Domain.Repositories;
-using Habbits.Domain.Repositories.User;
+using Habbits.Domain.Repositories.Users;
 using Habbits.Domain.Services.LoggedUser;
 
 namespace Habbits.Application.UseCases.Users.Delete;
