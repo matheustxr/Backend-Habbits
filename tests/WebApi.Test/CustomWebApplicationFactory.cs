@@ -31,7 +31,7 @@ namespace WebApi.Test
                     //configuração para sempre inicar o bd com um usuario
                     var scope = services.BuildServiceProvider().CreateScope();
                     var dbContext = scope.ServiceProvider.GetRequiredService<HabbitsDbContext>();
-                    var passwordEncripter = scope.ServiceProvider.GetRequiredService<IPasswordEncripter>();
+                    var passwordEncripter = scope.ServiceProvider.GetRequiredService<IPasswordEncrypter>();
                     var accessTokenGenerator = scope.ServiceProvider.GetRequiredService<IAccessTokenGenerator>();
 
                     StartDatabase(dbContext, passwordEncripter, accessTokenGenerator);
@@ -40,7 +40,7 @@ namespace WebApi.Test
 
         private void StartDatabase(
             HabbitsDbContext dbContext,
-            IPasswordEncripter passwordEncripter,
+            IPasswordEncrypter passwordEncripter,
             IAccessTokenGenerator accessTokenGenerator)
         {
             dbContext.Database.EnsureDeleted();
@@ -60,7 +60,7 @@ namespace WebApi.Test
 
         private User AddUser(
             HabbitsDbContext dbContext,
-            IPasswordEncripter passwordEncripter,
+            IPasswordEncrypter passwordEncripter,
             IAccessTokenGenerator accessTokenGenerator)
         {
             var user = UserBuilder.Build();

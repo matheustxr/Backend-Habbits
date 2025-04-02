@@ -14,13 +14,13 @@ public class ChangePasswordUseCase : IChangePasswordUseCase
     private readonly ILoggedUser _loggedUser;
     private readonly IUserUpdateOnlyRepository _repository;
     private readonly IUnityOfWork _unityOfWork;
-    private readonly IPasswordEncripter _passwordEncripter;
+    private readonly IPasswordEncrypter _passwordEncripter;
 
     public ChangePasswordUseCase(
         ILoggedUser loggedUser,
         IUserUpdateOnlyRepository repository,
         IUnityOfWork unityOfWork,
-        IPasswordEncripter passwordEncripter)
+        IPasswordEncrypter passwordEncripter)
     {
         _loggedUser = loggedUser;
         _repository = repository;

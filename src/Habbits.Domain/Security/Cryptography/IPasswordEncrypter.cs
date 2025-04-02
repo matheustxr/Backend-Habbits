@@ -1,5 +1,5 @@
 ﻿namespace Habbits.Domain.Security.Cryptography;
-public interface IPasswordEncripter
+public interface IPasswordEncrypter
 {
     string Encrypt(string password);
 
