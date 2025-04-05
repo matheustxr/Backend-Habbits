@@ -3,7 +3,7 @@ using Moq;
 
 namespace CommonTestUtilities.Repositories.Users
 {
-    public class UsertWriteOnlyRepository
+    public class UsertWriteOnlyRepositoryBuilder
     {
         public static IUsertWriteOnlyRepository Build()
         {
