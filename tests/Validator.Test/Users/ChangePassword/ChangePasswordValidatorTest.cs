@@ -11,7 +11,6 @@ namespace Validator.Test.Users.ChangePassword
         public void Success()
         {
             var validator = new ChangePasswordValidator();
-
             var request = RequestChangePasswordJsonBuilder.Build();
 
             var result = validator.Validate(request);
@@ -27,7 +26,6 @@ namespace Validator.Test.Users.ChangePassword
         {
             var validator = new ChangePasswordValidator();
             var request = RequestChangePasswordJsonBuilder.Build();
-
             request.NewPassword = newPassword;
 
             var result = validator.Validate(request);
