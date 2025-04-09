@@ -5,7 +5,7 @@ using Habbits.Infrastructure.DataAccess;
 
 namespace WebApi.Test;
 
-public class HabitsClassFixture : IDisposable
+public class HabitsClassFixture : IClassFixture<CustomWebApplicationFactory>
 {
     private readonly HttpClient _httpClient;
     public readonly HabbitsDbContext DbContext;
