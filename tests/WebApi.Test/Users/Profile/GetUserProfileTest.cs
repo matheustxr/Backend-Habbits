@@ -1,5 +1,6 @@
 ﻿using System.Net;
 using System.Text.Json;
+using FluentAssertions;
 
 namespace WebApi.Test.Users.Profile
 {
@@ -12,9 +13,9 @@ namespace WebApi.Test.Users.Profile
 
         public GetUserProfileTest(CustomWebApplicationFactory webApplicationFactory) : base(webApplicationFactory)
         {
-            _token = webApplicationFactory.User_Team_Member.GetToken();
-            _userName = webApplicationFactory.User_Team_Member.GetName();
-            _userEmail = webApplicationFactory.User_Team_Member.GetEmail();
+            _token = webApplicationFactory.TestUser.GetToken();
+            _userName = webApplicationFactory.TestUser.GetName();
+            _userEmail = webApplicationFactory.TestUser.GetEmail();
         }
 
         [Fact]
