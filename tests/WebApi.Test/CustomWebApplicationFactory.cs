@@ -7,19 +7,21 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using WebApi.Test.Resources;
 
 namespace WebApi.Test
 {
     public class CustomWebApplicationFactory : WebApplicationFactory<Program>
     {
         public string? TestUserToken { get; private set; }
+        public UserIdentityManager? TestUser { get; private set; }
+        public HabitIdentityManager? TestHabit { get; private set; }
 
         protected override void ConfigureWebHost(IWebHostBuilder builder)
         {
             builder.UseEnvironment("Test")
                 .ConfigureServices(services =>
                 {
-                    //configuração para iniciar o bd inMemory para testes
                     var provider = services.AddEntityFrameworkInMemoryDatabase().BuildServiceProvider();
 
                     services.AddDbContext<HabbitsDbContext>(config =>
@@ -28,7 +30,6 @@ namespace WebApi.Test
                         config.UseInternalServiceProvider(provider);
                     });
 
-                    //configuração para sempre inicar o bd com um usuario
                     var scope = services.BuildServiceProvider().CreateScope();
                     var dbContext = scope.ServiceProvider.GetRequiredService<HabbitsDbContext>();
                     var passwordEncripter = scope.ServiceProvider.GetRequiredService<IPasswordEncrypter>();
@@ -47,13 +48,10 @@ namespace WebApi.Test
             dbContext.Database.EnsureCreated();
 
             var user = AddUser(dbContext, passwordEncripter, accessTokenGenerator);
-
-            if (user == null || string.IsNullOrEmpty(TestUserToken))
-            {
-                throw new InvalidOperationException("Erro ao criar usuário de teste e gerar token.");
-            }
-
             var habit = AddHabit(dbContext, user, habitId: 1);
+
+            TestUser = new UserIdentityManager(user, "12345678", TestUserToken!);
+            TestHabit = new HabitIdentityManager(habit);
 
             dbContext.SaveChanges();
         }
@@ -64,11 +62,8 @@ namespace WebApi.Test
             IAccessTokenGenerator accessTokenGenerator)
         {
             var user = UserBuilder.Build();
-
             dbContext.Users.Add(user);
-
             TestUserToken = accessTokenGenerator.Generate(user);
-
             return user;
         }
 
@@ -76,9 +71,7 @@ namespace WebApi.Test
         {
             var habit = HabitBuilder.Build(user);
             habit.Id = habitId;
-
             dbContext.Habits.Add(habit);
-
             return habit;
         }
     }
