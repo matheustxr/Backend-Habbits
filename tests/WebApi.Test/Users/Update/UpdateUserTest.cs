@@ -40,7 +40,6 @@ namespace WebApi.Test.Users.Update
             response.StatusCode.Should().Be(HttpStatusCode.BadRequest);
 
             await using var responseBody = await response.Content.ReadAsStreamAsync();
-
             var responseData = await JsonDocument.ParseAsync(responseBody);
             var errors = responseData.RootElement.GetProperty("errorMessages").EnumerateArray();
 
