@@ -1,7 +1,7 @@
 ﻿using System.Net.Http.Headers;
 using System.Net.Http.Json;
-using Microsoft.EntityFrameworkCore;
 using Habbits.Infrastructure.DataAccess;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace WebApi.Test;
 
@@ -14,13 +14,7 @@ public class HabitsClassFixture : IClassFixture<CustomWebApplicationFactory>
     {
         _httpClient = webApplicationFactory.CreateClient();
 
-        // Configurando o DbContext para usar um banco de dados em memória isolado
-        var options = new DbContextOptionsBuilder<HabbitsDbContext>()
-            .UseInMemoryDatabase(Guid.NewGuid().ToString()) // Nome aleatório para cada execução
-            .EnableSensitiveDataLogging() // Ajuda a debugar problemas de rastreamento de entidade
-            .Options;
-
-        DbContext = new HabbitsDbContext(options);
+        DbContext = webApplicationFactory.Services.GetRequiredService<HabbitsDbContext>();
     }
 
     public void Dispose()

@@ -50,7 +50,7 @@ namespace WebApi.Test
             var user = AddUser(dbContext, passwordEncripter, accessTokenGenerator);
             var habit = AddHabit(dbContext, user, habitId: 1);
 
-            TestUser = new UserIdentityManager(user, "12345678", TestUserToken!);
+            TestUser = new UserIdentityManager(user, "!Password123", TestUserToken!);
             TestHabit = new HabitIdentityManager(habit);
 
             dbContext.SaveChanges();
@@ -58,12 +58,17 @@ namespace WebApi.Test
 
         private User AddUser(
             HabbitsDbContext dbContext,
-            IPasswordEncrypter passwordEncripter,
+            IPasswordEncrypter passwordEncrypter,
             IAccessTokenGenerator accessTokenGenerator)
         {
             var user = UserBuilder.Build();
+
+            var encryptedPassword = passwordEncrypter.Encrypt("!Password123");
+            user.Password = encryptedPassword;
+
             dbContext.Users.Add(user);
             TestUserToken = accessTokenGenerator.Generate(user);
+
             return user;
         }
 
