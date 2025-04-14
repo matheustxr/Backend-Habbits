@@ -1,4 +1,5 @@
 ﻿using CommonTestUtilities.Requests.User;
+using FluentAssertions;
 using Habbits.Communication.Requests.Users;
 using Habbits.Exception;
 using System.Globalization;
@@ -26,18 +27,20 @@ namespace WebApi.Test.Login
         [Fact]
         public async Task Success()
         {
+            // Arrange
             var request = new RequestLoginJson
             {
                 Email = _email,
                 Password = _password
             };
 
+            // Act
             var response = await DoPost(requestUri: METHOD, request: request);
 
+            // Assert
             response.StatusCode.Should().Be(HttpStatusCode.OK);
 
             var responseBody = await response.Content.ReadAsStreamAsync();
-
             var responseData = await JsonDocument.ParseAsync(responseBody);
 
             responseData.RootElement.GetProperty("name").GetString().Should().Be(_name);
@@ -48,19 +51,21 @@ namespace WebApi.Test.Login
         [ClassData(typeof(CultureInlineDataTest))]
         public async Task Error_Login_Invalid(string culture)
         {
+            // Arrange
             var request = RequestLoginJsonBuilder.Build();
 
+            // Act
             var response = await DoPost(requestUri: METHOD, request: request, culture: culture);
 
+            // Assert
             response.StatusCode.Should().Be(HttpStatusCode.Unauthorized);
 
             var responseBody = await response.Content.ReadAsStreamAsync();
-
             var responseData = await JsonDocument.ParseAsync(responseBody);
-
             var errors = responseData.RootElement.GetProperty("errorMessages").EnumerateArray();
 
-            var expectedMessage = ResourceErrorMessages.ResourceManager.GetString("EMAIL_OR_PASSWORD_INVALID", new CultureInfo(culture));
+            var expectedMessage = ResourceErrorMessages.ResourceManager
+                .GetString("EMAIL_OR_PASSWORD_INVALID", new CultureInfo(culture));
 
             errors.Should().HaveCount(1).And.Contain(c => c.GetString()!.Equals(expectedMessage));
         }
