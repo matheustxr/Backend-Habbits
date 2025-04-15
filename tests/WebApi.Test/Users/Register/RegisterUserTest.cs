@@ -3,7 +3,7 @@ using System.Net;
 using System.Text.Json;
 using CommonTestUtilities.Requests.User;
 using FluentAssertions;
-using Habbits.Exception;
+using Habits.Exception;
 using WebApi.Test.InlineData;
 
 namespace WebApi.Test.Users.Register

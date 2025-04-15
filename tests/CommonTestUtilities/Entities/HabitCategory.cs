@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Bogus;
-using Habbits.Domain.Entities;
+﻿using Bogus;
+using Habits.Domain.Entities;
 
 namespace CommonTestUtilities.Entities
 {

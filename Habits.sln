@@ -3,17 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.10.35013.160
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Habbits.Api", "src\Habbits.Api\Habbits.Api.csproj", "{59AB4CA5-33E8-44B3-BED6-1607F633B886}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Habits.Api", "src\Habits.Api\Habits.Api.csproj", "{59AB4CA5-33E8-44B3-BED6-1607F633B886}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Habbits.Application", "src\Habbits.Application\Habbits.Application.csproj", "{56B7A3ED-0564-40E1-9689-F1291EA64300}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Habits.Application", "src\Habits.Application\Habits.Application.csproj", "{56B7A3ED-0564-40E1-9689-F1291EA64300}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Habbits.Communication", "src\Habbits.Communication\Habbits.Communication.csproj", "{F9A24189-56A8-4089-8889-ACF14BE2F7FB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Habits.Communication", "src\Habits.Communication\Habits.Communication.csproj", "{F9A24189-56A8-4089-8889-ACF14BE2F7FB}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Habbits.Infrastructure", "src\Habbits.Infrastructure\Habbits.Infrastructure.csproj", "{B2D2EB35-A0D7-45B7-97EF-8C4E0CCD7E42}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Habits.Infrastructure", "src\Habits.Infrastructure\Habits.Infrastructure.csproj", "{B2D2EB35-A0D7-45B7-97EF-8C4E0CCD7E42}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Habbits.Domain", "src\Habbits.Domain\Habbits.Domain.csproj", "{D86946FA-AFF2-41F9-813C-CE8D847E4166}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Habits.Domain", "src\Habits.Domain\Habits.Domain.csproj", "{D86946FA-AFF2-41F9-813C-CE8D847E4166}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Habbits.Exception", "src\Habbits.Exception\Habbits.Exception.csproj", "{C76C7C27-BF5E-42B0-885D-10A4C1066BCC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Habits.Exception", "src\Habits.Exception\Habits.Exception.csproj", "{C76C7C27-BF5E-42B0-885D-10A4C1066BCC}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{B344E3BE-A8E4-4056-AD21-EE5ADAC3C2F4}"
 EndProject

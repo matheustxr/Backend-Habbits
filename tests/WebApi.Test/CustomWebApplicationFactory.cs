@@ -1,8 +1,8 @@
 ﻿using CommonTestUtilities.Entities;
-using Habbits.Domain.Entities;
-using Habbits.Domain.Security.Cryptography;
-using Habbits.Domain.Security.Tokens;
-using Habbits.Infrastructure.DataAccess;
+using Habits.Domain.Entities;
+using Habits.Domain.Security.Cryptography;
+using Habits.Domain.Security.Tokens;
+using Habits.Infrastructure.DataAccess;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.EntityFrameworkCore;

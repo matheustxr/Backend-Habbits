@@ -1,5 +1,5 @@
-﻿using Habbits.Domain.Entities;
-using Habbits.Domain.Services.LoggedUser;
+﻿using Habits.Domain.Entities;
+using Habits.Domain.Services.LoggedUser;
 using Moq;
 
 namespace CommonTestUtilities.LoggedUser

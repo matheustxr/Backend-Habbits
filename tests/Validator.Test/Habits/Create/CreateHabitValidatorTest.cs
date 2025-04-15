@@ -1,7 +1,7 @@
 ﻿using FluentValidation.TestHelper;
-using Habbits.Application.UseCases.Habit.Create;
-using Habbits.Communication.Enums;
-using Habbits.Communication.Requests.Habits;
+using Habits.Communication.Requests.Habits;
+using Habits.Application.UseCases.Habits.Create;
+using Habits.Communication.Enums;
 
 namespace Validator.Test.Habits.Create
 {

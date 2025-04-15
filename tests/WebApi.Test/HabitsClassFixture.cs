@@ -1,6 +1,6 @@
 ﻿using System.Net.Http.Headers;
 using System.Net.Http.Json;
-using Habbits.Infrastructure.DataAccess;
+using Habits.Infrastructure.DataAccess;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace WebApi.Test;

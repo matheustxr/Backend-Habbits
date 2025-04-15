@@ -3,8 +3,8 @@ using CommonTestUtilities.LoggedUser;
 using CommonTestUtilities.Repositories;
 using CommonTestUtilities.Repositories.Users;
 using FluentAssertions;
-using Habbits.Application.UseCases.Users.Delete;
-using Habbits.Domain.Entities;
+using Habits.Domain.Entities;
+using Habits.Application.UseCases.Users.Delete;
 
 namespace UseCases.Test.Users.Delete
 {

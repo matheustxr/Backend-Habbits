@@ -1,4 +1,4 @@
-﻿using Habbits.Domain.Security.Cryptography;
+﻿using Habits.Domain.Security.Cryptography;
 using Moq;
 
 namespace CommonTestUtilities.Cryptography

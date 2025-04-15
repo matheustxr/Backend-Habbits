@@ -1,7 +1,7 @@
 ﻿using CommonTestUtilities.Requests.User;
-using Habbits.Application.UseCases.Users.Register;
+using Habits.Application.UseCases.Users.Register;
 using FluentAssertions;
-using Habbits.Exception;
+using Habits.Exception;
 
 namespace Validator.Test.Users.Register
 {

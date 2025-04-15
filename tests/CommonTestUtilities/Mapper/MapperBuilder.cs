@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Habbits.Application.AutoMapper;
+using Habits.Application.AutoMapper;
 
 namespace CommonTestUtilities.Mapper
 {

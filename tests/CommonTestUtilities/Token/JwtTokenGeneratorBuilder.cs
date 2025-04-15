@@ -1,5 +1,5 @@
-﻿using Habbits.Domain.Entities;
-using Habbits.Domain.Security.Tokens;
+﻿using Habits.Domain.Entities;
+using Habits.Domain.Security.Tokens;
 using Moq;
 
 namespace CommonTestUtilities.Token

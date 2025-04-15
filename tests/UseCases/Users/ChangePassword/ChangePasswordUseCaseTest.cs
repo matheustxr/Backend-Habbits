@@ -7,10 +7,10 @@ using CommonTestUtilities.Repositories;
 using CommonTestUtilities.Repositories.Users;
 using CommonTestUtilities.Requests.User;
 using FluentAssertions;
-using Habbits.Application.UseCases.Users.ChangePassword;
-using Habbits.Domain.Entities;
-using Habbits.Exception;
-using Habbits.Exception.ExceptionBase;
+using Habits.Application.UseCases.Users.ChangePassword;
+using Habits.Domain.Entities;
+using Habits.Exception;
+using Habits.Exception.ExceptionBase;
 
 namespace UseCases.Test.Users.ChangePassword
 {

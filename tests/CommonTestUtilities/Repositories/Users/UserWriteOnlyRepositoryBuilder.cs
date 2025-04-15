@@ -1,4 +1,4 @@
-﻿using Habbits.Domain.Repositories.Users;
+﻿using Habits.Domain.Repositories.Users;
 using Moq;
 
 namespace CommonTestUtilities.Repositories.Users

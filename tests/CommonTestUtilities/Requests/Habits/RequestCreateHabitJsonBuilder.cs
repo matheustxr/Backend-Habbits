@@ -1,6 +1,6 @@
 ﻿using Bogus;
-using Habbits.Communication.Enums; 
-using Habbits.Communication.Requests.Habits;
+using Habits.Communication.Enums; 
+using Habits.Communication.Requests.Habits;
 
 namespace CommonTestUtilities.Requests.Habits
 {

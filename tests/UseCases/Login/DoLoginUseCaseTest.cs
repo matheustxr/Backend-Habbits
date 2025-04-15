@@ -4,9 +4,11 @@ using CommonTestUtilities.Repositories.Users;
 using CommonTestUtilities.Requests.User;
 using CommonTestUtilities.Token;
 using FluentAssertions;
-using Habbits.Application.UseCases.Login;
-using Habbits.Exception.ExceptionBase;
-using Habbits.Exception;
+using Habits.Application.UseCases.Login;
+using Habits.Exception.ExceptionBase;
+using Habits.Exception;
+using Habits.Domain.Entities;
+
 
 namespace UseCases.Test.Login
 {
@@ -62,7 +64,7 @@ namespace UseCases.Test.Login
             result.Where(ex => ex.GetErrors().Count == 1 && ex.GetErrors().Contains(ResourceErrorMessages.EMAIL_OR_PASSWORD_INVALID));
         }
 
-        private DoLoginUseCase CreateUseCase(Habbits.Domain.Entities.User user, string? password = null)
+        private DoLoginUseCase CreateUseCase(User user, string? password = null)
         {
             var passwordEncripter = new PasswordEncrypterBuilder().Verify(password).Build();
 

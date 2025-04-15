@@ -1,13 +1,13 @@
 ﻿using AutoMapper;
 using FluentAssertions;
-using Habbits.Application.UseCases.Habit.Create;
-using Habbits.Communication.Enums;
-using Habbits.Communication.Requests.Habits;
-using Habbits.Domain.Entities;
-using Habbits.Domain.Repositories;
-using Habbits.Domain.Repositories.Habits;
-using Habbits.Exception;
-using Habbits.Exception.ExceptionBase;
+using Habits.Communication.Enums;
+using Habits.Communication.Requests.Habits;
+using Habits.Domain.Entities;
+using Habits.Domain.Repositories;
+using Habits.Domain.Repositories.Habits;
+using Habits.Exception;
+using Habits.Exception.ExceptionBase;
+using Habits.Application.UseCases.Habits.Create;
 using Moq;
 
 namespace UseCases.Test.Habits.Create

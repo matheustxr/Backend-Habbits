@@ -3,8 +3,8 @@ using System.Net;
 using System.Text.Json;
 using CommonTestUtilities.Requests.User; 
 using FluentAssertions;
-using Habbits.Communication.Requests.Users;
-using Habbits.Exception;
+using Habits.Communication.Requests.Users;
+using Habits.Exception;
 using WebApi.Test.InlineData;
 
 namespace WebApi.Test.Users.ChangePassword

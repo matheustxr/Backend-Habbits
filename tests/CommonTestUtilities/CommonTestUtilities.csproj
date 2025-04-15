@@ -12,8 +12,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Habbits.Application\Habbits.Application.csproj" />
-    <ProjectReference Include="..\..\src\Habbits.Communication\Habbits.Communication.csproj" />
+    <ProjectReference Include="..\..\src\Habits.Application\Habits.Application.csproj" />
+    <ProjectReference Include="..\..\src\Habits.Communication\Habits.Communication.csproj" />
   </ItemGroup>
 
 </Project>

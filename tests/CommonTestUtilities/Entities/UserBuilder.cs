@@ -1,6 +1,6 @@
 ﻿using Bogus;
 using CommonTestUtilities.Cryptography;
-using Habbits.Domain.Entities;
+using Habits.Domain.Entities;
 
 namespace CommonTestUtilities.Entities
 {

@@ -1,6 +1,6 @@
 ﻿using CommonTestUtilities.Requests.Habits;
 using FluentAssertions;
-using Habbits.Exception;
+using Habits.Exception;
 using System.Globalization;
 using System.Net;
 using System.Text.Json;

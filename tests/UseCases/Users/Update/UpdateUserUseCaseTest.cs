@@ -4,10 +4,10 @@ using CommonTestUtilities.Repositories.Users;
 using CommonTestUtilities.Repositories;
 using CommonTestUtilities.Requests.User;
 using FluentAssertions;
-using Habbits.Application.UseCases.Users.Update;
-using Habbits.Domain.Entities;
-using Habbits.Exception.ExceptionBase;
-using Habbits.Exception;
+using Habits.Domain.Entities;
+using Habits.Exception.ExceptionBase;
+using Habits.Exception;
+using Habits.Application.UseCases.Users.Update;
 
 namespace UseCases.Test.Users.Update
 {

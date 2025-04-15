@@ -1,4 +1,4 @@
-﻿using Habbits.Domain.Entities;
+﻿using Habits.Domain.Entities;
 
 namespace WebApi.Test.Resources
 {

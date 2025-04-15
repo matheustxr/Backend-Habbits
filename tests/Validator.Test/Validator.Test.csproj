@@ -18,9 +18,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Habbits.Application\Habbits.Application.csproj" />
-    <ProjectReference Include="..\..\src\Habbits.Communication\Habbits.Communication.csproj" />
-    <ProjectReference Include="..\..\src\Habbits.Exception\Habbits.Exception.csproj" />
+    <ProjectReference Include="..\..\src\Habits.Application\Habits.Application.csproj" />
+    <ProjectReference Include="..\..\src\Habits.Communication\Habits.Communication.csproj" />
+    <ProjectReference Include="..\..\src\Habits.Exception\Habits.Exception.csproj" />
     <ProjectReference Include="..\CommonTestUtilities\CommonTestUtilities.csproj" />
   </ItemGroup>
 

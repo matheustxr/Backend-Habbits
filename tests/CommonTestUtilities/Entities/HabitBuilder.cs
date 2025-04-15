@@ -1,5 +1,5 @@
 ﻿using Bogus;
-using Habbits.Domain.Entities;
+using Habits.Domain.Entities;
 
 namespace CommonTestUtilities.Entities
 {

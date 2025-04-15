@@ -5,9 +5,9 @@ using CommonTestUtilities.Repositories.Users;
 using CommonTestUtilities.Requests.User;
 using CommonTestUtilities.Token;
 using FluentAssertions;
-using Habbits.Application.UseCases.Users.Register;
-using Habbits.Exception.ExceptionBase;
-using Habbits.Exception;
+using Habits.Application.UseCases.Users.Register;
+using Habits.Exception;
+using Habits.Exception.ExceptionBase;
 
 namespace UseCases.Test.Users.Register
 {

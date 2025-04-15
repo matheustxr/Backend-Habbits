@@ -2,8 +2,8 @@
 using CommonTestUtilities.LoggedUser;
 using CommonTestUtilities.Mapper;
 using FluentAssertions;
-using Habbits.Application.UseCases.Users.Profile;
-using Habbits.Domain.Entities;
+using Habits.Domain.Entities;
+using Habits.Application.UseCases.Users.Profile;
 
 namespace UseCases.Test.Users.Profile
 {

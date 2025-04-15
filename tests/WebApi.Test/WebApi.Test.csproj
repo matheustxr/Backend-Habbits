@@ -21,8 +21,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Habbits.Api\Habbits.Api.csproj" />
-    <ProjectReference Include="..\..\src\Habbits.Infrastructure\Habbits.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\src\Habits.Api\Habits.Api.csproj" />
+    <ProjectReference Include="..\..\src\Habits.Infrastructure\Habits.Infrastructure.csproj" />
     <ProjectReference Include="..\CommonTestUtilities\CommonTestUtilities.csproj" />
   </ItemGroup>
 

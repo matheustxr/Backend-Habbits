@@ -1,7 +1,7 @@
 ﻿using CommonTestUtilities.Requests.User;
 using FluentAssertions;
-using Habbits.Application.UseCases.Users.Update;
-using Habbits.Exception;
+using Habits.Application.UseCases.Users.Update;
+using Habits.Exception;
 
 namespace Validator.Test.Users.Update
 {
