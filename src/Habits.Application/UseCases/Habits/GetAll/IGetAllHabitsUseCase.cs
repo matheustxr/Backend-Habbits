@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Habits.Communication.Responses.Habits;
 
 namespace Habits.Application.UseCases.Habits.GetAll
 {
-    internal interface IGetAllHabitsUseCase
+    public interface IGetAllHabitsUseCase
     {
+        Task<ResponseHabitsJson> Execute();
     }
 }

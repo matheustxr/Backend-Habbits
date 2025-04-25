@@ -27,6 +27,11 @@ public class HabitRepository : IHabitReadOnlyRepository, IHabitWriteOnlyReposito
         return await _dbContext.Habits.AnyAsync(h => h.Title == title);
     }
 
+    public async Task<List<Habit>> GetAll(User user)
+    {
+        return await _dbContext.Habits.AsNoTracking().Where(habit => habit.UserId == user.Id).ToListAsync();
+    }
+
     public async Task<Habit> GetById(long id)
     {
         return await _dbContext.Habits.FirstAsync(habit => habit.Id == id);

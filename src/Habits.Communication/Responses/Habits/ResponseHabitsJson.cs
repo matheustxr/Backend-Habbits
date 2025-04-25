@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Habits.Communication.Responses.Habits
+﻿namespace Habits.Communication.Responses.Habits
 {
-    internal class ResponseHabitsJson
+    public class ResponseHabitsJson
     {
+        public List<ResponseShortHabitJson> Habits { get; set; } = [];
     }
 }
