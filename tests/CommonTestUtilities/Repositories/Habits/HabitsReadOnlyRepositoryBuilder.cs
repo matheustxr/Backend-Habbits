@@ -1,15 +1,25 @@
-﻿using Habits.Domain.Repositories.Habits;
+﻿using Habits.Domain.Entities;
+using Habits.Domain.Repositories.Habits;
 using Moq;
 
 namespace CommonTestUtilities.Repositories.Habits
 {
     public class HabitsReadOnlyRepositoryBuilder
     {
-        public static IHabitReadOnlyRepository Build()
-        {
-            var mock = new Mock<IHabitReadOnlyRepository>();
+        private readonly Mock<IHabitReadOnlyRepository> _repository;
 
-            return mock.Object;
+        public HabitsReadOnlyRepositoryBuilder()
+        {
+            _repository = new Mock<IHabitReadOnlyRepository>();
         }
+
+        public HabitsReadOnlyRepositoryBuilder GetAll(User user, List<Habit> habits)
+        {
+            _repository.Setup(repository => repository.GetAll(user)).ReturnsAsync(habits);
+
+            return this;
+        }
+
+        public IHabitReadOnlyRepository Build() => _repository.Object;
     }
 }
