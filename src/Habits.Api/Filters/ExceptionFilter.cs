@@ -10,7 +10,7 @@ public class ExceptionFilter : IExceptionFilter
 {
     public void OnException(ExceptionContext context)
     {
-        if (context.Exception is HabbitException)
+        if (context.Exception is HabitException)
         {
             HandleProjectException(context);
         }
@@ -22,7 +22,7 @@ public class ExceptionFilter : IExceptionFilter
 
     private void HandleProjectException(ExceptionContext context)
     {
-        var habbitException = (HabbitException)context.Exception;
+        var habbitException = (HabitException)context.Exception;
         var errorResponse = new ResponseErrorJson(habbitException.GetErrors());
 
         context.HttpContext.Response.StatusCode = habbitException.StatusCode;

@@ -2,7 +2,7 @@
 
 namespace Habits.Exception.ExceptionBase;
 
-public class InvalidLoginException : HabbitException
+public class InvalidLoginException : HabitException
 {
     public InvalidLoginException() : base(ResourceErrorMessages.EMAIL_OR_PASSWORD_INVALID)
     {

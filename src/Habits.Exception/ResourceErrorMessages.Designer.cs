@@ -106,6 +106,15 @@ namespace Habits.Exception {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Habit not found..
+        /// </summary>
+        public static string HABIT_NOT_FOUND {
+            get {
+                return ResourceManager.GetString("HABIT_NOT_FOUND", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Your password should be a minimum of 8 characters, containing at least one uppercase letter, one lowercase letter, one number, and one special character (e.g., !, ?, *, .)..
         /// </summary>
         public static string INVALID_PASSWORD {

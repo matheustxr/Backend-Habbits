@@ -1,8 +1,8 @@
 ﻿namespace Habits.Exception.ExceptionBase;
 
-public abstract class HabbitException : SystemException
+public abstract class HabitException : SystemException
 {
-    protected HabbitException(string message) : base(message) { }
+    protected HabitException(string message) : base(message) { }
 
     public abstract int StatusCode { get; }
 

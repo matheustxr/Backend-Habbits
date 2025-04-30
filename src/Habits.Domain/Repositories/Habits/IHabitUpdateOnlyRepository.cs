@@ -1,6 +1,8 @@
-﻿namespace Habits.Domain.Repositories.Habits;
+﻿using Habits.Domain.Entities;
+
+namespace Habits.Domain.Repositories.Habits;
 public interface IHabitUpdateOnlyRepository
 {
-    Task<Entities.Habit> GetById(long id);
-    void Update(Entities.Habit habit);
+    Task<Habit?> GetById(User user, long id);
+    void Update(Habit habit);
 }

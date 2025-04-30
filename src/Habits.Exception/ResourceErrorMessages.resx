@@ -132,6 +132,9 @@
   <data name="EMAIL_OR_PASSWORD_INVALID" xml:space="preserve">
     <value>Invalid e-mail and/or password.</value>
   </data>
+  <data name="HABIT_NOT_FOUND" xml:space="preserve">
+    <value>Habit not found.</value>
+  </data>
   <data name="INVALID_PASSWORD" xml:space="preserve">
     <value>Your password should be a minimum of 8 characters, containing at least one uppercase letter, one lowercase letter, one number, and one special character (e.g., !, ?, *, .).</value>
   </data>

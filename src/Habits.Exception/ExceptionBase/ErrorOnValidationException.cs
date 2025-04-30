@@ -2,7 +2,7 @@
 
 namespace Habits.Exception.ExceptionBase;
 
-public class ErrorOnValidationException : HabbitException
+public class ErrorOnValidationException : HabitException
 {
     private readonly List<string> _errors;
 
