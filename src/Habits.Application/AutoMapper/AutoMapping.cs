@@ -31,8 +31,8 @@ public class AutoMapping : Profile
         CreateMap<User, ResponseUserProfileJson>();
         CreateMap<Habit, ResponseCreateHabitJson>();
         CreateMap<Habit, ResponseHabitsJson>();
-
         CreateMap<Habit, ResponseShortHabitJson>()
             .ForMember(dest => dest.CategoryName, opt => opt.MapFrom(src => src.HabitCategory != null ? src.HabitCategory.Category : null));
+        CreateMap<Habit, ResponseHabitJson>();
     }
 }

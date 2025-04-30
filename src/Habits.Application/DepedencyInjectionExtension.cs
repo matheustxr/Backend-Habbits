@@ -1,6 +1,7 @@
 ﻿using Habits.Application.AutoMapper;
 using Habits.Application.UseCases.Habits.Create;
 using Habits.Application.UseCases.Habits.GetAll;
+using Habits.Application.UseCases.Habits.GetById;
 using Habits.Application.UseCases.Login;
 using Habits.Application.UseCases.Users.ChangePassword;
 using Habits.Application.UseCases.Users.Delete;
@@ -27,7 +28,6 @@ public static class DepedencyInjectionExtension
     private static void AddUseCases(IServiceCollection services)
     {
         services.AddScoped<IDoLoginUseCase, DoLoginUseCase>();
-        services.AddScoped<IGetAllHabitsUseCase, GetAllHabitsUseCase>();
 
         services.AddScoped<IRegisterUserUseCase, RegisterUserUseCase>();
         services.AddScoped<IGetUserProfileUseCase, GetUserProfileUseCase>();
@@ -36,5 +36,7 @@ public static class DepedencyInjectionExtension
         services.AddScoped<IChangePasswordUseCase, ChangePasswordUseCase>();
 
         services.AddScoped<ICreateHabitUseCase, CreateHabitUseCase>();
+        services.AddScoped<IGetAllHabitsUseCase, GetAllHabitsUseCase>();
+        services.AddScoped<IGetHabitByIdUseCase, GetHabitByIdUseCase>();
     }
 }

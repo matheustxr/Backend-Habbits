@@ -2,6 +2,7 @@
 using Habits.Domain.Enums;
 using Habits.Domain.Repositories.Habits;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Query;
 
 namespace Habits.Infrastructure.DataAccess.Repositories;
 
@@ -72,10 +73,9 @@ public class HabitRepository : IHabitReadOnlyRepository, IHabitWriteOnlyReposito
         _dbContext.Habits.Update(habit);
     }
 
-    private IQueryable<Habit> GetFullHabit()
+    private IIncludableQueryable<Habit, HabitCategory?> GetFullHabit()
     {
         return _dbContext.Habits
-            .Include(h => h.WeekDays)
             .Include(h => h.DayHabits)
             .Include(h => h.HabitCategory);
     }

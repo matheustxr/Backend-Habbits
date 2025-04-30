@@ -48,7 +48,7 @@ namespace Habits.Application.UseCases.Habits.Create
         {
             var result = new CreateHabitValidator().Validate(request);
 
-            var titleExist = await _habitReadOnlyRepository.ExistActiveHabitWithTitle(request.Title);
+            var titleExist = await _habitReadOnlyRepository.ExistHabitWithTitle(request.Title);
 
             if (titleExist)
             {
