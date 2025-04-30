@@ -1,6 +1,7 @@
 ﻿using Habits.Api.UserContext;
 using Habits.Application.UseCases.Habits.Create;
 using Habits.Application.UseCases.Habits.GetAll;
+using Habits.Application.UseCases.Habits.GetById;
 using Habits.Communication.Requests.Habits;
 using Habits.Communication.Responses;
 using Habits.Communication.Responses.Habits;
@@ -46,5 +47,18 @@ public class HabitsController : ControllerBase
             return Ok(response);
 
         return NoContent();
+    }
+
+    [HttpGet]
+    [Route("{id}")]
+    [ProducesResponseType(typeof(ResponseHabitJson), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    public async Task<IActionResult> GetById(
+        [FromServices] IGetHabitByIdUseCase useCase,
+        [FromRoute] long id)
+    {
+        var response = await useCase.Execute(id);
+        return Ok(response);
     }
 }
