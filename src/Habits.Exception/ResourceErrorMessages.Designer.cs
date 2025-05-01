@@ -124,6 +124,15 @@ namespace Habits.Exception {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a One or more days of the week are invalid..
+        /// </summary>
+        public static string INVALID_WEEKDAY {
+            get {
+                return ResourceManager.GetString("INVALID_WEEKDAY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a The name cannot be empty..
         /// </summary>
         public static string NAME_EMPTY {
@@ -138,6 +147,15 @@ namespace Habits.Exception {
         public static string PASSWORD_DIFFERENT_CURRENT_PASSWORD {
             get {
                 return ResourceManager.GetString("PASSWORD_DIFFERENT_CURRENT_PASSWORD", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a This title is already registered..
+        /// </summary>
+        public static string TITLE_ALREADY_REGISTERED {
+            get {
+                return ResourceManager.GetString("TITLE_ALREADY_REGISTERED", resourceCulture);
             }
         }
         

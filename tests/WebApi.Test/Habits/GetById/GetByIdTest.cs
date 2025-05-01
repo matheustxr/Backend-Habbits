@@ -1,10 +1,9 @@
-﻿using FluentAssertions;
-using Habits.Domain.Enums;
-using Habits.Exception;
-using Newtonsoft.Json.Linq;
-using System.Globalization;
+﻿using System.Globalization;
 using System.Net;
 using System.Text.Json;
+using FluentAssertions;
+using Habits.Domain.Enums;
+using Habits.Exception;
 using WebApi.Test.InlineData;
 
 namespace WebApi.Test.Habits.GetById

@@ -68,7 +68,14 @@ namespace UseCases.Test.Habits.Create
         [Fact]
         public async Task Should_ThrowError_When_TitleAlreadyExists()
         {
-            var request = new RequestCreateHabitJson { Title = "Exercise" };
+            var request = new RequestCreateHabitJson
+            {
+                Title = "Exercise",
+                Description = "Any description",
+                WeekDays = new List<WeekDays> { WeekDays.Monday },
+                IsActive = true,
+                UserId = Guid.NewGuid()
+            };
 
             _habitReadOnlyRepositoryMock
                 .Setup(repo => repo.ExistHabitWithTitle(request.Title))
@@ -76,7 +83,7 @@ namespace UseCases.Test.Habits.Create
 
             var exception = await Assert.ThrowsAsync<ErrorOnValidationException>(() => _useCase.Execute(request));
 
-            exception.GetErrors().Should().Contain(ResourceErrorMessages.EMAIL_ALREADY_REGISTERED);
+            exception.GetErrors().Should().Contain(ResourceErrorMessages.TITLE_ALREADY_REGISTERED);
         }
     }
 }

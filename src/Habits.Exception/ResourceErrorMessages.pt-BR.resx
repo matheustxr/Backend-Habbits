@@ -138,11 +138,17 @@
   <data name="INVALID_PASSWORD" xml:space="preserve">
     <value>Sua senha deve ter no mínimo 8 caracteres, contendo pelo menos uma letra maiúscula, uma letra minúscula, um número e um caractere especial (por exemplo, !, ?, *, .).</value>
   </data>
+  <data name="INVALID_WEEKDAY" xml:space="preserve">
+    <value>Um ou mais dias da semana são inválidos.</value>
+  </data>
   <data name="NAME_EMPTY" xml:space="preserve">
     <value>O nome não pode estar vazio.</value>
   </data>
   <data name="PASSWORD_DIFFERENT_CURRENT_PASSWORD" xml:space="preserve">
     <value>A senha inserida é diferente da senha atual.</value>
+  </data>
+  <data name="TITLE_ALREADY_REGISTERED" xml:space="preserve">
+    <value>Este título já está cadastrado.</value>
   </data>
   <data name="TITLE_EMPTY" xml:space="preserve">
     <value>O título não pode ser vazio</value>

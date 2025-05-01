@@ -138,11 +138,17 @@
   <data name="INVALID_PASSWORD" xml:space="preserve">
     <value>Your password should be a minimum of 8 characters, containing at least one uppercase letter, one lowercase letter, one number, and one special character (e.g., !, ?, *, .).</value>
   </data>
+  <data name="INVALID_WEEKDAY" xml:space="preserve">
+    <value>One or more days of the week are invalid.</value>
+  </data>
   <data name="NAME_EMPTY" xml:space="preserve">
     <value>The name cannot be empty.</value>
   </data>
   <data name="PASSWORD_DIFFERENT_CURRENT_PASSWORD" xml:space="preserve">
     <value>The password entered is different from the current password.</value>
+  </data>
+  <data name="TITLE_ALREADY_REGISTERED" xml:space="preserve">
+    <value>This title is already registered.</value>
   </data>
   <data name="TITLE_EMPTY" xml:space="preserve">
     <value>The title cannot be empty</value>
