@@ -13,7 +13,7 @@ namespace WebApi.Test
 {
     public class CustomWebApplicationFactory : WebApplicationFactory<Program>
     {
-        public string TestUserToken { get; private set; }
+        public string? TestUserToken { get; private set; }
         public UserIdentityManager? TestUser { get; private set; }
         public HabitIdentityManager? TestHabit { get; private set; }
 
