@@ -38,15 +38,15 @@ namespace UseCases.Test.Habits.GetById
 
             var useCase = CreateUseCase(loggedUser, existingHabit);
 
-            var nonexistentId = existingHabit.Id + 9999;
-            var act = async () => await useCase.Execute(id: nonexistentId);
+            var noneExistentId = existingHabit.Id + 9999;
+            var act = async () => await useCase.Execute(id: noneExistentId);
 
             var result = await act.Should().ThrowAsync<NotFoundException>();
 
             result.Where(ex => ex.GetErrors().Count == 1 && ex.GetErrors().Contains(ResourceErrorMessages.HABIT_NOT_FOUND));
         }
 
-        private GetHabitByIdUseCase CreateUseCase(User user, Habit? habit = null)
+        private GetHabitByIdUseCase CreateUseCase(User user, Habit habit)
         {
             var repository = new HabitsReadOnlyRepositoryBuilder().GetById(user, habit).Build();
 
