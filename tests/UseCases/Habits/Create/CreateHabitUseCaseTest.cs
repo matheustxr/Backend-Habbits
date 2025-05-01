@@ -50,7 +50,7 @@ namespace UseCases.Test.Habits.Create
             var habit = new Habit { Title = request.Title };
 
             _habitReadOnlyRepositoryMock
-                .Setup(repo => repo.ExistActiveHabitWithTitle(request.Title))
+                .Setup(repo => repo.ExistHabitWithTitle(request.Title))
                 .ReturnsAsync(false);
 
             _mapperMock
@@ -71,93 +71,12 @@ namespace UseCases.Test.Habits.Create
             var request = new RequestCreateHabitJson { Title = "Exercise" };
 
             _habitReadOnlyRepositoryMock
-                .Setup(repo => repo.ExistActiveHabitWithTitle(request.Title))
+                .Setup(repo => repo.ExistHabitWithTitle(request.Title))
                 .ReturnsAsync(true);
 
             var exception = await Assert.ThrowsAsync<ErrorOnValidationException>(() => _useCase.Execute(request));
 
             exception.GetErrors().Should().Contain(ResourceErrorMessages.EMAIL_ALREADY_REGISTERED);
         }
-
-        /*
-        [Fact]
-        public async Task Sucess()
-        {
-            var loggedUser = UserBuilder.Build();
-
-            var request = RequestCreateHabitJsonHabitBuilder.Build();
-
-            var useCase = CreateUseCase(loggedUser);
-
-            var result = await useCase.Execute(request);
-
-            result.Should().NotBeNull();
-            result.Title.Should().Be(request.Title);
-        }
-
-        [Fact]
-        public async Task Error_Title_Empty()
-        {
-            var loggedUser = UserBuilder.Build();
-
-            var request = RequestCreateHabitJsonHabitBuilder.Build();
-            request.Title = string.Empty;
-
-            var useCase = CreateUseCase(loggedUser);
-            var act = async () => await useCase.Execute(request);
-
-            var result = await act.Should().ThrowAsync<ErrorOnValidationException>();
-
-            result.Which.GetErrors().Should().HaveCount(1);
-            result.Which.GetErrors().Should().Contain(ResourceErrorMessages.TITLE_EMPTY);
-        }
-
-        [Fact]
-        public async Task Error_WeekDays_Empty()
-        {
-            var loggedUser = UserBuilder.Build();
-
-            var request = RequestCreateHabitJsonHabitBuilder.Build();
-            request.WeekDays.Clear(); // Simulando lista vazia
-
-            var useCase = CreateUseCase(loggedUser);
-            var act = async () => await useCase.Execute(request);
-
-            var result = await act.Should().ThrowAsync<ErrorOnValidationException>();
-
-            result.Which.GetErrors().Should().Contain(ResourceErrorMessages.WEEKDAYS_EMPTY);
-        }
-
-        [Fact]
-        public async Task Error_Description_TooLong()
-        {
-            var loggedUser = UserBuilder.Build();
-
-            var request = RequestCreateHabitJsonHabitBuilder.Build();
-            request.Description = new string('A', 501); // Descrição com 501 caracteres
-
-            var useCase = CreateUseCase(loggedUser);
-            var act = async () => await useCase.Execute(request);
-
-            var result = await act.Should().ThrowAsync<ErrorOnValidationException>();
-
-            result.Which.GetErrors().Should().Contain(ResourceErrorMessages.DESCRIPTION_TOO_LONG);
-        }
-
-        private CreateHabitUseCase CreateUseCase(Habbits.Domain.Entities.User user)
-        {
-            var habitWriteOnlyRepository = HabitsWriteOnlyRepositoryBuilder.Build();
-
-            var habitReadOnlyRepository = HabitsReadOnlyRepositoryBuilder.Build();
-
-            var unityOfWork = UnityOfWorkBuilder.Build();
-
-            var mapper = MapperBuilder.Build();
-
-            var loggedUser = LoggedUserBuilder.Build(user);
-
-            return new CreateHabitUseCase(mapper, habitReadOnlyRepository, habitWriteOnlyRepository, unityOfWork);
-        }
-        */
     }
 }

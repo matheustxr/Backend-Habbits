@@ -20,6 +20,13 @@ namespace CommonTestUtilities.Repositories.Habits
             return this;
         }
 
+        public HabitsReadOnlyRepositoryBuilder GetById(User user, Habit habit)
+        {
+            _repository.Setup(repository => repository.GetById(user, habit.Id)).ReturnsAsync(habit);
+
+            return this;
+        }
+
         public IHabitReadOnlyRepository Build() => _repository.Object;
     }
 }

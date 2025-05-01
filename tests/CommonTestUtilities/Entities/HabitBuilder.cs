@@ -1,5 +1,6 @@
 ﻿using Bogus;
 using Habits.Domain.Entities;
+using Habits.Domain.Enums;
 
 namespace CommonTestUtilities.Entities
 {
@@ -31,6 +32,7 @@ namespace CommonTestUtilities.Entities
                 .RuleFor(h => h.Id, faker => faker.UniqueIndex)
                 .RuleFor(h => h.Title, faker => faker.Lorem.Word())
                 .RuleFor(h => h.Description, faker => faker.Lorem.Sentence())
+                .RuleFor(h => h.WeekDays, _ => new List<WeekDays> { WeekDays.Monday, WeekDays.Wednesday })
                 .RuleFor(h => h.CreatedAt, faker => faker.Date.Past())
                 .RuleFor(h => h.UpdatedAt, faker => faker.Date.Recent(10))
                 .RuleFor(h => h.IsActive, faker => faker.Random.Bool())
