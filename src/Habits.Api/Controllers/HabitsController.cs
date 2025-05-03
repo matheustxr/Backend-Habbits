@@ -1,5 +1,6 @@
 ﻿using Habits.Api.UserContext;
 using Habits.Application.UseCases.Habits.Create;
+using Habits.Application.UseCases.Habits.Delete;
 using Habits.Application.UseCases.Habits.GetAll;
 using Habits.Application.UseCases.Habits.GetById;
 using Habits.Communication.Requests.Habits;
@@ -60,5 +61,19 @@ public class HabitsController : ControllerBase
     {
         var response = await useCase.Execute(id);
         return Ok(response);
+    }
+
+    [HttpDelete]
+    [Route("{id}")]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
+
+    public async Task<IActionResult> Delete(
+        [FromServices] IDeleteHabitUseCase useCase,
+        [FromRoute] long id)
+    {
+        await useCase.Execute(id);
+
+        return NoContent();
     }
 }

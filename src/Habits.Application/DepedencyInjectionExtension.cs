@@ -1,5 +1,6 @@
 ﻿using Habits.Application.AutoMapper;
 using Habits.Application.UseCases.Habits.Create;
+using Habits.Application.UseCases.Habits.Delete;
 using Habits.Application.UseCases.Habits.GetAll;
 using Habits.Application.UseCases.Habits.GetById;
 using Habits.Application.UseCases.Login;
@@ -38,5 +39,6 @@ public static class DepedencyInjectionExtension
         services.AddScoped<ICreateHabitUseCase, CreateHabitUseCase>();
         services.AddScoped<IGetAllHabitsUseCase, GetAllHabitsUseCase>();
         services.AddScoped<IGetHabitByIdUseCase, GetHabitByIdUseCase>();
+        services.AddScoped<IDeleteHabitUseCase, DeleteHabitUseCase>();
     }
 }
