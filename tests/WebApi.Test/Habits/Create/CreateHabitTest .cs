@@ -8,12 +8,12 @@ using WebApi.Test.InlineData;
 
 namespace WebApi.Test.Habits.Create;
 
-public class CreateHabitWebApiTests : HabitsClassFixture, IClassFixture<CustomWebApplicationFactory>
+public class CreateHabitTest : HabitsClassFixture, IClassFixture<CustomWebApplicationFactory>
 {
     private const string METHOD = "api/habits";
     private readonly string _token;
 
-    public CreateHabitWebApiTests(CustomWebApplicationFactory webApplicationFactory) : base(webApplicationFactory)
+    public CreateHabitTest(CustomWebApplicationFactory webApplicationFactory) : base(webApplicationFactory)
     {
         _token = webApplicationFactory.TestUserToken ?? throw new InvalidOperationException("Token não gerado");
     }
