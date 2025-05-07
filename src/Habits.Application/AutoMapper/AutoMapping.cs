@@ -20,10 +20,11 @@ public class AutoMapping : Profile
         CreateMap<RequestRegisterUserJson, User>()
             .ForMember(dest => dest.Password, config => config.Ignore());
 
-        CreateMap<RequestCreateHabitJson, Habit>()
+        CreateMap<RequestHabitJson, Habit>()
             .ForMember(dest => dest.CreatedAt, opt => opt.MapFrom(_ => DateTime.UtcNow))
             .ForMember(dest => dest.UpdatedAt, opt => opt.MapFrom(_ => (DateTime?)null))
-            .ForMember(dest => dest.IsActive, opt => opt.MapFrom(_ => true));
+            .ForMember(dest => dest.IsActive, opt => opt.MapFrom(_ => true))
+            .ForMember(dest => dest.UserId, opt => opt.Ignore());
     }
 
     private void EntityResponse()

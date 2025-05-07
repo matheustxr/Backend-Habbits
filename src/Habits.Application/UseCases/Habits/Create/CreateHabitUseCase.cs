@@ -28,7 +28,7 @@ namespace Habits.Application.UseCases.Habits.Create
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<ResponseCreateHabitJson> Execute(RequestCreateHabitJson request)
+        public async Task<ResponseCreateHabitJson> Execute(RequestHabitJson request)
         {
             await Validate(request);
 
@@ -44,15 +44,15 @@ namespace Habits.Application.UseCases.Habits.Create
             };
         }
 
-        private async Task Validate(RequestCreateHabitJson request)
+        private async Task Validate(RequestHabitJson request)
         {
-            var result = new CreateHabitValidator().Validate(request);
+            var result = new HabitValidator().Validate(request);
 
             var titleExist = await _habitReadOnlyRepository.ExistHabitWithTitle(request.Title);
 
             if (titleExist)
             {
-                result.Errors.Add(new ValidationFailure(string.Empty, ResourceErrorMessages.EMAIL_ALREADY_REGISTERED));
+                result.Errors.Add(new ValidationFailure(string.Empty, ResourceErrorMessages.TITLE_ALREADY_REGISTERED));
             }
 
             if (result.IsValid == false)

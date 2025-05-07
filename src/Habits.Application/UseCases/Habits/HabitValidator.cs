@@ -3,11 +3,11 @@ using Habits.Communication.Requests.Habits;
 using Habits.Communication.Enums;
 using Habits.Exception;
 
-namespace Habits.Application.UseCases.Habits.Create
+namespace Habits.Application.UseCases.Habits
 {
-    public class CreateHabitValidator : AbstractValidator<RequestCreateHabitJson>
+    public class HabitValidator : AbstractValidator<RequestHabitJson>
     {
-        public CreateHabitValidator()
+        public HabitValidator()
         {
             RuleFor(habit => habit.Title).NotEmpty().WithMessage(ResourceErrorMessages.TITLE_EMPTY);
             RuleFor(habit => habit.WeekDays)

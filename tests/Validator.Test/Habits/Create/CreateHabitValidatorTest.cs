@@ -1,23 +1,23 @@
 ﻿using FluentValidation.TestHelper;
 using Habits.Communication.Requests.Habits;
-using Habits.Application.UseCases.Habits.Create;
 using Habits.Communication.Enums;
+using Habits.Application.UseCases.Habits;
 
 namespace Validator.Test.Habits.Create
 {
     public class CreateHabitValidatorTest
     {
-        private readonly CreateHabitValidator _validator;
+        private readonly HabitValidator _validator;
 
         public CreateHabitValidatorTest()
         {
-            _validator = new CreateHabitValidator();
+            _validator = new HabitValidator();
         }
 
         [Fact]
         public void Should_HaveError_When_TitleIsEmpty()
         {
-            var request = new RequestCreateHabitJson { Title = "" };
+            var request = new RequestHabitJson { Title = "" };
 
             var result = _validator.TestValidate(request);
 
@@ -27,7 +27,7 @@ namespace Validator.Test.Habits.Create
         [Fact]
         public void Should_HaveError_When_WeekDaysAreEmpty()
         {
-            var request = new RequestCreateHabitJson { Title = "Test", WeekDays = new List<WeekDays>() };
+            var request = new RequestHabitJson { Title = "Test", WeekDays = new List<WeekDays>() };
 
             var result = _validator.TestValidate(request);
 
@@ -37,7 +37,7 @@ namespace Validator.Test.Habits.Create
         [Fact]
         public void Should_NotHaveError_When_DataIsValid()
         {
-            var request = new RequestCreateHabitJson
+            var request = new RequestHabitJson
             {
                 Title = "Workout",
                 WeekDays = new List<WeekDays> { WeekDays.Monday, WeekDays.Wednesday }

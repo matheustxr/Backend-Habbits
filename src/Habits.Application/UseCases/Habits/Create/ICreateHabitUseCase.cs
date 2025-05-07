@@ -4,6 +4,6 @@ using Habits.Communication.Responses.Habits;
 namespace Habits.Application.UseCases.Habits.Create;
 public interface ICreateHabitUseCase
 {
-    Task<ResponseCreateHabitJson> Execute(RequestCreateHabitJson request);
+    Task<ResponseCreateHabitJson> Execute(RequestHabitJson request);
 };
 

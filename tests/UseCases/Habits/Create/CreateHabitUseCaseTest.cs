@@ -38,7 +38,7 @@ namespace UseCases.Test.Habits.Create
         [Fact]
         public async Task Should_CreateHabit_When_DataIsValid()
         {
-            var request = new RequestCreateHabitJson
+            var request = new RequestHabitJson
             {
                 Title = "Exercise",
                 Description = "Go to the gym",
@@ -50,7 +50,7 @@ namespace UseCases.Test.Habits.Create
             var habit = new Habit { Title = request.Title };
 
             _habitReadOnlyRepositoryMock
-                .Setup(repo => repo.ExistHabitWithTitle(request.Title))
+                .Setup(repo => repo.ExistHabitWithTitle(request.Title, null))
                 .ReturnsAsync(false);
 
             _mapperMock
@@ -68,7 +68,7 @@ namespace UseCases.Test.Habits.Create
         [Fact]
         public async Task Should_ThrowError_When_TitleAlreadyExists()
         {
-            var request = new RequestCreateHabitJson
+            var request = new RequestHabitJson
             {
                 Title = "Exercise",
                 Description = "Any description",
@@ -78,7 +78,7 @@ namespace UseCases.Test.Habits.Create
             };
 
             _habitReadOnlyRepositoryMock
-                .Setup(repo => repo.ExistHabitWithTitle(request.Title))
+                .Setup(repo => repo.ExistHabitWithTitle(request.Title, null))
                 .ReturnsAsync(true);
 
             var exception = await Assert.ThrowsAsync<ErrorOnValidationException>(() => _useCase.Execute(request));

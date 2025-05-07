@@ -8,11 +8,11 @@ namespace CommonTestUtilities.Requests.Habits
     {
         private static readonly Guid FixedUserId = Guid.NewGuid();
 
-        public static RequestCreateHabitJson Build()
+        public static RequestHabitJson Build()
         {
             var faker = new Faker();
 
-            var habit = new RequestCreateHabitJson
+            var habit = new RequestHabitJson
             {
                 Title = faker.Lorem.Sentence(),
                 Description = faker.Lorem.Paragraph(),

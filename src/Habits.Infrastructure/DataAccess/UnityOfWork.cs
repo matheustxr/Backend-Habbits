@@ -1,4 +1,5 @@
 ﻿using Habits.Domain.Repositories;
+using Microsoft.EntityFrameworkCore;
 
 namespace Habits.Infrastructure.DataAccess;
 
@@ -11,6 +12,14 @@ public class UnityOfWork : IUnityOfWork
     }
     public async Task Commit()
     {
-        await _dbContext.SaveChangesAsync();
+        try
+        {
+            await _dbContext.SaveChangesAsync();
+        }
+        catch (DbUpdateException ex)
+        {
+            Console.WriteLine("Erro ao salvar no banco: " + ex.InnerException?.Message);
+            throw;
+        }
     }
 }

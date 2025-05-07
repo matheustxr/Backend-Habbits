@@ -26,11 +26,18 @@ public class HabitRepository : IHabitReadOnlyRepository, IHabitWriteOnlyReposito
             _dbContext.Habits.Remove(habitToRemove);
     }
 
-    public async Task<bool> ExistHabitWithTitle(string title)
+    public async Task<bool> ExistHabitWithTitle(string title, long? excludeId = null)
     {
-        return await _dbContext.Habits
+        var query = _dbContext.Habits
             .AsNoTracking()
-            .AnyAsync(h => h.Title == title);
+            .Where(h => h.Title == title);
+
+        if (excludeId.HasValue)
+        {
+            query = query.Where(h => h.Id != excludeId.Value);
+        }
+
+        return await query.AnyAsync();
     }
 
     public async Task<List<Habit>> GetAll(User user)

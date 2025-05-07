@@ -3,7 +3,7 @@ using Habits.Communication.Enums;
 
 namespace Habits.Communication.Requests.Habits;
 
-public class RequestCreateHabitJson
+public class RequestHabitJson
 {
     public required string Title { get; set; }
     public string? Description { get; set; }

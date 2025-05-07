@@ -3,6 +3,7 @@ using Habits.Application.UseCases.Habits.Create;
 using Habits.Application.UseCases.Habits.Delete;
 using Habits.Application.UseCases.Habits.GetAll;
 using Habits.Application.UseCases.Habits.GetById;
+using Habits.Application.UseCases.Habits.Update;
 using Habits.Application.UseCases.Login;
 using Habits.Application.UseCases.Users.ChangePassword;
 using Habits.Application.UseCases.Users.Delete;
@@ -40,5 +41,6 @@ public static class DepedencyInjectionExtension
         services.AddScoped<IGetAllHabitsUseCase, GetAllHabitsUseCase>();
         services.AddScoped<IGetHabitByIdUseCase, GetHabitByIdUseCase>();
         services.AddScoped<IDeleteHabitUseCase, DeleteHabitUseCase>();
+        services.AddScoped<IUpdateHabitUseCase, UpdateHabitUseCase>();
     }
 }

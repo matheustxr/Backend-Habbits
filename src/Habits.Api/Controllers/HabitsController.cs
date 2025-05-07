@@ -3,6 +3,7 @@ using Habits.Application.UseCases.Habits.Create;
 using Habits.Application.UseCases.Habits.Delete;
 using Habits.Application.UseCases.Habits.GetAll;
 using Habits.Application.UseCases.Habits.GetById;
+using Habits.Application.UseCases.Habits.Update;
 using Habits.Communication.Requests.Habits;
 using Habits.Communication.Responses;
 using Habits.Communication.Responses.Habits;
@@ -27,7 +28,7 @@ public class HabitsController : ControllerBase
     [ProducesResponseType(typeof(ResponseCreateHabitJson), StatusCodes.Status201Created)]
     [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> CreateHabit(
-        [FromBody] RequestCreateHabitJson request,
+        [FromBody] RequestHabitJson request,
         [FromServices] ICreateHabitUseCase useCase)
     {
         request.UserId = _userContext.GetUserId();
@@ -74,6 +75,20 @@ public class HabitsController : ControllerBase
     {
         await useCase.Execute(id);
 
+        return NoContent();
+    }
+
+    [HttpPut]
+    [Route("{id}")]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
+    public async Task<IActionResult> Update(
+            [FromServices] IUpdateHabitUseCase useCase,
+            [FromRoute] long id,
+            [FromBody] RequestHabitJson request)
+    {
+        await useCase.Execute(id, request);
         return NoContent();
     }
 }
