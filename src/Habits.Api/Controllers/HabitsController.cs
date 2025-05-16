@@ -31,8 +31,6 @@ public class HabitsController : ControllerBase
         [FromBody] RequestHabitJson request,
         [FromServices] ICreateHabitUseCase useCase)
     {
-        request.UserId = _userContext.GetUserId();
-
         var response = await useCase.Execute(request);
 
         return Created(string.Empty, response);
@@ -88,7 +86,7 @@ public class HabitsController : ControllerBase
             [FromRoute] long id,
             [FromBody] RequestHabitJson request)
     {
-        await useCase.Execute(id, request);
+        await useCase.Execute(request, id);
         return NoContent();
     }
 }

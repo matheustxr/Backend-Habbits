@@ -21,7 +21,7 @@ public class CreateHabitTest : HabitsClassFixture, IClassFixture<CustomWebApplic
     [Fact]
     public async Task Success()
     {
-        var request = RequestCreateHabitJsonBuilder.Build();
+        var request = RequestHabitJsonBuilder.Build();
 
         var result = await DoPost(requestUri: METHOD, request: request, token: _token);
 
@@ -37,7 +37,7 @@ public class CreateHabitTest : HabitsClassFixture, IClassFixture<CustomWebApplic
     [ClassData(typeof(CultureInlineDataTest))]
     public async Task Error_Title_Empty(string culture)
     {
-        var request = RequestCreateHabitJsonBuilder.Build();
+        var request = RequestHabitJsonBuilder.Build();
         request.Title = string.Empty;
 
         var result = await DoPost(requestUri: METHOD, request: request, token: _token, culture: culture);

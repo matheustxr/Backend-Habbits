@@ -5,11 +5,13 @@ namespace CommonTestUtilities.Repositories.Habits
 {
     public class HabitsWriteOnlyRepositoryBuilder
     {
-        public static IHabitWriteOnlyRepository Build()
-        {
-            var mock = new Mock<IHabitWriteOnlyRepository>();
+        private readonly Mock<IHabitWriteOnlyRepository> _repository;
 
-            return mock.Object;
+        public HabitsWriteOnlyRepositoryBuilder()
+        {
+            _repository = new Mock<IHabitWriteOnlyRepository>();
         }
+
+        public IHabitWriteOnlyRepository Build() => _repository.Object;
     }
 }

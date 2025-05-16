@@ -14,24 +14,24 @@ namespace Habits.Application.UseCases.Habits.Update
         private readonly IMapper _mapper;
         private readonly IHabitReadOnlyRepository _habitReadOnlyRepository;
         private readonly IHabitUpdateOnlyRepository _habitUpdateRepository;
-        private readonly IUnityOfWork _unitOfWork;
         private readonly ILoggedUser _loggedUser;
+        private readonly IUnityOfWork _unitOfWork;
 
         public UpdateHabitUseCase(
             IMapper mapper,
             IHabitReadOnlyRepository habitReadOnlyRepository,
             IHabitUpdateOnlyRepository habitUpdateRepository,
-            IUnityOfWork unitOfWork,
-            ILoggedUser loggedUser)
+            ILoggedUser loggedUser,
+            IUnityOfWork unitOfWork)
         {
             _mapper = mapper;
-            _unitOfWork = unitOfWork;
             _habitReadOnlyRepository = habitReadOnlyRepository;
             _habitUpdateRepository = habitUpdateRepository;
             _loggedUser = loggedUser;
+            _unitOfWork = unitOfWork;
         }
 
-        public async Task Execute(long id, RequestHabitJson request)
+        public async Task Execute(RequestHabitJson request, long id)
         {
             await Validate(request, id);
 
@@ -45,6 +45,8 @@ namespace Habits.Application.UseCases.Habits.Update
             }
 
             _mapper.Map(request, habit);
+
+            habit.UpdatedAt = DateTime.UtcNow;
 
             _habitUpdateRepository.Update(habit);
 

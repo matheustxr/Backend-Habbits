@@ -4,6 +4,7 @@ using Habits.Communication.Requests.Habits;
 using Habits.Communication.Responses.Habits;
 using Habits.Domain.Repositories;
 using Habits.Domain.Repositories.Habits;
+using Habits.Domain.Services.LoggedUser;
 using Habits.Exception;
 using Habits.Exception.ExceptionBase;
 
@@ -14,22 +15,28 @@ namespace Habits.Application.UseCases.Habits.Create
         private readonly IMapper _mapper;
         private readonly IHabitReadOnlyRepository _habitReadOnlyRepository;
         private readonly IHabitWriteOnlyRepository _habitWriteOnlyRepository;
+        private readonly ILoggedUser _loggedUser;
         private readonly IUnityOfWork _unitOfWork;
 
         public CreateHabitUseCase(
             IMapper mapper,
             IHabitReadOnlyRepository habitReadOnlyRepository,
             IHabitWriteOnlyRepository habitWriteOnlyRepository,
+            ILoggedUser loggedUser,
             IUnityOfWork unitOfWork)
         {
             _mapper = mapper;
             _habitReadOnlyRepository = habitReadOnlyRepository;
             _habitWriteOnlyRepository = habitWriteOnlyRepository;
+            _loggedUser = loggedUser;
             _unitOfWork = unitOfWork;
         }
 
         public async Task<ResponseCreateHabitJson> Execute(RequestHabitJson request)
         {
+            var user = await _loggedUser.Get();
+            request.UserId = user.Id;
+
             await Validate(request);
 
             var habit = _mapper.Map<Domain.Entities.Habit>(request);

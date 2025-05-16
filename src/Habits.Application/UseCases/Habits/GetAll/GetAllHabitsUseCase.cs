@@ -7,9 +7,9 @@ namespace Habits.Application.UseCases.Habits.GetAll
 {
     public class GetAllHabitsUseCase : IGetAllHabitsUseCase
     {
-        private readonly IHabitReadOnlyRepository _repository;
-        private readonly IMapper _mapper;
-        private readonly ILoggedUser _loggedUser;
+            private readonly IHabitReadOnlyRepository _repository;
+            private readonly IMapper _mapper;
+            private readonly ILoggedUser _loggedUser;
 
         public GetAllHabitsUseCase(IHabitReadOnlyRepository repository, IMapper mapper, ILoggedUser loggedUser)
         {

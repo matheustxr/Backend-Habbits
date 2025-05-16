@@ -22,7 +22,11 @@ namespace CommonTestUtilities.Repositories.Habits
 
         public HabitsReadOnlyRepositoryBuilder GetById(User user, Habit habit)
         {
-            _repository.Setup(repository => repository.GetById(user, habit.Id)).ReturnsAsync(habit);
+            _repository
+                .Setup(repository => repository.GetById(
+                    It.Is<User>(u => u.Id == user.Id),
+                    It.Is<long>(id => id == habit.Id)))
+                .ReturnsAsync(habit);
 
             return this;
         }

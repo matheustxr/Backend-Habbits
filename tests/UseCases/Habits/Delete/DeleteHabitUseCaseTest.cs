@@ -46,7 +46,7 @@ namespace UseCases.Test.Habits.Delete
         {
             var repositoryReadOnly = new HabitsReadOnlyRepositoryBuilder().GetById(user, habit).Build();    
 
-            var repositoryWriteOnly = HabitsWriteOnlyRepositoryBuilder.Build();
+            var repositoryWriteOnly = new HabitsWriteOnlyRepositoryBuilder().Build();
 
             var unitOfWork = UnityOfWorkBuilder.Build();
 

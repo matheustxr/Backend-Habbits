@@ -1,89 +1,63 @@
-﻿using AutoMapper;
+﻿using CommonTestUtilities.Entities;
+using CommonTestUtilities.LoggedUser;
+using CommonTestUtilities.Mapper;
+using CommonTestUtilities.Repositories;
+using CommonTestUtilities.Repositories.Habits;
+using CommonTestUtilities.Requests.Habits;
 using FluentAssertions;
-using Habits.Communication.Enums;
-using Habits.Communication.Requests.Habits;
+using Habits.Application.UseCases.Habits.Create;
 using Habits.Domain.Entities;
-using Habits.Domain.Repositories;
-using Habits.Domain.Repositories.Habits;
 using Habits.Exception;
 using Habits.Exception.ExceptionBase;
-using Habits.Application.UseCases.Habits.Create;
-using Moq;
 
-namespace UseCases.Test.Habits.Create
+namespace UseCases.Test.Habits.Create;
+
+public class CreateHabitUseCaseTest
 {
-    public class CreateHabitUseCaseTest
+    [Fact]
+    public async Task Success()
     {
-        private readonly Mock<IMapper> _mapperMock;
-        private readonly Mock<IHabitReadOnlyRepository> _habitReadOnlyRepositoryMock;
-        private readonly Mock<IHabitWriteOnlyRepository> _habitWriteOnlyRepositoryMock;
-        private readonly Mock<IUnityOfWork> _unitOfWorkMock;
-        private readonly CreateHabitUseCase _useCase;
+        var loggedUser = UserBuilder.Build();
 
-        public CreateHabitUseCaseTest()
-        {
-            _mapperMock = new Mock<IMapper>();
-            _habitReadOnlyRepositoryMock = new Mock<IHabitReadOnlyRepository>();
-            _habitWriteOnlyRepositoryMock = new Mock<IHabitWriteOnlyRepository>();
-            _unitOfWorkMock = new Mock<IUnityOfWork>();
+        var request = RequestHabitJsonBuilder.Build();
 
-            _useCase = new CreateHabitUseCase(
-                _mapperMock.Object,
-                _habitReadOnlyRepositoryMock.Object,
-                _habitWriteOnlyRepositoryMock.Object,
-                _unitOfWorkMock.Object
-            );
-        }
+        var useCase = CreateUseCase(loggedUser);
 
-        [Fact]
-        public async Task Should_CreateHabit_When_DataIsValid()
-        {
-            var request = new RequestHabitJson
-            {
-                Title = "Exercise",
-                Description = "Go to the gym",
-                WeekDays = new List<WeekDays> { WeekDays.Monday, WeekDays.Wednesday },
-                IsActive = true,
-                UserId = Guid.NewGuid()
-            };
+        var result = await useCase.Execute(request);
 
-            var habit = new Habit { Title = request.Title };
+        result.Should().NotBeNull();
+        result.Title.Should().Be(request.Title);
+    }
 
-            _habitReadOnlyRepositoryMock
-                .Setup(repo => repo.ExistHabitWithTitle(request.Title, null))
-                .ReturnsAsync(false);
+    [Fact]
+    public async Task Error_Title_Empty()
+    {
+        var loggedUser = UserBuilder.Build();
 
-            _mapperMock
-                .Setup(mapper => mapper.Map<Habit>(request))
-                .Returns(habit);
+        var request = RequestHabitJsonBuilder.Build();
 
-            var response = await _useCase.Execute(request);
+        request.Title = string.Empty;
 
-            _habitWriteOnlyRepositoryMock.Verify(r => r.Add(It.IsAny<Habit>()), Times.Once);
-            _unitOfWorkMock.Verify(u => u.Commit(), Times.Once);
+        var useCase = CreateUseCase(loggedUser);
 
-            response.Title.Should().Be(request.Title);
-        }
+        var act = async () => await useCase.Execute(request);
 
-        [Fact]
-        public async Task Should_ThrowError_When_TitleAlreadyExists()
-        {
-            var request = new RequestHabitJson
-            {
-                Title = "Exercise",
-                Description = "Any description",
-                WeekDays = new List<WeekDays> { WeekDays.Monday },
-                IsActive = true,
-                UserId = Guid.NewGuid()
-            };
+        var result = await act.Should().ThrowAsync<ErrorOnValidationException>();
 
-            _habitReadOnlyRepositoryMock
-                .Setup(repo => repo.ExistHabitWithTitle(request.Title, null))
-                .ReturnsAsync(true);
+        result.Which.GetErrors().Should().ContainSingle().And.Contain(ResourceErrorMessages.TITLE_EMPTY);
+    }
 
-            var exception = await Assert.ThrowsAsync<ErrorOnValidationException>(() => _useCase.Execute(request));
+    private CreateHabitUseCase CreateUseCase(User user)
+    {
+        var readOnlyUpdateRepository = new HabitsReadOnlyRepositoryBuilder().Build();
+        var writeOnlyRepository = new HabitsWriteOnlyRepositoryBuilder().Build();
 
-            exception.GetErrors().Should().Contain(ResourceErrorMessages.TITLE_ALREADY_REGISTERED);
-        }
+        var mapper = MapperBuilder.Build();
+
+        var unitOfWork = UnityOfWorkBuilder.Build();
+
+        var loggedUser = LoggedUserBuilder.Build(user);
+
+        return new CreateHabitUseCase(mapper, readOnlyUpdateRepository, writeOnlyRepository, loggedUser, unitOfWork);
     }
 }

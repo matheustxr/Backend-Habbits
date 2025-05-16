@@ -4,6 +4,6 @@ namespace Habits.Application.UseCases.Habits.Update
 {
     public interface IUpdateHabitUseCase
     {
-        Task Execute(long id, RequestHabitJson request);
+        Task Execute(RequestHabitJson request, long id);
     }
 }
