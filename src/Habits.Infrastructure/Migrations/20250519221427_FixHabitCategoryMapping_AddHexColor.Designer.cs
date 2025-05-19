@@ -3,6 +3,7 @@ using System;
 using Habits.Infrastructure.DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Habbits.Infrastructure.Migrations
 {
     [DbContext(typeof(HabbitsDbContext))]
-    partial class HabbitsDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250519221427_FixHabitCategoryMapping_AddHexColor")]
+    partial class FixHabitCategoryMapping_AddHexColor
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -63,6 +66,9 @@ namespace Habbits.Infrastructure.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("text");
 
+                    b.Property<long?>("HabitCategoryId")
+                        .HasColumnType("bigint");
+
                     b.Property<bool>("IsActive")
                         .HasColumnType("boolean");
 
@@ -81,7 +87,7 @@ namespace Habbits.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CategoryId");
+                    b.HasIndex("HabitCategoryId");
 
                     b.HasIndex("UserId");
 
@@ -146,8 +152,7 @@ namespace Habbits.Infrastructure.Migrations
                 {
                     b.HasOne("Habits.Domain.Entities.HabitCategory", "HabitCategory")
                         .WithMany("Habits")
-                        .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.SetNull);
+                        .HasForeignKey("HabitCategoryId");
 
                     b.HasOne("Habits.Domain.Entities.User", "User")
                         .WithMany("Habits")
