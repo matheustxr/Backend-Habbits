@@ -1,5 +1,4 @@
-﻿using Habits.Api.UserContext;
-using Habits.Application.UseCases.Habits.Create;
+﻿using Habits.Application.UseCases.Habits.Create;
 using Habits.Application.UseCases.Habits.Delete;
 using Habits.Application.UseCases.Habits.GetAll;
 using Habits.Application.UseCases.Habits.GetById;
@@ -17,13 +16,6 @@ namespace Habits.Api.Controllers;
 [Authorize]
 public class HabitsController : ControllerBase
 {
-    private readonly IUserContext _userContext;
-
-    public HabitsController(IUserContext userContext)
-    {
-        _userContext = userContext;
-    }
-
     [HttpPost]
     [ProducesResponseType(typeof(ResponseCreateHabitJson), StatusCodes.Status201Created)]
     [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]

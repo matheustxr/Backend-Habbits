@@ -1,7 +1,9 @@
+using System.Text;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using Habits.Api.Filters;
 using Habits.Api.Middleware;
 using Habits.Api.Token;
-using Habits.Api.UserContext;
 using Habits.Application;
 using Habits.Domain.Security.Tokens;
 using Habits.Infrastructure;
@@ -13,9 +15,6 @@ using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-using System.Text;
-using System.Text.Json.Serialization;
-using System.Text.Json;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -90,8 +89,8 @@ builder.Services
         options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter(JsonNamingPolicy.CamelCase));
     });
 
+builder.Services.AddScoped<ITokenProvider, HttpContextTokenValue>();
 builder.Services.AddHttpContextAccessor();
-builder.Services.AddScoped<IUserContext, UserContext>();
 
 builder.Services.AddHealthChecks().AddDbContextCheck<HabbitsDbContext>();
 
