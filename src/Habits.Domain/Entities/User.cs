@@ -8,4 +8,5 @@ public class User
     public string Password { get; set; } = string.Empty;
 
     public List<Habit> Habits { get; set; } = new();
+    public List<HabitCategory>? HabitCategories { get; set; }
 }

@@ -8,5 +8,6 @@ namespace Habits.Api.Controllers
     [Authorize]
     public class CategoriesController : ControllerBase
     {
+
     }
 }
