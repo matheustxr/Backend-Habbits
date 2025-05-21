@@ -7,9 +7,9 @@ namespace Habits.Infrastructure.DataAccess.Repositories;
 
 public class UserRepository : IUserReadOnlyRepository, IUsertWriteOnlyRepository, IUserUpdateOnlyRepository
 {
-    private readonly HabbitsDbContext _dbContext;
+    private readonly HabitsDbContext _dbContext;
 
-    public UserRepository(HabbitsDbContext dbContext) => _dbContext = dbContext;
+    public UserRepository(HabitsDbContext dbContext) => _dbContext = dbContext;
 
     public async Task Add(User user)
     {

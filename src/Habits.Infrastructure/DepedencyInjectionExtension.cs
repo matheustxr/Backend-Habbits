@@ -56,6 +56,6 @@ public static class DepedencyInjectionExtension
     {
         var connectionString = configuration.GetConnectionString("Connection");
 
-        services.AddDbContext<HabbitsDbContext>(options => options.UseNpgsql(connectionString));
+        services.AddDbContext<HabitsDbContext>(options => options.UseNpgsql(connectionString));
     }
 }

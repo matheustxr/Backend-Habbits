@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using FluentValidation.Results;
 using Habits.Communication.Requests.Habits;
+using Habits.Domain.Entities;
 using Habits.Domain.Repositories;
 using Habits.Domain.Repositories.Habits;
 using Habits.Domain.Services.LoggedUser;
@@ -33,11 +34,11 @@ namespace Habits.Application.UseCases.Habits.Update
 
         public async Task Execute(RequestHabitJson request, long id)
         {
-            await Validate(request, id);
+            var user = await _loggedUser.Get();
 
-            var loggedUser = await _loggedUser.Get();
+            await Validate(request, user, id);
 
-            var habit = await _habitUpdateRepository.GetById(loggedUser, id);
+            var habit = await _habitUpdateRepository.GetById(user, id);
 
             if (habit is null)
             {
@@ -53,11 +54,11 @@ namespace Habits.Application.UseCases.Habits.Update
             await _unitOfWork.Commit();
         }
 
-        private async Task Validate(RequestHabitJson request, long id)
+        private async Task Validate(RequestHabitJson request, User user,long id)
         {
             var result = new HabitValidator().Validate(request);
 
-            var titleExist = await _habitReadOnlyRepository.ExistHabitWithTitle(request.Title, id);
+            var titleExist = await _habitReadOnlyRepository.ExistHabitWithTitle(request.Title, user, id);
 
             if (titleExist)
             {

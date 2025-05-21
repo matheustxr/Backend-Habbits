@@ -2,6 +2,7 @@
 using FluentValidation.Results;
 using Habits.Communication.Requests.Habits;
 using Habits.Communication.Responses.Habits;
+using Habits.Domain.Entities;
 using Habits.Domain.Repositories;
 using Habits.Domain.Repositories.Habits;
 using Habits.Domain.Services.LoggedUser;
@@ -37,7 +38,7 @@ namespace Habits.Application.UseCases.Habits.Create
             var user = await _loggedUser.Get();
             request.UserId = user.Id;
 
-            await Validate(request);
+            await Validate(request, user);
 
             var habit = _mapper.Map<Domain.Entities.Habit>(request);
 
@@ -51,11 +52,11 @@ namespace Habits.Application.UseCases.Habits.Create
             };
         }
 
-        private async Task Validate(RequestHabitJson request)
+        private async Task Validate(RequestHabitJson request, User user)
         {
             var result = new HabitValidator().Validate(request);
 
-            var titleExist = await _habitReadOnlyRepository.ExistHabitWithTitle(request.Title);
+            var titleExist = await _habitReadOnlyRepository.ExistHabitWithTitle(request.Title, user);
 
             if (titleExist)
             {

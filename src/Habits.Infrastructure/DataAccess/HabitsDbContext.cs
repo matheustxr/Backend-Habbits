@@ -3,9 +3,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Habits.Infrastructure.DataAccess;
 
-public class HabbitsDbContext : DbContext
+public class HabitsDbContext : DbContext
 {
-    public HabbitsDbContext(DbContextOptions options) : base(options) { }
+    public HabitsDbContext(DbContextOptions options) : base(options) { }
     public DbSet<User> Users { get; set; }
     public DbSet<Habit> Habits { get; set; }
     public DbSet<HabitCategory> HabitCategories { get; set; }

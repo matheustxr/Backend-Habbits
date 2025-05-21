@@ -8,7 +8,7 @@ public static class DataBaseMigration
 {
     public async static Task MigrateDatabase(IServiceProvider serviceProvider)
     {
-        var dbContext = serviceProvider.GetRequiredService<HabbitsDbContext>();
+        var dbContext = serviceProvider.GetRequiredService<HabitsDbContext>();
 
         await dbContext.Database.MigrateAsync();
     }

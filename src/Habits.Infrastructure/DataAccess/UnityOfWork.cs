@@ -5,8 +5,8 @@ namespace Habits.Infrastructure.DataAccess;
 
 public class UnityOfWork : IUnityOfWork
 {
-    private readonly HabbitsDbContext _dbContext;
-    public UnityOfWork(HabbitsDbContext dbContext)
+    private readonly HabitsDbContext _dbContext;
+    public UnityOfWork(HabitsDbContext dbContext)
     {
         _dbContext = dbContext;
     }

@@ -9,10 +9,10 @@ using System.Security.Claims;
 namespace Habits.Infrastructure.Services.LoggedUser;
 public class LoggedUser : ILoggedUser
 {
-    private readonly HabbitsDbContext _dbContext;
+    private readonly HabitsDbContext _dbContext;
     private readonly ITokenProvider _tokenProvider;
 
-    public LoggedUser(HabbitsDbContext dbContext, ITokenProvider tokenProvider)
+    public LoggedUser(HabitsDbContext dbContext, ITokenProvider tokenProvider)
     {
         _dbContext = dbContext;
         _tokenProvider = tokenProvider;

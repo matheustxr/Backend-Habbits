@@ -24,14 +24,14 @@ namespace WebApi.Test
                 {
                     var provider = services.AddEntityFrameworkInMemoryDatabase().BuildServiceProvider();
 
-                    services.AddDbContext<HabbitsDbContext>(config =>
+                    services.AddDbContext<HabitsDbContext>(config =>
                     {
                         config.UseInMemoryDatabase("InMemoryDbForTesting");
                         config.UseInternalServiceProvider(provider);
                     });
 
                     var scope = services.BuildServiceProvider().CreateScope();
-                    var dbContext = scope.ServiceProvider.GetRequiredService<HabbitsDbContext>();
+                    var dbContext = scope.ServiceProvider.GetRequiredService<HabitsDbContext>();
                     var passwordEncripter = scope.ServiceProvider.GetRequiredService<IPasswordEncrypter>();
                     var accessTokenGenerator = scope.ServiceProvider.GetRequiredService<IAccessTokenGenerator>();
 
@@ -40,7 +40,7 @@ namespace WebApi.Test
         }
 
         private void StartDatabase(
-            HabbitsDbContext dbContext,
+            HabitsDbContext dbContext,
             IPasswordEncrypter passwordEncripter,
             IAccessTokenGenerator accessTokenGenerator)
         {
@@ -57,7 +57,7 @@ namespace WebApi.Test
         }
 
         private User AddUser(
-            HabbitsDbContext dbContext,
+            HabitsDbContext dbContext,
             IPasswordEncrypter passwordEncrypter,
             IAccessTokenGenerator accessTokenGenerator)
         {
@@ -72,7 +72,7 @@ namespace WebApi.Test
             return user;
         }
 
-        private Habit AddHabit(HabbitsDbContext dbContext, User user, long habitId)
+        private Habit AddHabit(HabitsDbContext dbContext, User user, long habitId)
         {
             var habit = HabitBuilder.Build(user);
             habit.Id = habitId;

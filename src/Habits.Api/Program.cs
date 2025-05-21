@@ -92,7 +92,7 @@ builder.Services
 builder.Services.AddScoped<ITokenProvider, HttpContextTokenValue>();
 builder.Services.AddHttpContextAccessor();
 
-builder.Services.AddHealthChecks().AddDbContextCheck<HabbitsDbContext>();
+builder.Services.AddHealthChecks().AddDbContextCheck<HabitsDbContext>();
 
 var app = builder.Build();
 

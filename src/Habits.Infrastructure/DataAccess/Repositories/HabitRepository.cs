@@ -8,9 +8,9 @@ namespace Habits.Infrastructure.DataAccess.Repositories;
 
 public class HabitRepository : IHabitReadOnlyRepository, IHabitWriteOnlyRepository, IHabitUpdateOnlyRepository
 {
-    private readonly HabbitsDbContext _dbContext;
+    private readonly HabitsDbContext _dbContext;
 
-    public HabitRepository(HabbitsDbContext dbContext) => _dbContext = dbContext;
+    public HabitRepository(HabitsDbContext dbContext) => _dbContext = dbContext;
 
     public async Task Add(Habit habit)
     {
@@ -26,11 +26,11 @@ public class HabitRepository : IHabitReadOnlyRepository, IHabitWriteOnlyReposito
             _dbContext.Habits.Remove(habitToRemove);
     }
 
-    public async Task<bool> ExistHabitWithTitle(string title, long? excludeId = null)
+    public async Task<bool> ExistHabitWithTitle(string title, User user, long? excludeId = null)
     {
         var query = _dbContext.Habits
             .AsNoTracking()
-            .Where(h => h.Title == title);
+            .Where(h => h.Title == title && h.UserId == user.Id);
 
         if (excludeId.HasValue)
         {

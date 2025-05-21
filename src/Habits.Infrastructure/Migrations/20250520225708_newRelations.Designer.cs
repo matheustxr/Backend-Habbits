@@ -11,7 +11,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Habbits.Infrastructure.Migrations
 {
-    [DbContext(typeof(HabbitsDbContext))]
+    [DbContext(typeof(HabitsDbContext))]
     [Migration("20250520225708_newRelations")]
     partial class newRelations
     {

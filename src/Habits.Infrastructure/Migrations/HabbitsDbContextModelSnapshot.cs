@@ -10,7 +10,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Habbits.Infrastructure.Migrations
 {
-    [DbContext(typeof(HabbitsDbContext))]
+    [DbContext(typeof(HabitsDbContext))]
     partial class HabbitsDbContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
