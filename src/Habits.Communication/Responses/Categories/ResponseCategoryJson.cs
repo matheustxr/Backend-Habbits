@@ -2,6 +2,7 @@
 {
     public class ResponseCategoryJson
     {
-        public string Category { get; set; } = string.Empty;
+        public required string Category { get; set; }
+        public string? HexColor { get; set; } = "#FFFFFF";
     }
 }

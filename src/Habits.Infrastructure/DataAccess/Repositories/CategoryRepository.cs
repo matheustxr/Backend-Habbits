@@ -65,11 +65,5 @@ namespace Habits.Infrastructure.DataAccess.Repositories
         {
             _dbContext.HabitCategories.Update(category);
         }
-
-        async Task<HabitCategory?> ICategoryUpdateOnlyRepository.GetById(User user, long id)
-        {
-            return await _dbContext.HabitCategories
-                .FirstOrDefaultAsync(category => category.Id == id && category.UserId == user.Id);
-        }
     }
 }
