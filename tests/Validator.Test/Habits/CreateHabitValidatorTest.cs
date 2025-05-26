@@ -3,7 +3,7 @@ using Habits.Communication.Requests.Habits;
 using Habits.Communication.Enums;
 using Habits.Application.UseCases.Habits;
 
-namespace Validator.Test.Habits.Create
+namespace Validator.Test.Habits
 {
     public class CreateHabitValidatorTest
     {

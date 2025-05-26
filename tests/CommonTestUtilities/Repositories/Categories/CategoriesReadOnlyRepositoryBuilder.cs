@@ -1,5 +1,4 @@
-﻿using CommonTestUtilities.Repositories.Habits;
-using Habits.Domain.Entities;
+﻿using Habits.Domain.Entities;
 using Habits.Domain.Repositories.Categories;
 using Moq;
 
