@@ -12,7 +12,7 @@ namespace CommonTestUtilities.Requests.Categories
             var category = new RequestCategoryJson
             {
                 Category = faker.Commerce.Categories(1).First(),
-                HexColor = faker.Internet.Color()
+                HexColor = faker.Internet.Color().Replace("#", "")
             };
 
             return category;

@@ -49,7 +49,7 @@ public class CreateHabitUseCaseTest
 
     private CreateHabitUseCase CreateUseCase(User user)
     {
-        var readOnlyUpdateRepository = new HabitsReadOnlyRepositoryBuilder().Build();
+        var readOnlyRepository = new HabitsReadOnlyRepositoryBuilder().Build();
         var writeOnlyRepository = new HabitsWriteOnlyRepositoryBuilder().Build();
 
         var mapper = MapperBuilder.Build();
@@ -58,6 +58,6 @@ public class CreateHabitUseCaseTest
 
         var loggedUser = LoggedUserBuilder.Build(user);
 
-        return new CreateHabitUseCase(mapper, readOnlyUpdateRepository, writeOnlyRepository, loggedUser, unitOfWork);
+        return new CreateHabitUseCase(mapper, readOnlyRepository, writeOnlyRepository, loggedUser, unitOfWork);
     }
 }
