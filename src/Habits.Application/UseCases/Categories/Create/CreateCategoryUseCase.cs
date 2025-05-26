@@ -14,15 +14,15 @@ namespace Habits.Application.UseCases.Categories.Create
     public class CreateCategoryUseCase : ICreateCategoryUseCase
     {
         private readonly IMapper _mapper;
-        private readonly ICategoryReadOnlyRepository _categoryReadOnlyRepository;
-        private readonly ICategoryWriteOnlyRepository _categoryWriteOnlyRepository;
+        private readonly ICategoriesReadOnlyRepository _categoryReadOnlyRepository;
+        private readonly ICategoriesWriteOnlyRepository _categoryWriteOnlyRepository;
         private readonly ILoggedUser _loggedUser;
         private readonly IUnityOfWork _unitOfWork;
 
         public CreateCategoryUseCase(
             IMapper mapper,
-            ICategoryReadOnlyRepository categoryReadOnlyRepository,
-            ICategoryWriteOnlyRepository categoryWriteOnlyRepository,
+            ICategoriesReadOnlyRepository categoryReadOnlyRepository,
+            ICategoriesWriteOnlyRepository categoryWriteOnlyRepository,
             ILoggedUser loggedUser,
             IUnityOfWork unitOfWork)
         {

@@ -2,7 +2,7 @@
 
 namespace Habits.Domain.Repositories.Categories
 {
-    public interface ICategoryUpdateOnlyRepository
+    public interface ICategoriesUpdateOnlyRepository
     {
         void Update(HabitCategory category);
     }

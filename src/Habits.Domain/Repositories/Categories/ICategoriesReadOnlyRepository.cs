@@ -2,7 +2,7 @@
 
 namespace Habits.Domain.Repositories.Categories
 {
-    public interface ICategoryReadOnlyRepository
+    public interface ICategoriesReadOnlyRepository
     {
         Task<List<HabitCategory>> GetAll(User user);
         Task<HabitCategory?> GetById(User user, long id);

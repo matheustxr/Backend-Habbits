@@ -52,9 +52,9 @@ public static class DepedencyInjectionExtension
         services.AddScoped<IHabitWriteOnlyRepository, HabitRepository>();
         services.AddScoped<IHabitUpdateOnlyRepository, HabitRepository>();
 
-        services.AddScoped<ICategoryReadOnlyRepository, CategoryRepository>();
-        services.AddScoped<ICategoryWriteOnlyRepository, CategoryRepository>();
-        services.AddScoped<ICategoryUpdateOnlyRepository, CategoryRepository>();
+        services.AddScoped<ICategoriesReadOnlyRepository, CategoryRepository>();
+        services.AddScoped<ICategoriesWriteOnlyRepository, CategoryRepository>();
+        services.AddScoped<ICategoriesUpdateOnlyRepository, CategoryRepository>();
     }
 
     private static void AddDbContext(IServiceCollection services, IConfiguration configuration)

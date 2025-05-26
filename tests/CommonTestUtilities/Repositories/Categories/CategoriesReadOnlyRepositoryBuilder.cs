@@ -7,11 +7,11 @@ namespace CommonTestUtilities.Repositories.Categories
 {
     public class CategoriesReadOnlyRepositoryBuilder
     {
-        private readonly Mock<ICategoryReadOnlyRepository> _repository;
+        private readonly Mock<ICategoriesReadOnlyRepository> _repository;
 
         public CategoriesReadOnlyRepositoryBuilder()
         {
-            _repository = new Mock<ICategoryReadOnlyRepository>();
+            _repository = new Mock<ICategoriesReadOnlyRepository>();
         }
 
         public CategoriesReadOnlyRepositoryBuilder GetAll(User user)
@@ -32,6 +32,6 @@ namespace CommonTestUtilities.Repositories.Categories
             return this;
         }
 
-        public ICategoryReadOnlyRepository Build() => _repository.Object;
+        public ICategoriesReadOnlyRepository Build() => _repository.Object;
     }
 }

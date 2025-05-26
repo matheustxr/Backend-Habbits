@@ -6,7 +6,7 @@ using Habits.Domain.Repositories.Habits;
 
 namespace Habits.Infrastructure.DataAccess.Repositories
 {
-    public class CategoryRepository : ICategoryReadOnlyRepository, ICategoryWriteOnlyRepository, ICategoryUpdateOnlyRepository
+    public class CategoryRepository : ICategoriesReadOnlyRepository, ICategoriesWriteOnlyRepository, ICategoriesUpdateOnlyRepository
     {
         private readonly HabitsDbContext _dbContext;
 
