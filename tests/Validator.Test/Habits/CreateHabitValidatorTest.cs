@@ -14,14 +14,21 @@ namespace Validator.Test.Habits
             _validator = new HabitValidator();
         }
 
-        [Fact]
-        public void Should_HaveError_When_TitleIsEmpty()
+        [Theory]
+        [InlineData("")]
+        [InlineData("   ")]
+        [InlineData(null)]
+        public void Should_HaveError_When_TitleIsEmpty(string title)
         {
-            var request = new RequestHabitJson { Title = "" };
+            var request = new RequestHabitJson
+            {
+                Title = title,
+                WeekDays = new List<WeekDays> { WeekDays.Monday }
+            };
 
             var result = _validator.TestValidate(request);
 
-            result.ShouldHaveValidationErrorFor(h => h.Title);
+            result.ShouldHaveValidationErrorFor(r => r.Title);
         }
 
         [Fact]
