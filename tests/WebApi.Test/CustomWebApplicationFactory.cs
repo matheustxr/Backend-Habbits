@@ -79,5 +79,13 @@ namespace WebApi.Test
             dbContext.Habits.Add(habit);
             return habit;
         }
+
+        private HabitCategory AddCategory(HabitsDbContext dbContext, User user, long categoryId = 1)
+        {
+            var category = HabitCategoryBuilder.Build(user);
+            category.Id = categoryId;
+            dbContext.HabitCategories.Add(category);
+            return category;
+        }
     }
 }
