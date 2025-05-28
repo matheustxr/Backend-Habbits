@@ -16,6 +16,7 @@ namespace WebApi.Test
         public string? TestUserToken { get; private set; }
         public UserIdentityManager? TestUser { get; private set; }
         public HabitIdentityManager? TestHabit { get; private set; }
+        public CategoryIdentityManager? TestCategory { get; private set; }
 
         protected override void ConfigureWebHost(IWebHostBuilder builder)
         {
@@ -49,9 +50,11 @@ namespace WebApi.Test
 
             var user = AddUser(dbContext, passwordEncripter, accessTokenGenerator);
             var habit = AddHabit(dbContext, user, habitId: 1);
+            var category = AddCategory(dbContext, user, categoryId: 1);
 
             TestUser = new UserIdentityManager(user, "!Password123", TestUserToken!);
             TestHabit = new HabitIdentityManager(habit);
+            TestCategory = new CategoryIdentityManager(category);
 
             dbContext.SaveChanges();
         }
@@ -82,7 +85,7 @@ namespace WebApi.Test
 
         private HabitCategory AddCategory(HabitsDbContext dbContext, User user, long categoryId = 1)
         {
-            var category = HabitCategoryBuilder.Build(user);
+            var category = CategoryBuilder.Build(user);
             category.Id = categoryId;
             dbContext.HabitCategories.Add(category);
             return category;
