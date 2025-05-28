@@ -12,10 +12,5 @@ namespace WebApi.Test.Resources
         }
 
         public long GetId() => _habit.Id;
-        public string GetTitle() => _habit.Title;
-        public DateTime GetCreatedAt() => _habit.CreatedAt;
-        public Guid GetUserId() => _habit.UserId;
-        public bool IsActive() => _habit.IsActive;
-        public long? GetCategoryId() => _habit.CategoryId;
     }
 }
