@@ -1,7 +1,6 @@
 ﻿using Habits.Application.UseCases.Categories.Create;
-using Habits.Application.UseCases.Habits.Create;
+using Habits.Application.UseCases.Categories.GetAll;
 using Habits.Communication.Requests.Categories;
-using Habits.Communication.Requests.Habits;
 using Habits.Communication.Responses;
 using Habits.Communication.Responses.Categories;
 using Microsoft.AspNetCore.Authorization;
@@ -24,6 +23,19 @@ namespace Habits.Api.Controllers
             var response = await useCase.Execute(request);
 
             return Created(string.Empty, response);
+        }
+
+        [HttpGet]
+        [ProducesResponseType(typeof(ResponseListCategoriesJson), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        public async Task<IActionResult> GetAllCategories([FromServices] IGetAllCategoriesUseCase useCase)
+        {
+            var response = await useCase.Execute();
+
+            if (response.Categories.Count != 0)
+                return Ok(response);
+
+            return NoContent();
         }
     }
 }
