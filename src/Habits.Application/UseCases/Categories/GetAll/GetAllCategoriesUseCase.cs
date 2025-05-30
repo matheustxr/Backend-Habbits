@@ -27,7 +27,10 @@ namespace Habits.Application.UseCases.Categories.GetAll
 
             var result = await _repository.GetAll(user);
 
-            return _mapper.Map<ResponseListCategoriesJson>(result);
+            return new ResponseListCategoriesJson
+            {
+                Categories = _mapper.Map<List<ResponseCategoryJson>>(result)
+            };
         }
     }
 }
