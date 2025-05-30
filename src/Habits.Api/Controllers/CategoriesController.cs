@@ -1,5 +1,6 @@
 ﻿using Habits.Application.UseCases.Categories.Create;
 using Habits.Application.UseCases.Categories.GetAll;
+using Habits.Application.UseCases.Categories.GetById;
 using Habits.Communication.Requests.Categories;
 using Habits.Communication.Responses;
 using Habits.Communication.Responses.Categories;
@@ -36,6 +37,17 @@ namespace Habits.Api.Controllers
                 return Ok(response);
 
             return NoContent();
+        }
+
+        [HttpGet]
+        [Route("{id}")]
+        [ProducesResponseType(typeof(ResponseCategoryJson), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> GeyCategoryById([FromServices] IGetCategoriesByIdUseCase useCase, [FromRoute] long id)
+        {
+            var response = await useCase.Execute(id);
+
+            return Ok(response);
         }
     }
 }

@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="CATEGORY_NOT_FOUND" xml:space="preserve">
+    <value>Categoria não encontrada.</value>
+  </data>
   <data name="DESCRIPTION_TOO_LONG" xml:space="preserve">
     <value>A descrição é muito longa, o valor máximo é de 500 caracteres</value>
   </data>
