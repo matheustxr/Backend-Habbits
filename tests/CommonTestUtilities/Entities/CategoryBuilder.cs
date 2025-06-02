@@ -12,13 +12,15 @@ namespace CommonTestUtilities.Entities
             if (count == 0)
                 count = 1;
 
-             var categoryId = 0;
+             var categoryId = 1L;
 
             for (int i = 0; i < count; i++)
             {
                 var category = Build(user);
                 category.Id = categoryId++;
                 category.HexColor = "#00000";
+
+                list.Add(category);
             }
 
             return list;
