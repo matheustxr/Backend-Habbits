@@ -48,6 +48,6 @@ public static class DepedencyInjectionExtension
 
         services.AddScoped<ICreateCategoryUseCase, CreateCategoryUseCase>();
         services.AddScoped<IGetAllCategoriesUseCase, GetAllCategoriesUseCase>();
-        services.AddScoped<IGetCategoriesByIdUseCase, GetCategoriesByIdUseCase>();
+        services.AddScoped<IGetCategoryByIdUseCase, GetCategoryByIdUseCase>();
     }
 }

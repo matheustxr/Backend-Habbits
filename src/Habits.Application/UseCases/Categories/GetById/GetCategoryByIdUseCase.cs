@@ -7,13 +7,13 @@ using Habits.Exception.ExceptionBase;
 
 namespace Habits.Application.UseCases.Categories.GetById
 {
-    public class GetCategoriesByIdUseCase : IGetCategoriesByIdUseCase
+    public class GetCategoryByIdUseCase : IGetCategoryByIdUseCase
     {
         private readonly ILoggedUser _loggedUser;
         private readonly ICategoriesReadOnlyRepository _repository;
         private readonly IMapper _mapper;
 
-        public GetCategoriesByIdUseCase(
+        public GetCategoryByIdUseCase(
             ILoggedUser loggedUser,
             ICategoriesReadOnlyRepository repository,
             IMapper mapper)

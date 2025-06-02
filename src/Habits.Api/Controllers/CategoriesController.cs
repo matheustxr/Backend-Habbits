@@ -43,7 +43,7 @@ namespace Habits.Api.Controllers
         [Route("{id}")]
         [ProducesResponseType(typeof(ResponseCategoryJson), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> GeyCategoryById([FromServices] IGetCategoriesByIdUseCase useCase, [FromRoute] long id)
+        public async Task<IActionResult> GeyCategoryById([FromServices] IGetCategoryByIdUseCase useCase, [FromRoute] long id)
         {
             var response = await useCase.Execute(id);
 
