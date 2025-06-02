@@ -1,4 +1,5 @@
-﻿using Habits.Domain.Entities;
+﻿using CommonTestUtilities.Repositories.Habits;
+using Habits.Domain.Entities;
 using Habits.Domain.Repositories.Categories;
 using Moq;
 
@@ -13,9 +14,9 @@ namespace CommonTestUtilities.Repositories.Categories
             _repository = new Mock<ICategoriesReadOnlyRepository>();
         }
 
-        public CategoriesReadOnlyRepositoryBuilder GetAll(User user)
+        public CategoriesReadOnlyRepositoryBuilder GetAll(User user, List<HabitCategory> categories)
         {
-            _repository.Setup(repository => repository.GetAll(user));
+            _repository.Setup(repository => repository.GetAll(user)).ReturnsAsync(categories);
 
             return this;
         }
