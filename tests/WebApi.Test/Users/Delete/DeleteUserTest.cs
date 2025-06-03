@@ -20,5 +20,14 @@ namespace WebApi.Test.Users.Delete
 
             result.StatusCode.Should().Be(HttpStatusCode.NoContent);
         }
+
+        [Fact]
+        public async Task Unauthorized_WithoutToken()
+        {
+            var result = await DoGet(requestUri: METHOD, token: "");
+
+            result.StatusCode.Should().Be(HttpStatusCode.Unauthorized);
+        }
+
     }
 }

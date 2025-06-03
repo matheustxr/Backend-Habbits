@@ -28,5 +28,14 @@ namespace WebApi.Test.Users.Profile
             response.RootElement.GetProperty("name").GetString().Should().Be(_userName);
             response.RootElement.GetProperty("email").GetString().Should().Be(_userEmail);
         }
+
+        [Fact]
+        public async Task Unauthorized_WithoutToken()
+        {
+            var result = await DoGet(requestUri: METHOD, token: "");
+
+            result.StatusCode.Should().Be(HttpStatusCode.Unauthorized);
+        }
+
     }
 }
