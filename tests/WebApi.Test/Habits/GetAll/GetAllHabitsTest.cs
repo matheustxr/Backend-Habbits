@@ -27,5 +27,14 @@ namespace WebApi.Test.Habits.GetAll
 
             response.RootElement.GetProperty("habits").EnumerateArray().Should().NotBeNullOrEmpty();
         }
+
+        [Fact]
+        public async Task Unauthorized_WithoutToken()
+        {
+            var result = await DoGet(requestUri: METHOD, token: "");
+
+            result.StatusCode.Should().Be(HttpStatusCode.Unauthorized);
+        }
+
     }
 }
