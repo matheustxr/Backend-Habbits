@@ -19,8 +19,8 @@ namespace WebApi.Test.Users.ChangePassword
         public ChangePasswordTest(CustomWebApplicationFactory webApplicationFactory) : base(webApplicationFactory)
         {
             _token = webApplicationFactory.TestUser.GetToken();
-            _password = webApplicationFactory.TestUser.GetPassword();
             _email = webApplicationFactory.TestUser.GetEmail();
+            _password = webApplicationFactory.TestUser.GetPassword();
         }
 
         [Fact]
@@ -28,6 +28,7 @@ namespace WebApi.Test.Users.ChangePassword
         {
             var request = RequestChangePasswordJsonBuilder.Build();
             request.Password = _password;
+
             var loginRequest = new RequestLoginJson
             {
                 Email = _email,
@@ -40,13 +41,11 @@ namespace WebApi.Test.Users.ChangePassword
 
             
             response = await DoPost("api/Login", loginRequest);
-
             response.StatusCode.Should().Be(HttpStatusCode.Unauthorized);
 
             loginRequest.Password = request.NewPassword;
 
             response = await DoPost("api/Login", loginRequest);
-
             response.StatusCode.Should().Be(HttpStatusCode.OK);
         }
 
@@ -56,8 +55,8 @@ namespace WebApi.Test.Users.ChangePassword
         {
             var request = new RequestChangePasswordJson
             {
-                Password = "!WrongPassword456",     // senha inválida, mas segura
-                NewPassword = "!NewPassword123"     // nova senha válida
+                Password = "!WrongPassword456",
+                NewPassword = "!NewPassword123"
             };
 
             var expectedMessage = ResourceErrorMessages.ResourceManager.GetString(
@@ -77,10 +76,12 @@ namespace WebApi.Test.Users.ChangePassword
         [Fact]
         public async Task Unauthorized_WithoutToken()
         {
-            var result = await DoGet(requestUri: METHOD, token: "");
+            var request = RequestChangePasswordJsonBuilder.Build();
+            request.Password = _password;
+
+            var result = await DoPut(requestUri: METHOD, request: request, token: "");
 
             result.StatusCode.Should().Be(HttpStatusCode.Unauthorized);
         }
-
     }
 }

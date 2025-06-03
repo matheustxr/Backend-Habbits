@@ -24,7 +24,7 @@ namespace WebApi.Test.Users.Delete
         [Fact]
         public async Task Unauthorized_WithoutToken()
         {
-            var result = await DoGet(requestUri: METHOD, token: "");
+            var result = await DoDelete(requestUri: METHOD, token: "");
 
             result.StatusCode.Should().Be(HttpStatusCode.Unauthorized);
         }
