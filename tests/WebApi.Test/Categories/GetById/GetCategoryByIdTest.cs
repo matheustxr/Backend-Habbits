@@ -58,7 +58,7 @@ namespace WebApi.Test.Categories.GetById
         [Fact]
         public async Task Unauthorized_WithoutToken()
         {
-            var result = await DoGet(requestUri: METHOD, token: "");
+            var result = await DoGet(requestUri: $"{METHOD}/{_categoryId}", token: "");
 
             result.StatusCode.Should().Be(HttpStatusCode.Unauthorized);
         }
