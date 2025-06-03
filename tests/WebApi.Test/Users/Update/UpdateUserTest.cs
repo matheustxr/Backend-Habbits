@@ -51,6 +51,8 @@ namespace WebApi.Test.Users.Update
         [Fact]
         public async Task Unauthorized_WithoutToken()
         {
+            var request = RequestUpdateUserJsonBuilder.Build();
+
             var result = await DoPut(requestUri: METHOD, request: request, token: "");
 
             result.StatusCode.Should().Be(HttpStatusCode.Unauthorized);
