@@ -78,7 +78,9 @@ namespace WebApi.Test.Habits.Update
         [Fact]
         public async Task Unauthorized_WithoutToken()
         {
-            var result = await DoGet(requestUri: METHOD, token: "");
+            var request = RequestHabitJsonBuilder.Build();
+
+            var result = await DoPut(requestUri: $"{METHOD}/{_habitId}", request, token: "");
 
             result.StatusCode.Should().Be(HttpStatusCode.Unauthorized);
         }

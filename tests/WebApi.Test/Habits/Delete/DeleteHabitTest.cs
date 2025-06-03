@@ -1,4 +1,5 @@
-﻿using FluentAssertions;
+﻿using CommonTestUtilities.Requests.Habits;
+using FluentAssertions;
 using Habits.Exception;
 using System.Globalization;
 using System.Net;
@@ -53,7 +54,7 @@ namespace WebApi.Test.Habits.Delete
         [Fact]
         public async Task Unauthorized_WithoutToken()
         {
-            var result = await DoGet(requestUri: METHOD, token: "");
+            var result = await DoDelete(requestUri: $"{METHOD}/{_habitId}", token:"");
 
             result.StatusCode.Should().Be(HttpStatusCode.Unauthorized);
         }

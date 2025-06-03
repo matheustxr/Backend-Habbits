@@ -57,7 +57,9 @@ public class CreateHabitTest : HabitsClassFixture, IClassFixture<CustomWebApplic
     [Fact]
     public async Task Unauthorized_WithoutToken()
     {
-        var result = await DoGet(requestUri: METHOD, token: "");
+        var request = RequestHabitJsonBuilder.Build();
+
+        var result = await DoPost(requestUri: METHOD, request, token: "");
 
         result.StatusCode.Should().Be(HttpStatusCode.Unauthorized);
     }
