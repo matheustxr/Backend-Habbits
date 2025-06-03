@@ -53,5 +53,14 @@ namespace WebApi.Test.Categories.Create
 
             errors.Should().HaveCount(1).And.Contain(error => error.GetString()!.Equals(expectedMessage));
         }
+
+        [Fact]
+        public async Task Unauthorized_WithoutToken()
+        {
+            var result = await DoGet(requestUri: METHOD, token: "");
+
+            result.StatusCode.Should().Be(HttpStatusCode.Unauthorized);
+        }
+
     }
 }
