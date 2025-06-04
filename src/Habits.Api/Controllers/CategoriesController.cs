@@ -1,7 +1,10 @@
 ﻿using Habits.Application.UseCases.Categories.Create;
 using Habits.Application.UseCases.Categories.GetAll;
 using Habits.Application.UseCases.Categories.GetById;
+using Habits.Application.UseCases.Categories.Update;
+using Habits.Application.UseCases.Habits.Update;
 using Habits.Communication.Requests.Categories;
+using Habits.Communication.Requests.Habits;
 using Habits.Communication.Responses;
 using Habits.Communication.Responses.Categories;
 using Microsoft.AspNetCore.Authorization;
@@ -48,6 +51,20 @@ namespace Habits.Api.Controllers
             var response = await useCase.Execute(id);
 
             return Ok(response);
+        }
+
+        [HttpPut]
+        [Route("{id}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> Update(
+            [FromServices] IUpdateCategoryUseCase useCase,
+            [FromRoute] long id,
+            [FromBody] RequestCategoryJson request)
+        {
+            await useCase.Execute(request, id);
+            return NoContent();
         }
     }
 }
