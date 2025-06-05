@@ -3,11 +3,10 @@ using CommonTestUtilities.LoggedUser;
 using CommonTestUtilities.Mapper;
 using CommonTestUtilities.Repositories.Categories;
 using FluentAssertions;
-using Habits.Application.UseCases.Categories.GetAll;
 using Habits.Application.UseCases.Categories.GetById;
 using Habits.Domain.Entities;
-using Habits.Exception.ExceptionBase;
 using Habits.Exception;
+using Habits.Exception.ExceptionBase;
 
 namespace UseCases.Test.Categories.GetById
 {
