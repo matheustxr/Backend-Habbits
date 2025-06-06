@@ -1,7 +1,9 @@
 ﻿using Habits.Application.UseCases.Categories.Create;
+using Habits.Application.UseCases.Categories.Delete;
 using Habits.Application.UseCases.Categories.GetAll;
 using Habits.Application.UseCases.Categories.GetById;
 using Habits.Application.UseCases.Categories.Update;
+using Habits.Application.UseCases.Habits.Delete;
 using Habits.Application.UseCases.Habits.Update;
 using Habits.Communication.Requests.Categories;
 using Habits.Communication.Requests.Habits;
@@ -51,6 +53,20 @@ namespace Habits.Api.Controllers
             var response = await useCase.Execute(id);
 
             return Ok(response);
+        }
+
+        [HttpDelete]
+        [Route("{id}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
+
+        public async Task<IActionResult> Delete(
+            [FromServices] IDeleteCategoryUseCase useCase,
+            [FromRoute] long id)
+        {
+            await useCase.Execute(id);
+
+            return NoContent();
         }
 
         [HttpPut]

@@ -1,5 +1,6 @@
 ﻿using Habits.Application.AutoMapper;
 using Habits.Application.UseCases.Categories.Create;
+using Habits.Application.UseCases.Categories.Delete;
 using Habits.Application.UseCases.Categories.GetAll;
 using Habits.Application.UseCases.Categories.GetById;
 using Habits.Application.UseCases.Categories.Update;
@@ -50,6 +51,7 @@ public static class DepedencyInjectionExtension
         services.AddScoped<ICreateCategoryUseCase, CreateCategoryUseCase>();
         services.AddScoped<IGetAllCategoriesUseCase, GetAllCategoriesUseCase>();
         services.AddScoped<IGetCategoryByIdUseCase, GetCategoryByIdUseCase>();
+        services.AddScoped<IDeleteCategoryUseCase, DeleteCategoryUseCase>();
         services.AddScoped<IUpdateCategoryUseCase, UpdateCategoryUseCase>();
     }
 }
