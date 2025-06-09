@@ -21,9 +21,7 @@ namespace UseCases.Test.Categories.Update
         public async Task Success()
         {
             var loggedUser = UserBuilder.Build();
-
             var category = CategoryBuilder.Build(loggedUser);
-
             var request = RequestCategoryBuilder.Build();
 
             var useCase = CreateUseCase(loggedUser, category);
@@ -82,12 +80,7 @@ namespace UseCases.Test.Categories.Update
 
             var readOnlyRepository = readOnlyRepositoryBuilder.Build();
 
-            var updateRepositoryBuilder = new CategoriesUpdateOnlyRepositoryBuilder();
-
-            if (category is not null)
-                readOnlyRepositoryBuilder.GetById(user, category);
-
-            var categoryUpdateRepository = updateRepositoryBuilder.Build();
+            var categoryUpdateRepository = CategoriesUpdateOnlyRepositoryBuilder.Build();
 
             var mapper = MapperBuilder.Build();
             var unitOfWork = UnityOfWorkBuilder.Build();
