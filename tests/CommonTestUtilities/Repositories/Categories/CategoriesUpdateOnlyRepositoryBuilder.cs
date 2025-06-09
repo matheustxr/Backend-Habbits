@@ -4,17 +4,15 @@ using Moq;
 
 namespace CommonTestUtilities.Repositories.Categories
 {
-    public class CategoriesUpdateOnlyRepositoryBuilder
+    public static class CategoriesUpdateOnlyRepositoryBuilder
     {
-        private readonly Mock<ICategoriesUpdateOnlyRepository> _repository;
-
-        public CategoriesUpdateOnlyRepositoryBuilder()
+        public static ICategoriesUpdateOnlyRepository Build()
         {
-            _repository = new Mock<ICategoriesUpdateOnlyRepository>();
+            var mock = new Mock<ICategoriesUpdateOnlyRepository>();
 
-            _repository.Setup(repo => repo.Update(It.IsAny<HabitCategory>()));
+            mock.Setup(repo => repo.Update(It.IsAny<HabitCategory>()));
+
+            return mock.Object;
         }
-
-        public ICategoriesUpdateOnlyRepository Build() => _repository.Object;
     }
 }
