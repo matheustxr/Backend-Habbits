@@ -31,14 +31,14 @@ Uma API RESTful completa para gerenciamento de hábitos pessoais, construída co
 
 ## Funcionalidades
 
-### 🧑 Usuários
+### Usuários
 - Registro de novos usuários
 - Login e autenticação com JWT
 - Atualização e exclusão de conta
 - Alteração de senha
 - Consulta de perfil
 
-### 📆 Hábitos
+### Hábitos
 - Criação, leitura, atualização e exclusão de hábitos
 - Marcação de hábitos por dia
 - Filtro por categorias
