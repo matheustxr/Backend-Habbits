@@ -5,12 +5,12 @@ Uma API RESTful completa para gerenciamento de hábitos pessoais, construída co
 ## 📦 Estrutura do Projeto
 `
   ├── src
-  │ ├── Habits.Api # Camada de apresentação (Controllers, Middlewares, etc.)
-  │ ├── Habits.Application # Casos de uso, validações e regras de negócio
-  │ ├── Habits.Communication # DTOs para requests/responses e enums compartilhados
-  │ ├── Habits.Domain # Entidades, contratos e lógica de domínio
-  │ ├── Habits.Exception # Exceptions personalizadas e mensagens localizadas
-  │ └── Habits.Infrastructure # Acesso a dados, repositórios, segurança e configurações
+  │   ├── Habits.Api # Camada de apresentação (Controllers, Middlewares, etc.)
+  │   ├── Habits.Application # Casos de uso, validações e regras de negócio
+  │   ├── Habits.Communication # DTOs para requests/responses e enums compartilhados
+  │   ├── Habits.Domain # Entidades, contratos e lógica de domínio
+  │   ├── Habits.Exception # Exceptions personalizadas e mensagens localizadas
+  │   └── Habits.Infrastructure # Acesso a dados, repositórios, segurança e configurações
   ├── tests # Testes unitários e de integração
   ├── .github/workflows # Pipeline CI com GitHub Actions
   ├── Habits.sln # Solution principal
