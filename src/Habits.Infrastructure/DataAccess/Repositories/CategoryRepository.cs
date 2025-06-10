@@ -1,8 +1,6 @@
 ﻿using Habits.Domain.Entities;
 using Habits.Domain.Repositories.Categories;
-using Microsoft.EntityFrameworkCore.Query;
 using Microsoft.EntityFrameworkCore;
-using Habits.Domain.Repositories.Habits;
 
 namespace Habits.Infrastructure.DataAccess.Repositories
 {

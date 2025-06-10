@@ -1,6 +1,4 @@
-﻿using Habits.Communication.Enums;
-
-namespace Habits.Communication.Responses.Habits;
+﻿namespace Habits.Communication.Responses.Habits;
 
 public class ResponseCreateHabitJson
 {
