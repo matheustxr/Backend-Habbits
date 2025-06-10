@@ -2,7 +2,7 @@
 
 Uma API RESTful completa para gerenciamento de hábitos pessoais, construída com .NET 8, arquitetura em camadas (DDD), princípios SOLID e validação robusta. Ideal para controle de hábitos, categorias e perfis de usuário, com autenticação via JWT e suporte a múltiplos idiomas para mensagens de erro.
 
-## 📦 Estrutura do Projeto
+## Estrutura do Projeto
 ```
 ├── src
 │   ├── Habits.Api # Camada de apresentação (Controllers, Middlewares, etc.)
@@ -17,7 +17,7 @@ Uma API RESTful completa para gerenciamento de hábitos pessoais, construída co
 └── README.md
 ```
 
-## 🚀 Tecnologias Utilizadas
+## Tecnologias Utilizadas
 
 - [.NET 8](https://learn.microsoft.com/dotnet)
 - C#
@@ -29,7 +29,7 @@ Uma API RESTful completa para gerenciamento de hábitos pessoais, construída co
 - BCrypt (hash de senhas)
 - GitHub Actions (CI/CD)
 
-## 📌 Funcionalidades
+## Funcionalidades
 
 ### 🧑 Usuários
 - Registro de novos usuários
@@ -43,33 +43,33 @@ Uma API RESTful completa para gerenciamento de hábitos pessoais, construída co
 - Marcação de hábitos por dia
 - Filtro por categorias
 
-### 🗂️ Categorias
+### Categorias
 - CRUD de categorias de hábitos
 - Suporte a cores personalizadas (HexColor)
 
-## 🌍 Suporte a Idiomas
+## Suporte a Idiomas
 
 Mensagens de erro e validação disponíveis em múltiplos idiomas via arquivos `.resx`:
 - `pt-BR`
 - `en-US` (default)
 
-## 🛡️ Segurança
+## Segurança
 
 - Hashing de senhas com BCrypt
 - Autenticação e autorização via JWT
 - Middleware de cultura e controle de exceções
 
-## 📑 Documentação da API
+## Documentação da API
 
 Você pode testar os endpoints usando ferramentas como:
 - Postman
 - Swagger
 
-## 🧪 Testes
+## Testes
 
 Os testes estão localizados na pasta `tests/`, utilizando builders, criptografia mockada e testes de entidades e regras de negócio.
 
-## 🛠️ Como Rodar Localmente
+## Como Rodar Localmente
 
 ### Pré-requisitos
 
@@ -94,15 +94,15 @@ dotnet ef database update --project src/Habits.Infrastructure
 dotnet run --project src/Habits.Api
 ```
 
-## ⚙️ Pipeline CI
+## Pipeline CI
 O projeto está integrado ao GitHub Actions com o workflow:
 
 ci.yml: Build, testes e validação de camadas
 
-## 👨‍💻 Contribuindo
+## Contribuindo
 Pull requests são bem-vindos. Para mudanças maiores, abra uma issue antes para discutir o que você gostaria de mudar.
 
-## 📝 Licença
+## Licença
 Este projeto é licenciado sob a MIT License.
 
 Desenvolvido por Matheus Teixeira 💻
