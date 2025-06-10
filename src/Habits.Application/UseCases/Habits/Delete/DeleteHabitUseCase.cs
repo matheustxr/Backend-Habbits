@@ -1,5 +1,4 @@
-﻿
-using Habits.Domain.Repositories;
+﻿using Habits.Domain.Repositories;
 using Habits.Domain.Repositories.Habits;
 using Habits.Domain.Services.LoggedUser;
 using Habits.Exception;

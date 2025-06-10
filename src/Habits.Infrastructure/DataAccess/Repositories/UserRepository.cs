@@ -1,6 +1,5 @@
 ﻿using Habits.Domain.Entities;
 using Habits.Domain.Repositories.Users;
-using Habits.Infrastructure.DataAccess;
 using Microsoft.EntityFrameworkCore;
 
 namespace Habits.Infrastructure.DataAccess.Repositories;

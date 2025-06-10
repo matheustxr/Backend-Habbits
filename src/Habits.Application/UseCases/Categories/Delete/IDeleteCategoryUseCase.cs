@@ -1,6 +1,4 @@
-﻿using Habits.Domain.Entities;
-
-namespace Habits.Application.UseCases.Categories.Delete
+﻿namespace Habits.Application.UseCases.Categories.Delete
 {
     public interface IDeleteCategoryUseCase
     {
