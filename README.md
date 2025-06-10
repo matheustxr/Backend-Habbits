@@ -3,7 +3,7 @@
 Uma API RESTful completa para gerenciamento de hábitos pessoais, construída com .NET 8, arquitetura em camadas (DDD), princípios SOLID e validação robusta. Ideal para controle de hábitos, categorias e perfis de usuário, com autenticação via JWT e suporte a múltiplos idiomas para mensagens de erro.
 
 ## 📦 Estrutura do Projeto
-`
+---
   ├── src
   │   ├── Habits.Api # Camada de apresentação (Controllers, Middlewares, etc.)
   │   ├── Habits.Application # Casos de uso, validações e regras de negócio
@@ -15,7 +15,7 @@ Uma API RESTful completa para gerenciamento de hábitos pessoais, construída co
   ├── .github/workflows # Pipeline CI com GitHub Actions
   ├── Habits.sln # Solution principal
   └── README.md
-`
+---
 
 ## 🚀 Tecnologias Utilizadas
 
@@ -63,8 +63,7 @@ Mensagens de erro e validação disponíveis em múltiplos idiomas via arquivos 
 
 Você pode testar os endpoints usando ferramentas como:
 - Postman
-- Thunder Client (VSCode)
-- Ou diretamente com os arquivos `.http` incluídos no projeto
+- Swagger
 
 ## 🧪 Testes
 
