@@ -3,12 +3,12 @@ FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build-env
 WORKDIR /app
 
 # Copia os arquivos .csproj e restaura as dependências primeiro para aproveitar o cache
-COPY src/Habits.Api/*.csproj ./Habits.Api/
-COPY src/Habits.Application/*.csproj ./Habits.Application/
-COPY src/Habits.Communication/*.csproj ./Habits.Communication/
-COPY src/Habits.Domain/*.csproj ./Habits.Domain/
-COPY src/Habits.Exception/*.csproj ./Habits.Exception/
-COPY src/Habits.Infrastructure/*.csproj ./Habits.Infrastructure/
+COPY src/Habits.Api/*.csproj ./src/Habits.Api/
+COPY src/Habits.Application/*.csproj ./src/Habits.Application/
+COPY src/Habits.Communication/*.csproj ./src/Habits.Communication/
+COPY src/Habits.Domain/*.csproj ./src/Habits.Domain/
+COPY src/Habits.Exception/*.csproj ./src/Habits.Exception/
+COPY src/Habits.Infrastructure/*.csproj ./src/Habits.Infrastructure/
 
 # Restaura as dependências de todos os projetos
 COPY Habits.sln .
