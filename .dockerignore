@@ -1,0 +1,11 @@
+# Ignora a pasta de testes inteira
+**/tests
+
+# Ignora pastas do git e do VSCode
+.git
+.vs
+.vscode
+
+# Ignora pastas de build e artefatos locais
+**/bin
+**/obj
