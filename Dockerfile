@@ -1,33 +1,23 @@
-# Estágio de Build
+# --- Estágio 1: Build ---
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build-env
 WORKDIR /app
 
-# Copia os arquivos .csproj e restaura as dependências primeiro para aproveitar o cache
-COPY src/Habits.Api/*.csproj ./src/Habits.Api/
-COPY src/Habits.Application/*.csproj ./src/Habits.Application/
-COPY src/Habits.Communication/*.csproj ./src/Habits.Communication/
-COPY src/Habits.Domain/*.csproj ./src/Habits.Domain/
-COPY src/Habits.Exception/*.csproj ./src/Habits.Exception/
-COPY src/Habits.Infrastructure/*.csproj ./src/Habits.Infrastructure/
+# Copia TODOS os arquivos do projeto
+COPY . ./
 
-# Restaura as dependências de todos os projetos
-COPY Habits.sln .
-RUN dotnet restore Habits.sln
-
-# Copia o restante do código-fonte
-COPY src/ ./src/
-
-# Publica a aplicação
+# Restaura e Publica o projeto da API em modo Release
 RUN dotnet publish src/Habits.Api/Habits.Api.csproj -c Release -o /app/out
 
-# Estágio Final
+# --- Estágio 2: Imagem Final ---
 FROM mcr.microsoft.com/dotnet/aspnet:8.0
 WORKDIR /app
+
+# Copia apenas os artefatos publicados do estágio de build
 COPY --from=build-env /app/out .
 
-# Copia e dá permissão de execução para o script de inicialização
-COPY start.sh .
+# Copia e torna o script de inicialização executável
+COPY --from=build-env /app/start.sh .
 RUN chmod +x start.sh
 
-# Define o script como ponto de entrada
+# Define o ponto de entrada para rodar as migrations e iniciar a API
 ENTRYPOINT ["/app/start.sh"]
