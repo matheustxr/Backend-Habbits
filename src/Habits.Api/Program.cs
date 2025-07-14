@@ -94,6 +94,20 @@ builder.Services.AddHttpContextAccessor();
 
 builder.Services.AddHealthChecks().AddDbContextCheck<HabitsDbContext>();
 
+// CONFIGURAÇÃO DO CORS
+var myAllowSpecificOrigins = "_myAllowSpecificOrigins";
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: myAllowSpecificOrigins,
+                      policy =>
+                      {
+                          policy.WithOrigins("http://localhost:4200") // URL do seu front-end em desenvolvimento
+                                .AllowAnyHeader()
+                                .AllowAnyMethod();
+                      });
+});
+
 var app = builder.Build();
 
 app.MapHealthChecks("/Health", new HealthCheckOptions
