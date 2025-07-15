@@ -110,6 +110,8 @@ builder.Services.AddCors(options =>
 
 var app = builder.Build();
 
+app.UseCors(myAllowSpecificOrigins);
+
 app.MapHealthChecks("/Health", new HealthCheckOptions
 {
     AllowCachingResponses = false,
