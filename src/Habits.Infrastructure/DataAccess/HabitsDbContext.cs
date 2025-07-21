@@ -9,6 +9,7 @@ public class HabitsDbContext : DbContext
     public DbSet<User> Users { get; set; }
     public DbSet<Habit> Habits { get; set; }
     public DbSet<HabitCategory> HabitCategories { get; set; }
+    public DbSet<DayHabit> DayHabits { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
