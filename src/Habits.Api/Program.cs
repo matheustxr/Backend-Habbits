@@ -21,7 +21,6 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 
-//CONFIGURAÇÃO PARA ADICIONAR O BOTÃO PARA COLOCAR O TOKEN NO SWAGGERR
 builder.Services.AddSwaggerGen(config =>
 {
     config.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
@@ -54,7 +53,6 @@ builder.Services.AddSwaggerGen(config =>
     });
 });
 
-//CONFIGURAÇÃO FILTRO DE EXCEÇÃO
 builder.Services.AddMvc(options => options.Filters.Add(typeof(ExceptionFilter)));
 
 builder.Services.AddInfrastructure(builder.Configuration);
@@ -65,7 +63,6 @@ builder.Services.AddHttpContextAccessor();
 
 var signingKey = builder.Configuration.GetValue<string>("Settings:Jwt:SigningKey");
 
-//CODIGO PARA CONFIGURAR A API PARA QUE ROTAS PRECISEM DE AUTORIZAÇÃO NECESSARIO O NUGET JWT BEARER
 builder.Services.AddAuthentication(config =>
 {
     config.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -81,7 +78,6 @@ config.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
     };
 });
 
-// CONFIGURAÇÃO PARA PODER RECEBER VALORES DOS ENUMS
 builder.Services
     .AddControllers()
     .AddJsonOptions(options =>
@@ -94,7 +90,6 @@ builder.Services.AddHttpContextAccessor();
 
 builder.Services.AddHealthChecks().AddDbContextCheck<HabitsDbContext>();
 
-// CONFIGURAÇÃO DO CORS
 var myAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
 builder.Services.AddCors(options =>
