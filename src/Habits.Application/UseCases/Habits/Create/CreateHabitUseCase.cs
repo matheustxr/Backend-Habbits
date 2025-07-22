@@ -36,11 +36,11 @@ namespace Habits.Application.UseCases.Habits.Create
         public async Task<ResponseCreateHabitJson> Execute(RequestHabitJson request)
         {
             var user = await _loggedUser.Get();
-            request.UserId = user.Id;
 
             await Validate(request, user);
 
-            var habit = _mapper.Map<Domain.Entities.Habit>(request);
+            var habit = _mapper.Map<Habit>(request);
+            habit.UserId = user.Id;
 
             await _habitWriteOnlyRepository.Add(habit);
 
