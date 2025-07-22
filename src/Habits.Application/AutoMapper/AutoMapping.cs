@@ -45,5 +45,6 @@ public class AutoMapping : Profile
         CreateMap<HabitCategory, ResponseCategoryJson>();
 
         CreateMap<DayHabit, ResponseSummaryJson>();
+        CreateMap<DayHabit, ResponseSummaryHabitJson>();
     }
 }
