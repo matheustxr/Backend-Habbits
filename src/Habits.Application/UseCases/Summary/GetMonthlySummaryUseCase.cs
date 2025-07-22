@@ -27,15 +27,7 @@ namespace Habits.Application.UseCases.Summary
 
             var summaryData = await _dayHabitRepository.GetMonthlySummaryAsync(loggedUser.Id, startDate, endDate);
 
-            var result = summaryData
-                .Select(kvp => new ResponseSummaryJson
-                {
-                    Date = kvp.Key,
-                    Completed = kvp.Value.completed,
-                    Amount = kvp.Value.possible
-                }).ToList();
-
-            return _mapper.Map<List<ResponseSummaryJson>>(result);
+            return _mapper.Map<List<ResponseSummaryJson>>(summaryData);
         }
     }
 }
