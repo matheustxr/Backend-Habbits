@@ -115,6 +115,15 @@ namespace Habits.Exception {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a End date can&apos;t be minor of start date..
+        /// </summary>
+        public static string END_DATE_CANT_BE_MINOR_OF_START_DATE {
+            get {
+                return ResourceManager.GetString("END_DATE_CANT_BE_MINOR_OF_START_DATE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Habit not found..
         /// </summary>
         public static string HABIT_NOT_FOUND {

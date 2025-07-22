@@ -150,6 +150,9 @@
   <data name="PASSWORD_DIFFERENT_CURRENT_PASSWORD" xml:space="preserve">
     <value>The password entered is different from the current password.</value>
   </data>
+  <data name="END_DATE_CANT_BE_MINOR_OF_START_DATE" xml:space="preserve">
+    <value>End date can't be minor of start date.</value>
+  </data>
   <data name="TITLE_ALREADY_REGISTERED" xml:space="preserve">
     <value>This title is already registered.</value>
   </data>
