@@ -4,6 +4,7 @@ using Habits.Communication.Requests.Habits;
 using Habits.Communication.Requests.Users;
 using Habits.Communication.Responses.Categories;
 using Habits.Communication.Responses.Habits;
+using Habits.Communication.Responses.Summary;
 using Habits.Communication.Responses.Users;
 using Habits.Domain.Entities;
 
@@ -42,5 +43,7 @@ public class AutoMapping : Profile
         CreateMap<Habit, ResponseHabitJson>();
 
         CreateMap<HabitCategory, ResponseCategoryJson>();
+
+        CreateMap<DayHabit, ResponseSummaryJson>();
     }
 }

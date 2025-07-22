@@ -4,6 +4,6 @@ namespace Habits.Application.UseCases.Summary
 {
     public interface IGetMonthlySummaryUseCase
     {
-        Task<List<ResponseSummaryJson>> ExecuteAsync(Guid userId, int year, int month);
+        Task<List<ResponseSummaryJson>> Execute(Guid userId, DateOnly startDate, DateOnly endDate);
     }
 }
