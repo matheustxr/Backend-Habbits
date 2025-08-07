@@ -10,6 +10,7 @@ using Habits.Application.UseCases.Habits.GetAll;
 using Habits.Application.UseCases.Habits.GetById;
 using Habits.Application.UseCases.Habits.Update;
 using Habits.Application.UseCases.Login;
+using Habits.Application.UseCases.Summary.GetHabitsDay;
 using Habits.Application.UseCases.Summary.GetMounthly;
 using Habits.Application.UseCases.Users.ChangePassword;
 using Habits.Application.UseCases.Users.Delete;
@@ -56,5 +57,6 @@ public static class DepedencyInjectionExtension
         services.AddScoped<IUpdateCategoryUseCase, UpdateCategoryUseCase>();
 
         services.AddScoped<IGetMonthlySummaryUseCase, GetMonthlySummaryUseCase>();
+        services.AddScoped<IGetHabitsDayUseCase, GetHabitsDayUseCase>();
     }
 }

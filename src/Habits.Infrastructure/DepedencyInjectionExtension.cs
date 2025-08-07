@@ -59,7 +59,6 @@ public static class DepedencyInjectionExtension
 
         services.AddScoped<IDayHabitReadOnlyRepository, DayHabitRepository>();
         services.AddScoped<IDayHabitWriteOnlyRepository, DayHabitRepository>();
-        services.AddScoped<IDayHabitUpdateOnlyRepository, DayHabitRepository>();
     }
 
     private static void AddDbContext(IServiceCollection services, IConfiguration configuration)

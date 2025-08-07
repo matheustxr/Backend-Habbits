@@ -1,11 +1,11 @@
-﻿using System.Linq;
-using Habits.Domain.Entities;
+﻿using Habits.Domain.Entities;
 using Habits.Domain.Repositories.DayHabits;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
 
 namespace Habits.Infrastructure.DataAccess.Repositories
 {
-    public class DayHabitRepository : IDayHabitReadOnlyRepository, IDayHabitWriteOnlyRepository, IDayHabitUpdateOnlyRepository
+    public class DayHabitRepository : IDayHabitReadOnlyRepository, IDayHabitWriteOnlyRepository
     {
         private readonly HabitsDbContext _dbContext;
 
@@ -17,47 +17,51 @@ namespace Habits.Infrastructure.DataAccess.Repositories
         public async Task AddAsync(DayHabit dayHabit)
         {
             await _dbContext.DayHabits.AddAsync(dayHabit);
-            await _dbContext.SaveChangesAsync();
+        }
+
+        public void Delete(DayHabit dayHabit)
+        {
+            _dbContext.DayHabits.Remove(dayHabit);
         }
 
         public async Task<List<(long habitId, string title, string? categoryName, bool isCompleted)>> GetHabitsForDateAsync(Guid userId, DateOnly date)
         {
-            var dateStart = date.ToDateTime(TimeOnly.MinValue);
-
-            var habits = await _dbContext.Habits
+            var possibleHabits = await _dbContext.Habits
                 .Include(h => h.HabitCategory)
                 .Where(h => h.UserId == userId && h.IsActive && h.WeekDays != null && h.WeekDays.Contains((Domain.Enums.WeekDays)(int)date.DayOfWeek))
-                .Select(h => new
-                {
-                    h.Id,
-                    h.Title,
-                    CategoryName = h.HabitCategory != null ? h.HabitCategory.Category : null,
-                    IsCompleted = _dbContext.DayHabits.Any(dh => dh.HabitId == h.Id && dh.Date.Date == dateStart.Date && dh.IsCompleted)
-                })
                 .ToListAsync();
 
-            return habits
-                .Select(h => (h.Id, h.Title, h.CategoryName, h.IsCompleted))
+            var completedHabitIds = (await _dbContext.DayHabits
+                .Where(dh => dh.Habit != null && dh.Habit.UserId == userId && dh.Date == date && dh.IsCompleted)
+                .Select(dh => dh.HabitId)
+                .ToListAsync())
+                .ToHashSet();
+
+            return possibleHabits
+                .Select(h => (
+                    h.Id,
+                    h.Title,
+                    h.HabitCategory?.Category,
+                    completedHabitIds.Contains(h.Id)
+                ))
                 .ToList();
         }
 
         public async Task<Dictionary<DateOnly, (int possible, int completed)>> GetMonthlySummaryAsync(Guid userId, DateOnly startDate, DateOnly endDate)
         {
-            var start = startDate.ToDateTime(TimeOnly.MinValue);
-            var end = endDate.ToDateTime(TimeOnly.MaxValue);
-
-            var days = await _dbContext.DayHabits
-                .Where(dh => dh.Habit != null && dh.Habit.UserId == userId && dh.Date >= start && dh.Date <= end)
-                .GroupBy(dh => dh.Date.Date)
+            var summary = await _dbContext.DayHabits
+                .AsNoTracking()
+                .Where(dh => dh.Habit != null && dh.Habit.UserId == userId && dh.Date >= startDate && dh.Date <= endDate)
+                .GroupBy(dh => dh.Date)
                 .Select(g => new
                 {
-                    Date = DateOnly.FromDateTime(g.Key),
-                    Completed = g.Count(x => x.IsCompleted),
-                    Possible = g.Select(x => x.HabitId).Distinct().Count()
+                    Date = g.Key,
+                    Possible = g.Select(x => x.HabitId).Distinct().Count(),
+                    Completed = g.Count(x => x.IsCompleted)
                 })
                 .ToListAsync();
 
-            return days.ToDictionary(
+            return summary.ToDictionary(
                 d => d.Date,
                 d => (d.Possible, d.Completed)
             );
@@ -65,27 +69,22 @@ namespace Habits.Infrastructure.DataAccess.Repositories
 
         public async Task ToggleCompletionStatusAsync(long habitId, DateOnly date)
         {
-            var day = date.ToDateTime(TimeOnly.MinValue);
-
             var entry = await _dbContext.DayHabits
-                .FirstOrDefaultAsync(dh => dh.HabitId == habitId && dh.Date.Date == day.Date);
+                .FirstOrDefaultAsync(dh => dh.HabitId == habitId && dh.Date == date);
 
             if (entry is null)
             {
                 _dbContext.DayHabits.Add(new DayHabit
                 {
                     HabitId = habitId,
-                    Date = day,
+                    Date = date,
                     IsCompleted = true
                 });
             }
             else
             {
                 entry.IsCompleted = !entry.IsCompleted;
-                _dbContext.DayHabits.Update(entry);
             }
-
-            await _dbContext.SaveChangesAsync();
         }
     }
 }
