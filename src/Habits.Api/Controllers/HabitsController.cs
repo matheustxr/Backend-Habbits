@@ -2,6 +2,7 @@
 using Habits.Application.UseCases.Habits.Delete;
 using Habits.Application.UseCases.Habits.GetAll;
 using Habits.Application.UseCases.Habits.GetById;
+using Habits.Application.UseCases.Habits.ToggleCompletion;
 using Habits.Application.UseCases.Habits.Update;
 using Habits.Communication.Requests.Habits;
 using Habits.Communication.Responses;
@@ -79,6 +80,20 @@ public class HabitsController : ControllerBase
             [FromBody] RequestHabitJson request)
     {
         await useCase.Execute(request, id);
+        return NoContent();
+    }
+
+    [HttpPatch("{habitId:long}/toggle/{date}")]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<IActionResult> ToggleCompletion(
+        [FromRoute] long habitId,
+        [FromRoute] DateOnly date,
+        [FromServices] IToggleHabitCompletionUseCase useCase)
+    {
+        await useCase.Execute(habitId, date);
+
         return NoContent();
     }
 }

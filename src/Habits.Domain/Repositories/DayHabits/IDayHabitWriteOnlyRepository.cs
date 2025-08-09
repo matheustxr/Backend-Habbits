@@ -4,6 +4,6 @@ namespace Habits.Domain.Repositories.DayHabits
 {
     public interface IDayHabitWriteOnlyRepository
     {
-        Task AddAsync(DayHabit dayHabit);
+        Task ToggleCompletionStatusAsync(long habitId, DateOnly date);
     }
 }
