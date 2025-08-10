@@ -150,6 +150,9 @@
   <data name="PASSWORD_DIFFERENT_CURRENT_PASSWORD" xml:space="preserve">
     <value>A senha inserida é diferente da senha atual.</value>
   </data>
+  <data name="END_DATE_CANT_BE_MINOR_OF_START_DATE" xml:space="preserve">
+    <value>A data final não pode ser menor que a data inicial.</value>
+  </data>
   <data name="TITLE_ALREADY_REGISTERED" xml:space="preserve">
     <value>Este título já está cadastrado.</value>
   </data>
