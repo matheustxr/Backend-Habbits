@@ -1,6 +1,5 @@
 ﻿using Habits.Application.UseCases.Summary.GetHabitsDay;
 using Habits.Application.UseCases.Summary.GetMounthly;
-using Habits.Communication.Requests.Summary;
 using Habits.Communication.Responses.Summary;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

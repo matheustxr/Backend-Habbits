@@ -25,9 +25,6 @@ namespace Habits.Application.UseCases.Summary.GetHabitsDay
         {
             var loggedUser = await _loggedUser.Get();
 
-            var startDateUtc = date.ToDateTime(TimeOnly.MinValue, DateTimeKind.Utc);
-            var endDateUtc = date.ToDateTime(TimeOnly.MaxValue, DateTimeKind.Utc);
-
             var habistDay = await _dayHabitRepository.GetHabitsForDateAsync(loggedUser.Id, date);
 
             return _mapper.Map<List<ResponseSummaryHabitJson>>(habistDay);

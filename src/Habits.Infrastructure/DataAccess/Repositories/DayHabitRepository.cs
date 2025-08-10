@@ -14,16 +14,6 @@ namespace Habits.Infrastructure.DataAccess.Repositories
             _dbContext = context;
         }
 
-        public async Task AddAsync(DayHabit dayHabit)
-        {
-            await _dbContext.DayHabits.AddAsync(dayHabit);
-        }
-
-        public void Delete(DayHabit dayHabit)
-        {
-            _dbContext.DayHabits.Remove(dayHabit);
-        }
-
         public async Task<List<(long habitId, string title, string? categoryName, bool isCompleted)>> GetHabitsForDateAsync(Guid userId, DateOnly date)
         {
             var possibleHabits = await _dbContext.Habits
@@ -51,7 +41,7 @@ namespace Habits.Infrastructure.DataAccess.Repositories
         {
             var summary = await _dbContext.DayHabits
                 .AsNoTracking()
-                .Where(dh => dh.Habit != null && dh.Habit.UserId == userId && dh.Date >= startDate && dh.Date <= endDate)
+                .Where(dh => dh.Habit != null && dh.Habit.UserId == userId && dh.Habit.IsActive && dh.Date >= startDate && dh.Date <= endDate)
                 .GroupBy(dh => dh.Date)
                 .Select(g => new
                 {
