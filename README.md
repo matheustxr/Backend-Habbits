@@ -39,8 +39,8 @@ Uma API RESTful completa para gerenciamento de hábitos pessoais, construída co
 - Consulta de perfil
 
 ### Hábitos
-- Criação, leitura, atualização e exclusão de hábitos
-- Marcação de hábitos por dia
+- CRUD de hábitos
+- Marcação de conclusão diária de hábitos
 - Filtro por categorias
 
 ### Categorias
