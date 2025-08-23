@@ -45,13 +45,16 @@ public class AutoMapping : Profile
         CreateMap<HabitCategory, ResponseCategoryJson>();
 
         CreateMap<(long habitId, string title, string? categoryName, bool isCompleted), ResponseSummaryHabitJson>()
-        .ConvertUsing(src => new ResponseSummaryHabitJson
+            .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.habitId))
+            .ForMember(dest => dest.Title, opt => opt.MapFrom(src => src.title))
+            .ForMember(dest => dest.CategoryName, opt => opt.MapFrom(src => src.categoryName))
+            .ForMember(dest => dest.Completed, opt => opt.MapFrom(src => src.isCompleted));
+        CreateMap<KeyValuePair<DateOnly, (int possible, int completed)>, ResponseSummaryJson>()
+        .ConvertUsing(kvp => new ResponseSummaryJson
         {
-            Id = src.habitId,
-            Title = src.title,
-            CategoryName = src.categoryName,
-            Completed = src.isCompleted
+            Date = kvp.Key,
+            Amount = kvp.Value.possible,
+            Completed = kvp.Value.completed
         });
-        CreateMap<DayHabit, ResponseSummaryHabitJson>();
     }
 }
