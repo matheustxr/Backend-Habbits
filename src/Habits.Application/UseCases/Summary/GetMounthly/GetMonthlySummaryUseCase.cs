@@ -38,7 +38,7 @@ namespace Habits.Application.UseCases.Summary.GetMounthly
         {
             var validator = new SummaryDateRangeValidator();
 
-            var result = validator.Validate(new RequestSummaryDateRange
+            var result = await validator.ValidateAsync(new RequestSummaryDateRange
             {
                 StartDate = startDate,
                 EndDate = endDate

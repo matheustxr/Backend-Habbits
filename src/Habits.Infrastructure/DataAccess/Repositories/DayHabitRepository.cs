@@ -39,22 +39,40 @@ namespace Habits.Infrastructure.DataAccess.Repositories
 
         public async Task<Dictionary<DateOnly, (int possible, int completed)>> GetMonthlySummaryAsync(Guid userId, DateOnly startDate, DateOnly endDate)
         {
-            var summary = await _dbContext.DayHabits
+            // 1. Busca todos os hábitos ativos do usuário uma única vez.
+            var activeHabits = await _dbContext.Habits
                 .AsNoTracking()
-                .Where(dh => dh.Habit != null && dh.Habit.UserId == userId && dh.Habit.IsActive && dh.Date >= startDate && dh.Date <= endDate)
-                .GroupBy(dh => dh.Date)
-                .Select(g => new
-                {
-                    Date = g.Key,
-                    Possible = g.Select(x => x.HabitId).Distinct().Count(),
-                    Completed = g.Count(x => x.IsCompleted)
-                })
+                .Where(h => h.UserId == userId && h.IsActive)
                 .ToListAsync();
 
-            return summary.ToDictionary(
-                d => d.Date,
-                d => (d.Possible, d.Completed)
-            );
+            // 2. Busca todos os registros de conclusão para o período, INCLUINDO o Hábito relacionado.
+            var completions = await _dbContext.DayHabits
+                .AsNoTracking()
+                .Include(dh => dh.Habit) // <-- CORREÇÃO PARA O ERRO 500
+                .Where(dh => dh.Habit.UserId == userId && dh.Habit.IsActive && dh.Date >= startDate && dh.Date <= endDate && dh.IsCompleted)
+                .GroupBy(dh => dh.Date)
+                .ToDictionaryAsync(g => g.Key, g => g.Count());
+
+            var summary = new Dictionary<DateOnly, (int possible, int completed)>();
+
+            // 3. Itera sobre cada dia no intervalo de datas solicitado.
+            for (var day = startDate; day <= endDate; day = day.AddDays(1))
+            {
+                // 4. Calcula os hábitos possíveis para o dia da semana atual com base nas regras.
+                var possibleCount = activeHabits
+                    .Count(h => h.WeekDays != null && h.WeekDays.Contains((Domain.Enums.WeekDays)(int)day.DayOfWeek));
+
+                // 5. Pega a contagem de hábitos completados do dicionário que buscamos.
+                var completedCount = completions.GetValueOrDefault(day, 0);
+
+                // Só adiciona ao resumo se houverem hábitos possíveis para o dia.
+                if (possibleCount > 0)
+                {
+                    summary[day] = (possibleCount, completedCount);
+                }
+            }
+
+            return summary;
         }
 
         public async Task ToggleCompletionStatusAsync(long habitId, DateOnly date)
