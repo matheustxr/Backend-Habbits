@@ -2,7 +2,7 @@
 {
     public interface IDayHabitReadOnlyRepository
     {
-        Task<Dictionary<DateOnly, (int possible, int completed)>> GetMonthlySummaryAsync(Guid userId, DateOnly startDate, DateOnly endDate);
+        Task<Dictionary<DateOnly, (int possible, int completed)>> GetDateRangeSummaryAsync(Guid userId, DateOnly startDate, DateOnly endDate);
 
         Task<List<(long habitId, string title, string? categoryName, bool isCompleted)>> GetHabitsForDateAsync(Guid userId, DateOnly date);
     }

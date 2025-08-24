@@ -7,13 +7,13 @@ using Habits.Exception.ExceptionBase;
 
 namespace Habits.Application.UseCases.Summary.GetMounthly
 {
-    public class GetMonthlySummaryUseCase : IGetMonthlySummaryUseCase
+    public class GetDateRangeSummaryUseCase : IGetDateRangeSummaryUseCase
     {
         private readonly IDayHabitReadOnlyRepository _dayHabitRepository;
         private readonly IMapper _mapper;
         private readonly ILoggedUser _loggedUser;
 
-        public GetMonthlySummaryUseCase(
+        public GetDateRangeSummaryUseCase(
             IDayHabitReadOnlyRepository dayHabitRepository,
             IMapper mapper,
             ILoggedUser loggedUse)
@@ -29,7 +29,7 @@ namespace Habits.Application.UseCases.Summary.GetMounthly
 
             var loggedUser = await _loggedUser.Get();
 
-            var summaryData = await _dayHabitRepository.GetMonthlySummaryAsync(loggedUser.Id, startDate, endDate);
+            var summaryData = await _dayHabitRepository.GetDateRangeSummaryAsync(loggedUser.Id, startDate, endDate);
 
             return _mapper.Map<List<ResponseSummaryJson>>(summaryData);
         }
