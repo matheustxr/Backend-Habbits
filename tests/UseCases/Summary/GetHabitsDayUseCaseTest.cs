@@ -1,12 +1,11 @@
-﻿using AutoMapper;
-using CommonTestUtilities.Entities;
+﻿using CommonTestUtilities.Entities;
 using CommonTestUtilities.LoggedUser;
 using CommonTestUtilities.Mapper;
 using CommonTestUtilities.Repositories.DayHabit;
 using FluentAssertions;
 using Habits.Application.UseCases.Summary.GetHabitsDay;
 using Habits.Communication.Responses.Summary;
-using Habits.Domain.Services.LoggedUser;
+using Habits.Domain.Entities;
 
 namespace UseCases.Test.Summary
 {
@@ -15,26 +14,31 @@ namespace UseCases.Test.Summary
         [Fact]
         public async Task Success()
         {
-            var date = new DateOnly(2025, 1, 1);
             var user = UserBuilder.Build();
-            var loggedUser = LoggedUserBuilder.Build(user);
-            var mapper = MapperBuilder.Build();
+            var date = new DateOnly(2025, 1, 1);
 
-            var habitsResultTuple = new List<(long habitId, string title, string? categoryName, bool isCompleted)>
+            var habits = new List<(long habitId, string title, string? categoryName, bool isCompleted)>
             {
                 (1, "Ler Livro", "Leitura", true),
                 (2, "Correr", "Exercício", false)
             };
 
-            var repository = new DayHabitReadOnlyRepositoryBuilder().GetHabitsForDate(habitsResultTuple).Build();
-
-            var useCase = new GetHabitsDayUseCase(repository, mapper, loggedUser);
+            var useCase = CreateUseCase(user, habits);
 
             var response = await useCase.Execute(date);
 
             response.Should().NotBeNull();
             response.Should().BeOfType<List<ResponseSummaryHabitJson>>();
-            response.Should().HaveCount(habitsResultTuple.Count);
+            response.Should().HaveCount(habits.Count);
+        }
+
+        private GetHabitsDayUseCase CreateUseCase(User user, List<(long habitId, string title, string? categoryName, bool isCompleted)> habits)
+        {
+            var loggedUser = LoggedUserBuilder.Build(user);
+            var mapper = MapperBuilder.Build();
+            var repository = new DayHabitReadOnlyRepositoryBuilder().GetHabitsForDate(habits).Build();
+
+            return new GetHabitsDayUseCase(repository, mapper, loggedUser);
         }
     }
 }
