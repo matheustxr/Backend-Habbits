@@ -12,6 +12,8 @@ namespace CommonTestUtilities.Repositories.DayHabit
             _repository = new Mock<IDayHabitWriteOnlyRepository>();
         }
 
+        public Mock<IDayHabitWriteOnlyRepository> GetMock() => _repository;
+
         public IDayHabitWriteOnlyRepository Build() => _repository.Object;
     }
 }
