@@ -36,7 +36,25 @@ namespace UseCases.Test.Habits.Toggle
         }
 
         [Fact]
-        public async Task Should_Throw_NotFoundException_When_Habit_Is_Inactive()
+        public async Task Should_Throw_NotFoundException_When_Habit_Is_Not_Found()
+        {
+            var user = UserBuilder.Build();
+            var existingHabit = HabitBuilder.Build(user);
+
+            var (useCase, _, _) = CreateUseCase(user, existingHabit);
+
+            var nonExistentId = existingHabit.Id + 9999;
+            var date = GetNextDateForWeekday(DayOfWeek.Monday);
+
+            Func<Task> act = async () => await useCase.Execute(nonExistentId, date);
+
+            var exception = await act.Should().ThrowAsync<NotFoundException>();
+
+            exception.Which.GetErrors().Should().Contain(ResourceErrorMessages.HABIT_NOT_FOUND);
+        }
+
+        [Fact]
+        public async Task Should_Throw_ValidationException_When_Habit_Is_Inactive()
         {
             var user = UserBuilder.Build();
             var habit = HabitBuilder.Build(user);
@@ -48,8 +66,11 @@ namespace UseCases.Test.Habits.Toggle
 
             Func<Task> act = async () => await useCase.Execute(habit.Id, date);
 
-            await act.Should().ThrowAsync<NotFoundException>()
-                .WithMessage(ResourceErrorMessages.HABIT_NOT_ACTIVE);
+            var exception = await act.Should()
+                .ThrowAsync<ErrorOnValidationException>();
+
+            exception.Which.GetErrors()
+                .Should().Contain(ResourceErrorMessages.HABIT_NOT_ACTIVE);
         }
 
         [Fact]
@@ -57,6 +78,7 @@ namespace UseCases.Test.Habits.Toggle
         {
             var user = UserBuilder.Build();
             var habit = HabitBuilder.Build(user);
+            habit.IsActive = true;
             habit.WeekDays.Clear();
 
             var (useCase, _, _) = CreateUseCase(user, habit);

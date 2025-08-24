@@ -39,7 +39,7 @@ namespace Habits.Application.UseCases.Habits.ToggleCompletion
 
             if (!habit.IsActive)
             {
-                throw new NotFoundException(ResourceErrorMessages.HABIT_NOT_ACTIVE);
+                throw new ErrorOnValidationException(new List<string> { ResourceErrorMessages.HABIT_NOT_ACTIVE });
             }
 
             var dayOfWeek = date.DayOfWeek;
