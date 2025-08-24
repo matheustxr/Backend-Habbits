@@ -58,7 +58,7 @@ public static class DepedencyInjectionExtension
         services.AddScoped<IDeleteCategoryUseCase, DeleteCategoryUseCase>();
         services.AddScoped<IUpdateCategoryUseCase, UpdateCategoryUseCase>();
 
-        services.AddScoped<IGetMonthlySummaryUseCase, GetMonthlySummaryUseCase>();
+        services.AddScoped<IGetDateRangeSummaryUseCase, GetDateRangeSummaryUseCase>();
         services.AddScoped<IGetHabitsDayUseCase, GetHabitsDayUseCase>();
     }
 }

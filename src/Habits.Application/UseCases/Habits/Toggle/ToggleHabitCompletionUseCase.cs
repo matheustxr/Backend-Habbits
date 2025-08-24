@@ -39,14 +39,14 @@ namespace Habits.Application.UseCases.Habits.ToggleCompletion
 
             if (!habit.IsActive)
             {
-                throw new NotFoundException("Habit not active.");
+                throw new NotFoundException(ResourceErrorMessages.HABIT_NOT_ACTIVE);
             }
 
             var dayOfWeek = date.DayOfWeek;
             var isHabitScheduledForDay = habit.WeekDays.Any(wd => (int)wd == (int)dayOfWeek);
             if (!isHabitScheduledForDay)
             {
-                throw new ErrorOnValidationException(new List<string> { "This habit is not scheduled for this day." });
+                throw new ErrorOnValidationException(new List<string> { ResourceErrorMessages.HABIT_NOT_TODAY});
             }
 
             await _dayHabitWriteOnlyRepository.ToggleCompletionStatusAsync(habitId, date);

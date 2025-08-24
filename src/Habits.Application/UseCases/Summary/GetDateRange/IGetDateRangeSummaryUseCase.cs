@@ -2,7 +2,7 @@
 
 namespace Habits.Application.UseCases.Summary.GetMounthly
 {
-    public interface IGetMonthlySummaryUseCase
+    public interface IGetDateRangeSummaryUseCase
     {
         Task<List<ResponseSummaryJson>> Execute(DateOnly startDate, DateOnly endDate);
     }

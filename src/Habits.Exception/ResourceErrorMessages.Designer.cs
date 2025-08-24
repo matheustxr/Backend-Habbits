@@ -124,11 +124,29 @@ namespace Habits.Exception {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Habit is not active.
+        /// </summary>
+        public static string HABIT_NOT_ACTIVE {
+            get {
+                return ResourceManager.GetString("HABIT_NOT_ACTIVE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Habit not found..
         /// </summary>
         public static string HABIT_NOT_FOUND {
             get {
                 return ResourceManager.GetString("HABIT_NOT_FOUND", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a This habit is not scheduled for this day..
+        /// </summary>
+        public static string HABIT_NOT_TODAY {
+            get {
+                return ResourceManager.GetString("HABIT_NOT_TODAY", resourceCulture);
             }
         }
         

@@ -168,4 +168,10 @@
   <data name="WEEKDAYS_EMPTY" xml:space="preserve">
     <value>The days of the week cannot be empty</value>
   </data>
+  <data name="HABIT_NOT_ACTIVE" xml:space="preserve">
+    <value>Habit is not active</value>
+  </data>
+  <data name="HABIT_NOT_TODAY" xml:space="preserve">
+    <value>This habit is not scheduled for this day.</value>
+  </data>
 </root>

@@ -18,7 +18,7 @@ public class SummaryController : ControllerBase
     public async Task<IActionResult> GetSummary(
     [FromRoute] DateOnly startDate,
     [FromRoute] DateOnly endDate,
-    [FromServices] IGetMonthlySummaryUseCase useCase)
+    [FromServices] IGetDateRangeSummaryUseCase useCase)
     {
         var response = await useCase.Execute(startDate, endDate);
 

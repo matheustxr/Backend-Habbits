@@ -14,11 +14,11 @@ namespace Habits.Application.UseCases.Summary.GetHabitsDay
         public GetHabitsDayUseCase(
             IDayHabitReadOnlyRepository dayHabitRepository,
             IMapper mapper,
-            ILoggedUser loggedUse)
+            ILoggedUser loggedUser)
         {
             _dayHabitRepository = dayHabitRepository;
             _mapper = mapper;
-            _loggedUser = loggedUse;
+            _loggedUser = loggedUser;
         }
 
         public async Task<List<ResponseSummaryHabitJson>> Execute(DateOnly date)
