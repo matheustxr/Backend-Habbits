@@ -12,7 +12,7 @@ namespace CommonTestUtilities.Repositories.DayHabit
             _repository = new Mock<IDayHabitReadOnlyRepository>();
         }
 
-        public DayHabitReadOnlyRepositoryBuilder GetHabitsForDate(List<(long habitId, string title, string? categoryName, bool isCompleted)> habits)
+        public DayHabitReadOnlyRepositoryBuilder GetHabitsForDate(List<(long habitId, string title, string? categoryName, bool isCompleted, DateTime createdAt, DateTime? updatedAt)> habits)
         {
             _repository.Setup(repo => repo.GetHabitsForDateAsync(It.IsAny<Guid>(), It.IsAny<DateOnly>()))
                        .ReturnsAsync(habits);
