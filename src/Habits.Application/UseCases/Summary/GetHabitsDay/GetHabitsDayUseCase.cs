@@ -8,16 +8,16 @@ namespace Habits.Application.UseCases.Summary.GetHabitsDay
     public class GetHabitsDayUseCase : IGetHabitsDayUseCase
     {
         private readonly IDayHabitReadOnlyRepository _dayHabitRepository;
-        private readonly IMapper _mapper;
+        //private readonly IMapper _mapper;
         private readonly ILoggedUser _loggedUser;
 
         public GetHabitsDayUseCase(
             IDayHabitReadOnlyRepository dayHabitRepository,
-            IMapper mapper,
+            //IMapper mapper,
             ILoggedUser loggedUser)
         {
             _dayHabitRepository = dayHabitRepository;
-            _mapper = mapper;
+            //_mapper = mapper;
             _loggedUser = loggedUser;
         }
 
@@ -27,7 +27,15 @@ namespace Habits.Application.UseCases.Summary.GetHabitsDay
 
             var habistDay = await _dayHabitRepository.GetHabitsForDateAsync(loggedUser.Id, date);
 
-            return _mapper.Map<List<ResponseSummaryHabitJson>>(habistDay);
+            return habistDay.Select(habit => new ResponseSummaryHabitJson
+            {
+                Id = habit.habitId,
+                Title = habit.title,
+                Completed = habit.isCompleted,
+                CategoryName = habit.categoryName,
+                CreatedAt = habit.createdAt ,
+                UpdatedAt = habit.updatedAt  // <-- Agora disponível
+            }).ToList();
         }
     }
 }

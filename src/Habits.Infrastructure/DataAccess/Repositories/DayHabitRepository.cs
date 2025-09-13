@@ -13,25 +13,39 @@ namespace Habits.Infrastructure.DataAccess.Repositories
             _dbContext = context;
         }
 
-        public async Task<List<(long habitId, string title, string? categoryName, bool isCompleted)>> GetHabitsForDateAsync(Guid userId, DateOnly date)
+        public async Task<List<(long habitId, string title, string? categoryName, bool isCompleted, DateTime createdAt, DateTime? updatedAt)>> GetHabitsForDateAsync(Guid userId, DateOnly date)
         {
-            var possibleHabits = await _dbContext.Habits
-                .Include(h => h.HabitCategory)
-                .Where(h => h.UserId == userId && h.IsActive && h.WeekDays != null && h.WeekDays.Contains((Domain.Enums.WeekDays)(int)date.DayOfWeek))
+            var dayOfWeek = (Domain.Enums.WeekDays)(int)date.DayOfWeek;
+
+            var dateUtc = DateTime.SpecifyKind(date.ToDateTime(TimeOnly.MinValue), DateTimeKind.Utc);
+
+            var resultsFromDb = await _dbContext.Habits
+                .AsNoTracking()
+                .Where(h =>
+                    h.UserId == userId &&
+                    h.IsActive &&
+                    h.CreatedAt.Date <= dateUtc &&
+                    h.WeekDays != null &&
+                    h.WeekDays.Contains(dayOfWeek))
+                .Select(h => new 
+                {
+                    Id = h.Id,
+                    Title = h.Title,
+                    CategoryName = h.HabitCategory != null ? h.HabitCategory.Category : null,
+                    IsCompleted = _dbContext.DayHabits.Any(dh => dh.HabitId == h.Id && dh.Date == date && dh.IsCompleted),
+                    CreatedAt = h.CreatedAt,
+                    UpdatedAt = h.UpdatedAt
+                })
                 .ToListAsync();
 
-            var completedHabitIds = (await _dbContext.DayHabits
-                .Where(dh => dh.Habit != null && dh.Habit.UserId == userId && dh.Date == date && dh.IsCompleted)
-                .Select(dh => dh.HabitId)
-                .ToListAsync())
-                .ToHashSet();
-
-            return possibleHabits
-                .Select(h => (
-                    h.Id,
-                    h.Title,
-                    h.HabitCategory?.Category,
-                    completedHabitIds.Contains(h.Id)
+            return resultsFromDb
+                .Select(result => (
+                    result.Id,
+                    result.Title,
+                    result.CategoryName,
+                    result.IsCompleted,
+                    result.CreatedAt,
+                    result.UpdatedAt
                 ))
                 .ToList();
         }
@@ -41,12 +55,12 @@ namespace Habits.Infrastructure.DataAccess.Repositories
             var activeHabits = await _dbContext.Habits
                 .AsNoTracking()
                 .Where(h => h.UserId == userId && h.IsActive)
+                .Select(h => new { h.CreatedAt, h.WeekDays })
                 .ToListAsync();
 
             var completions = await _dbContext.DayHabits
                 .AsNoTracking()
-                .Include(dh => dh.Habit) 
-                .Where(dh => dh.Habit.UserId == userId && dh.Habit.IsActive && dh.Date >= startDate && dh.Date <= endDate && dh.IsCompleted)
+                .Where(dh => dh.Habit!.UserId == userId && dh.Date >= startDate && dh.Date <= endDate && dh.IsCompleted)
                 .GroupBy(dh => dh.Date)
                 .ToDictionaryAsync(g => g.Key, g => g.Count());
 
@@ -54,12 +68,18 @@ namespace Habits.Infrastructure.DataAccess.Repositories
 
             for (var day = startDate; day <= endDate; day = day.AddDays(1))
             {
+                var dayOfWeek = (Domain.Enums.WeekDays)(int)day.DayOfWeek;
+                var dayUtc = DateTime.SpecifyKind(day.ToDateTime(TimeOnly.MinValue), DateTimeKind.Utc);
+
                 var possibleCount = activeHabits
-                    .Count(h => h.WeekDays != null && h.WeekDays.Contains((Domain.Enums.WeekDays)(int)day.DayOfWeek));
+                    .Count(h =>
+                        h.CreatedAt.Date <= dayUtc &&
+                        h.WeekDays != null &&
+                        h.WeekDays.Contains(dayOfWeek));
 
                 var completedCount = completions.GetValueOrDefault(day, 0);
 
-                if (possibleCount > 0)
+                if (possibleCount > 0 || completedCount > 0)
                 {
                     summary[day] = (possibleCount, completedCount);
                 }
@@ -87,5 +107,6 @@ namespace Habits.Infrastructure.DataAccess.Repositories
                 entry.IsCompleted = !entry.IsCompleted;
             }
         }
+
     }
 }
