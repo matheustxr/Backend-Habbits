@@ -44,11 +44,6 @@ public class AutoMapping : Profile
 
         CreateMap<HabitCategory, ResponseCategoryJson>();
 
-        //CreateMap<(long habitId, string title, string? categoryName, bool isCompleted), ResponseSummaryHabitJson>()
-        //    .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.habitId))
-        //    .ForMember(dest => dest.Title, opt => opt.MapFrom(src => src.title))
-        //    .ForMember(dest => dest.CategoryName, opt => opt.MapFrom(src => src.categoryName))
-        //    .ForMember(dest => dest.Completed, opt => opt.MapFrom(src => src.isCompleted));
         CreateMap<Habit, ResponseSummaryHabitJson>()
             .ForMember(dest => dest.CategoryName, opt => opt.MapFrom(src => src.HabitCategory != null ? src.HabitCategory.Category : null))
             .ForMember(dest => dest.Completed, opt => opt.Ignore());
