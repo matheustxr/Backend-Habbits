@@ -3,6 +3,7 @@ using FluentValidation.Results;
 using Habits.Communication.Requests.Habits;
 using Habits.Domain.Entities;
 using Habits.Domain.Repositories;
+using Habits.Domain.Repositories.Categories;
 using Habits.Domain.Repositories.Habits;
 using Habits.Domain.Services.LoggedUser;
 using Habits.Exception;
@@ -15,6 +16,7 @@ namespace Habits.Application.UseCases.Habits.Update
         private readonly IMapper _mapper;
         private readonly IHabitReadOnlyRepository _habitReadOnlyRepository;
         private readonly IHabitUpdateOnlyRepository _habitUpdateRepository;
+        private readonly ICategoriesReadOnlyRepository _categoryReadOnlyRepository;
         private readonly ILoggedUser _loggedUser;
         private readonly IUnityOfWork _unitOfWork;
 
@@ -22,12 +24,14 @@ namespace Habits.Application.UseCases.Habits.Update
             IMapper mapper,
             IHabitReadOnlyRepository habitReadOnlyRepository,
             IHabitUpdateOnlyRepository habitUpdateRepository,
+            ICategoriesReadOnlyRepository categoryReadOnlyRepository,
             ILoggedUser loggedUser,
             IUnityOfWork unitOfWork)
         {
             _mapper = mapper;
             _habitReadOnlyRepository = habitReadOnlyRepository;
             _habitUpdateRepository = habitUpdateRepository;
+            _categoryReadOnlyRepository = categoryReadOnlyRepository;
             _loggedUser = loggedUser;
             _unitOfWork = unitOfWork;
         }
@@ -63,6 +67,15 @@ namespace Habits.Application.UseCases.Habits.Update
             if (titleExist)
             {
                 result.Errors.Add(new ValidationFailure(string.Empty, ResourceErrorMessages.TITLE_ALREADY_REGISTERED));
+            }
+            else if (request.CategoryId != null)
+            {
+                var categoryExist = await _categoryReadOnlyRepository.GetById(user, request.CategoryId.Value);
+
+                if (categoryExist == null)
+                {
+                    result.Errors.Add(new ValidationFailure(string.Empty, ResourceErrorMessages.CATEGORY_NOT_FOUND));
+                }
             }
 
             if (result.IsValid == false)
