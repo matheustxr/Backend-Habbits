@@ -9,6 +9,7 @@ public class RequestHabitJson
     public string? Description { get; set; }
     public List<WeekDays> WeekDays { get; set; } = new();
     public bool IsActive { get; set; } = true;
+    public long? CategoryId { get; set; }
 
     [JsonIgnore]
     public Guid UserId { get; set; }
